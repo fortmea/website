@@ -1,3 +1,9 @@
+jQuery(document).ready(function(){
+    $( "#loader" ).delay(800).fadeOut(400, function(){
+        $( "#corpo" ).fadeIn(400);
+    });  
+    $("#corpo").css("visibility", "visible");
+});
 function initial(){
     var bgc = document.getElementsByTagName("body")[0];
     var btst = document.getElementById("mtbtn");
@@ -63,6 +69,5 @@ function setCookie(cname, cvalue) {
         var dbg =  name + "=" +
         ((window.location.pathname) ? ";path="+window.location.pathname:"") + ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
         document.cookie = dbg;
-        return dbg;
     }
   }
