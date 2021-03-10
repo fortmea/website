@@ -58,11 +58,11 @@ function setCookie(cname, cvalue) {
     return "";
   }
 
-  function delete_cookie( name, path, domain ) {
+  function delete_cookie( name, path ) {
     if( getCookie( name ) ) {
       document.cookie = name + "=" +
         ((path) ? ";path="+path:"")+
-        ((domain)?";domain="+domain:"") +
+        ((window.location.hostname)?";domain="+window.location.hostname:"") +
         ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
     }
   }
