@@ -1,8 +1,8 @@
 jQuery(document).ready(function(){
     $( "#loader" ).delay(800).fadeOut(400, function(){
-        $( "#corpo" ).fadeIn(400);
+        $( "#corpo" ).fadeIn(400);$("#corpo").css("visibility", "visible");
     });  
-    $("#corpo").css("visibility", "visible");
+    
 });
 function initial(){
     var bgc = document.getElementsByTagName("body")[0];
