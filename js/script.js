@@ -61,9 +61,7 @@ function setCookie(cname, cvalue) {
   function delete_cookie( name, path ) {
     if( getCookie( name ) ) {
         var dbg =  name + "=" +
-        ((window.location.pathname) ? ";path="+window.location.pathname:"")+
-        ((window.location.hostname)?";domain="+window.location.hostname:"") +
-        ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+        ((window.location.pathname) ? ";path="+window.location.pathname:"") + ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
         document.cookie = dbg;
         return dbg;
     }
