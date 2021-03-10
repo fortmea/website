@@ -7,7 +7,7 @@ function initial(){
         settheme();
     }
 }
-function settheme(tema){
+function settheme(){
     var bgc = document.getElementsByTagName("body")[0];
     var btst = document.getElementById("mtbtn");
     var nav = document.getElementById("nav1");
