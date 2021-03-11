@@ -1,13 +1,12 @@
 $.ajax({
   type: 'POST',
-  // make sure you respect the same origin policy with this url:
-  // http://en.wikipedia.org/wiki/Same_origin_policy
   url: 'https://xue-hua-piao.herokuapp.com/usuario/',
   data: { 
       'id': '1'
   },
+  dataType: 'json',
   success: function(msg){
-      alert('wow' + msg);
+      console.log(msg);
   }
 });
 jQuery(document).ready(function(){
