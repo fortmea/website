@@ -20,8 +20,7 @@ function initial(){
     var btst = document.getElementById("mtbtn");
     bgc.classList.add("font-monospace");
     btst.style.textAlign = "left";
-    if(!Cookies.get("tema_s")){
-      Cookies.remove('tema_s', { path: '/', domain: '.joaoamadeu.me' });
+    if(Cookies.get("tema_s")){
       tema(Cookies.get("tema"));
     }
 }
