@@ -2,7 +2,7 @@ $.ajax({
   type: 'POST',
   url: 'https://xue-hua-piao.herokuapp.com/usuario/',
   data: { 
-      'id': '1'
+      'id': ''
   },
   dataType: 'json',
   success: function(msg){
@@ -23,6 +23,7 @@ function initial(){
     if(Cookies.get("tema_s")){
       tema(Cookies.get("tema"));
     }
+    localStorage.setItem('sid','');
 }
 function tema(tema){
   if(tema=='dark'){
