@@ -20,45 +20,22 @@ function initial(){
     var btst = document.getElementById("mtbtn");
     bgc.classList.add("font-monospace");
     btst.style.textAlign = "left";
-    if((getCookie('tema')!=null)&&(getCookie('tema')!="")){
-        settheme();
-    }
-}
-function settheme(){
-    var bgc = document.getElementsByTagName("body")[0];
-    var btst = document.getElementById("mtbtn");
-    var nav = document.getElementById("nav1");
-    if(bgc.style.backgroundColor=="black"){
-        bgc.style.backgroundColor = "white";
-        bgc.style.color = "black";
-        nav.classList.remove("navbar-dark");
-        nav.classList.remove("bg-dark");
-        nav.classList.add("navbar-light");
-        nav.classList.add("bg-light");
-        btst.classList.remove("btn-dark");
-        btst.classList.add("btn-light");
-        btst.innerHTML = "<i class='gg-sun'></i>Modo noturno";
-        delete_cookie('tema','/');
-    }else{
-        bgc.style.color = "white";
-        bgc.style.backgroundColor = "black";
-        nav.classList.remove("navbar-light");
-        nav.classList.remove("bg-light");
-        nav.classList.add("navbar-dark");
-        nav.classList.add("bg-dark");
-        btst.classList.add("btn-dark");
-        btst.classList.remove("btn-light");
-        btst.innerHTML = "<i class='gg-moon'></i>Modo diurno";
-        setCookie('tema','1');
+    if((Cookies.get('tema')!=null)&&(Cookies.get('tema')!="")){
+        temanew();
     }
 }
 function temanew(){
-  if((getCookie('tema')=="")||(getCookie('tema')==null)){
+  if((Cookies.get('tema')=="")||(Cookies.get('tema')==null)){
     var list = document.getElementsByClassName("bg-light");
-    var listabtn = document.getElementsByClassName("btn-dark");
-    for(var i = 0;i<listabtn.length;i++){
-      listabtn[i].classList.add("btn-light");
-      listabtn[i].classList.remove("btn-dark");
+    var listabtn = document.getElementsByClassName("btn-light");
+    var listafrmctrl = document.getElementsByClassName("form-control");
+    for(i = 0;i<listafrmctrl.length;i++){
+      listafrmctrl[i].classList.add("bg-dark");
+      listafrmctrl[i].classList.remove("bg-light");
+    }
+    for(i = 0;i<listabtn.length;i++){
+      listabtn[i].classList.add("btn-dark");
+      listabtn[i].classList.remove("btn-light");
     }
     var i = 0;
     while(i<list.length){
@@ -67,67 +44,40 @@ function temanew(){
         list[i].classList.remove("navbar-light");
         list[i].classList.add("bg-dark");
         list[i].classList.remove("bg-light");
-      }else{
+      }
       list[i].classList.add("bg-dark");
       list[i].classList.remove("bg-light");
-      }
+      
       document.getElementsByTagName("body")[0].style.color = "white";
-      delete_cookie('tema');
+      Cookies.set('tema','1');
       i++;
     }
   }else{
     var list = document.getElementsByClassName("bg-dark");
     var listabtn = document.getElementsByClassName("btn-dark");
-    for(var i = 0;i<listabtn.length;i++){
+    var listafrmctrl = document.getElementsByClassName("form-control");
+    for(i = 0;i<listafrmctrl.length;i++){
+      listafrmctrl[i].classList.add("bg-light");
+      listafrmctrl[i].classList.remove("bg-dark");
+    }
+    for(i = 0;i<listabtn.length;i++){
       listabtn[i].classList.add("btn-light");
       listabtn[i].classList.remove("btn-dark");
     }
     var i = 0;
     while(i<list.length){
-      //return list[i].tagName;
       if(list[i].tagName == 'NAV'){
         list[i].classList.add("navbar-light");
         list[i].classList.remove("navbar-dark");
         list[i].classList.add("bg-light");
         list[i].classList.remove("bg-dark");
-      }else{
+      }
       list[i].classList.add("bg-light");
       list[i].classList.remove("bg-dark");
-      }
+      
       document.getElementsByTagName("body")[0].style.color = "black";
-      delete_cookie('tema');
-      setCookie('tema','1');
+      Cookies.remove('tema');
       i++;
     }
   }
 }
-function setCookie(cname, cvalue) {
-    var d = new Date();
-    d.setTime(d.getTime() + (1*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-  }
-
-  function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-  }
-
-  function delete_cookie( name ) {
-    if( getCookie( name ) ) {
-        var dbg =  name + "=" +
-        ((window.location.pathname) ? ";path="+window.location.pathname:"") + ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
-        document.cookie = dbg;
-    }
-  }
