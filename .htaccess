@@ -1,3 +1,4 @@
+Header Set Access-Control-Allow-Origin "https://xue-hua-piao.herokuapp.com/"
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE application/javascript
   AddOutputFilterByType DEFLATE application/rss+xml
