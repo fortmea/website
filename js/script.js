@@ -20,7 +20,7 @@ function initial(){
     var btst = document.getElementById("mtbtn");
     bgc.classList.add("font-monospace");
     btst.style.textAlign = "left";
-    if(Cookies.get("tema")){
+    if(Cookies.get("tema")!=null){
       tema(Cookies.get("tema"));
     }
 }
