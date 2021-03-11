@@ -20,7 +20,8 @@ function initial(){
     var btst = document.getElementById("mtbtn");
     bgc.classList.add("font-monospace");
     btst.style.textAlign = "left";
-    if(Cookies.get("tema")!=null){
+    if(Cookies.get("tema_s")){
+      Cookies.remove('tema_s', { path: '/', domain: '.joaoamadeu.me' });
       tema(Cookies.get("tema"));
     }
 }
@@ -77,5 +78,6 @@ function tema(tema){
     document.getElementsByTagName("body")[0].style.backgroundColor = "black";
     Cookies.set("tema", 'dark', { expires: 7, path: '/',domain: '.joaowalteramadeu.me' });
   }
+Cookies.set("tema_s", 'true', { expires: 7, path: '/',domain: '.joaowalteramadeu.me' });
 return Cookies.get('tema');
 }
