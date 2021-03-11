@@ -1,3 +1,15 @@
+$.ajax({
+  type: 'POST',
+  // make sure you respect the same origin policy with this url:
+  // http://en.wikipedia.org/wiki/Same_origin_policy
+  url: 'https://xue-hua-piao.herokuapp.com/usuario/',
+  data: { 
+      'id': '1'
+  },
+  success: function(msg){
+      alert('wow' + msg);
+  }
+});
 jQuery(document).ready(function(){
     $( "#loader" ).delay(800).fadeOut(400, function(){
         $( "#corpo" ).fadeIn(400);$("#corpo").css("visibility", "visible");
