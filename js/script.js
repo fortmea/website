@@ -27,6 +27,7 @@ function initial(){
 function temanew(){
   if((Cookies.get('tema')=="")||(Cookies.get('tema')==null)){
     var list = document.getElementsByClassName("bg-light");
+    console.log(list);
     var listabtn = document.getElementsByClassName("btn-light");
     var listafrmctrl = document.getElementsByClassName("form-control");
     for(i = 0;i<listafrmctrl.length;i++){
@@ -47,11 +48,11 @@ function temanew(){
       }
       list[i].classList.add("bg-dark");
       list[i].classList.remove("bg-light");
-      
-      document.getElementsByTagName("body")[0].style.color = "white";
-      Cookies.set('tema','1');
       i++;
     }
+    document.getElementsByTagName("body")[0].style.color = "white";
+    document.getElementsByTagName("body")[0].style.backgroundColor = "black";
+    Cookies.set('tema','1');
   }else{
     var list = document.getElementsByClassName("bg-dark");
     var listabtn = document.getElementsByClassName("btn-dark");
@@ -74,10 +75,10 @@ function temanew(){
       }
       list[i].classList.add("bg-light");
       list[i].classList.remove("bg-dark");
-      
-      document.getElementsByTagName("body")[0].style.color = "black";
-      Cookies.remove('tema');
       i++;
     }
+    document.getElementsByTagName("body")[0].style.color = "black";
+    document.getElementsByTagName("body")[0].style.backgroundColor = "white";
+    Cookies.remove('tema');
   }
 }
