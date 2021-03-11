@@ -6,7 +6,7 @@ $.ajax({
   },
   dataType: 'json',
   success: function(msg){
-      console.log("Mensagem:"+ JSON.stringify(msg));
+      console.log("Mensagem:"+ JSON.parse(msg));
   }
 });
 jQuery(document).ready(function(){
