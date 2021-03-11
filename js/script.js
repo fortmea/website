@@ -20,65 +20,62 @@ function initial(){
     var btst = document.getElementById("mtbtn");
     bgc.classList.add("font-monospace");
     btst.style.textAlign = "left";
-    if((Cookies.get('tema')!=null)&&(Cookies.get('tema')!="")){
-        temanew();
+    if(Cookies.get("tema")=="true"){
+      tema();
     }
 }
-function temanew(){
-  if((Cookies.get('tema')=="")||(Cookies.get('tema')==null)){
-    var list = document.getElementsByClassName("bg-light");
-    console.log(list);
-    var listabtn = document.getElementsByClassName("btn-light");
-    var listafrmctrl = document.getElementsByClassName("form-control");
-    for(i = 0;i<listafrmctrl.length;i++){
-      listafrmctrl[i].classList.add("bg-dark");
-      listafrmctrl[i].classList.remove("bg-light");
-    }
-    for(i = 0;i<listabtn.length;i++){
-      listabtn[i].classList.add("btn-dark");
-      listabtn[i].classList.remove("btn-light");
-    }
-    var i = 0;
-    while(i<list.length){
-      if(list[i].tagName == 'NAV'){
-        list[i].classList.add("navbar-dark");
-        list[i].classList.remove("navbar-light");
-        list[i].classList.add("bg-dark");
-        list[i].classList.remove("bg-light");
-      }
-      list[i].classList.add("bg-dark");
-      list[i].classList.remove("bg-light");
-      i++;
-    }
-    document.getElementsByTagName("body")[0].style.color = "white";
-    document.getElementsByTagName("body")[0].style.backgroundColor = "black";
-    Cookies.set('tema','1');
-  }else{
+function tema(){
+  if(Cookies.get("tema")=="true"){
     var list = document.getElementsByClassName("bg-dark");
     var listabtn = document.getElementsByClassName("btn-dark");
     var listafrmctrl = document.getElementsByClassName("form-control");
+    var listacard = document.getElementsByClassName("card");
     for(i = 0;i<listafrmctrl.length;i++){
-      listafrmctrl[i].classList.add("bg-light");
-      listafrmctrl[i].classList.remove("bg-dark");
+      listafrmctrl[i].classList.replace('bg-dark','bg-light');
+    }
+    for(i = 0;i<listacard.length;i++){
+      listacard[i].classList.replace('bg-dark','bg-light');
     }
     for(i = 0;i<listabtn.length;i++){
-      listabtn[i].classList.add("btn-light");
-      listabtn[i].classList.remove("btn-dark");
+      listabtn[i].classList.replace('btn-dark','btn-light');
     }
     var i = 0;
     while(i<list.length){
       if(list[i].tagName == 'NAV'){
-        list[i].classList.add("navbar-light");
-        list[i].classList.remove("navbar-dark");
-        list[i].classList.add("bg-light");
-        list[i].classList.remove("bg-dark");
+        list[i].classList.replace('navbar-dark','navbar-light');
       }
-      list[i].classList.add("bg-light");
-      list[i].classList.remove("bg-dark");
+        list[i].classList.replace('bg-dark','bg-light');
       i++;
     }
     document.getElementsByTagName("body")[0].style.color = "black";
     document.getElementsByTagName("body")[0].style.backgroundColor = "white";
-    Cookies.remove('tema');
+    Cookies.remove('tema', { path: '/' })
+    
+  }else{
+    var list = document.getElementsByClassName("bg-light");
+    var listabtn = document.getElementsByClassName("btn-light");
+    var listafrmctrl = document.getElementsByClassName("form-control");
+    var listacard = document.getElementsByClassName("card");
+    for(i = 0;i<listafrmctrl.length;i++){
+      listafrmctrl[i].classList.replace('bg-light','bg-dark');
+    }
+    for(i = 0;i<listacard.length;i++){
+      listacard[i].classList.replace('bg-light','bg-dark');
+    }
+    for(i = 0;i<listabtn.length;i++){
+      listabtn[i].classList.replace('btn-light','btn-dark');
+    }
+    var i = 0;
+    while(i<list.length){
+      if(list[i].tagName == 'NAV'){
+        list[i].classList.replace('navbar-light','navbar-dark');
+      }
+      list[i].classList.replace('bg-light','bg-dark');
+      i++;
+    }
+    document.getElementsByTagName("body")[0].style.color = "white";
+    document.getElementsByTagName("body")[0].style.backgroundColor = "black";
+    Cookies.set("tema", 'true', { expires: 7, path: '/' });
   }
+return Cookies.get('tema');
 }
