@@ -10,8 +10,8 @@ $.ajax({
   }
 });
 jQuery(document).ready(function(){
-    $( "#loader" ).delay(800).fadeOut(400, function(){
-        $( "#corpo" ).fadeIn(400);$("#corpo").css("visibility", "visible");
+    $( "#loader" ).delay(600).fadeOut(400, function(){
+        $( "#corpo" ).delay(200).fadeIn(400);$("#corpo").css("visibility", "visible");
     });  
     
 });
