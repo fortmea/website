@@ -49,7 +49,7 @@ function tema(){
     }
     document.getElementsByTagName("body")[0].style.color = "black";
     document.getElementsByTagName("body")[0].style.backgroundColor = "white";
-    Cookies.remove('tema', { path: '/' })
+    Cookies.remove('tema', { path: '/', domain: '.joaowalteramadeu.me' })
     
   }else{
     var list = document.getElementsByClassName("bg-light");
@@ -75,7 +75,7 @@ function tema(){
     }
     document.getElementsByTagName("body")[0].style.color = "white";
     document.getElementsByTagName("body")[0].style.backgroundColor = "black";
-    Cookies.set("tema", 'true', { expires: 7, path: '/' });
+    Cookies.set("tema", 'true', { expires: 7, path: '/',domain: '.joaowalteramadeu.me' });
   }
 return Cookies.get('tema');
 }
