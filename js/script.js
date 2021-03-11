@@ -20,12 +20,12 @@ function initial(){
     var btst = document.getElementById("mtbtn");
     bgc.classList.add("font-monospace");
     btst.style.textAlign = "left";
-    if(Cookies.get("tema")=="true"){
-      tema();
+    if(Cookies.get("tema")){
+      tema(Cookies.get("tema"));
     }
 }
-function tema(){
-  if(Cookies.get("tema")=="true"){
+function tema(tema){
+  if(tema=='dark'){
     var list = document.getElementsByClassName("bg-dark");
     var listabtn = document.getElementsByClassName("btn-dark");
     var listafrmctrl = document.getElementsByClassName("form-control");
@@ -49,9 +49,9 @@ function tema(){
     }
     document.getElementsByTagName("body")[0].style.color = "black";
     document.getElementsByTagName("body")[0].style.backgroundColor = "white";
-    Cookies.remove('tema', { path: '/', domain: '.joaowalteramadeu.me' })
+    Cookies.set("tema", 'light', { expires: 7, path: '/',domain: '.joaowalteramadeu.me' });
     
-  }else{
+  }else if(tema=="light"){
     var list = document.getElementsByClassName("bg-light");
     var listabtn = document.getElementsByClassName("btn-light");
     var listafrmctrl = document.getElementsByClassName("form-control");
@@ -75,7 +75,7 @@ function tema(){
     }
     document.getElementsByTagName("body")[0].style.color = "white";
     document.getElementsByTagName("body")[0].style.backgroundColor = "black";
-    Cookies.set("tema", 'true', { expires: 7, path: '/',domain: '.joaowalteramadeu.me' });
+    Cookies.set("tema", 'dark', { expires: 7, path: '/',domain: '.joaowalteramadeu.me' });
   }
 return Cookies.get('tema');
 }
