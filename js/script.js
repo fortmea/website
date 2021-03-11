@@ -38,7 +38,7 @@ function settheme(){
         btst.classList.remove("btn-dark");
         btst.classList.add("btn-light");
         btst.innerHTML = "<i class='gg-sun'></i>Modo noturno";
-        delete_cookie('tema','/',window.location.hostname);
+        delete_cookie('tema','/');
     }else{
         bgc.style.color = "white";
         bgc.style.backgroundColor = "black";
@@ -51,6 +51,55 @@ function settheme(){
         btst.innerHTML = "<i class='gg-moon'></i>Modo diurno";
         setCookie('tema','1');
     }
+}
+function temanew(){
+  if((getCookie('tema')=="")||(getCookie('tema')==null)){
+    var list = document.getElementsByClassName("bg-light");
+    var listabtn = document.getElementsByClassName("btn-dark");
+    for(var i = 0;i<listabtn.length;i++){
+      listabtn[i].classList.add("btn-light");
+      listabtn[i].classList.remove("btn-dark");
+    }
+    var i = 0;
+    while(i<list.length){
+      if(list[i].tagName == 'NAV'){
+        list[i].classList.add("navbar-dark");
+        list[i].classList.remove("navbar-light");
+        list[i].classList.add("bg-dark");
+        list[i].classList.remove("bg-light");
+      }else{
+      list[i].classList.add("bg-dark");
+      list[i].classList.remove("bg-light");
+      }
+      document.getElementsByTagName("body")[0].style.color = "white";
+      delete_cookie('tema');
+      i++;
+    }
+  }else{
+    var list = document.getElementsByClassName("bg-dark");
+    var listabtn = document.getElementsByClassName("btn-dark");
+    for(var i = 0;i<listabtn.length;i++){
+      listabtn[i].classList.add("btn-light");
+      listabtn[i].classList.remove("btn-dark");
+    }
+    var i = 0;
+    while(i<list.length){
+      //return list[i].tagName;
+      if(list[i].tagName == 'NAV'){
+        list[i].classList.add("navbar-light");
+        list[i].classList.remove("navbar-dark");
+        list[i].classList.add("bg-light");
+        list[i].classList.remove("bg-dark");
+      }else{
+      list[i].classList.add("bg-light");
+      list[i].classList.remove("bg-dark");
+      }
+      document.getElementsByTagName("body")[0].style.color = "black";
+      delete_cookie('tema');
+      setCookie('tema','1');
+      i++;
+    }
+  }
 }
 function setCookie(cname, cvalue) {
     var d = new Date();
@@ -75,7 +124,7 @@ function setCookie(cname, cvalue) {
     return "";
   }
 
-  function delete_cookie( name, path ) {
+  function delete_cookie( name ) {
     if( getCookie( name ) ) {
         var dbg =  name + "=" +
         ((window.location.pathname) ? ";path="+window.location.pathname:"") + ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
