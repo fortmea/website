@@ -1,3 +1,4 @@
+var temac = localStorage.getItem('temac') | 0;
 $.ajax({
   type: 'POST',
   url: 'https://xue-hua-piao.herokuapp.com/usuario/',
@@ -13,20 +14,18 @@ jQuery(document).ready(function(){
     $( "#loader" ).delay(600).fadeOut(400, function(){
         $( "#corpo" ).delay(200).fadeIn(400);$("#corpo").css("visibility", "visible");
     });  
-    
 });
 function initial(){
     var bgc = document.getElementsByTagName("body")[0];
     var btst = document.getElementById("mtbtn");
     bgc.classList.add("font-monospace");
     btst.style.textAlign = "left";
-    if(Cookies.get("tema_s")){
-      tema(Cookies.get("tema"));
+    if(Cookies.get('tema')==''){
+      tema();
     }
-    localStorage.setItem('sid','');
 }
-function tema(tema){
-  if(tema=='dark'){
+function tema(string){
+  if(Cookies.get('tema')=='dark'){
     var list = document.getElementsByClassName("bg-dark");
     var listabtn = document.getElementsByClassName("btn-dark");
     var listafrmctrl = document.getElementsByClassName("form-control");
@@ -50,9 +49,9 @@ function tema(tema){
     }
     document.getElementsByTagName("body")[0].style.color = "black";
     document.getElementsByTagName("body")[0].style.backgroundColor = "white";
-    Cookies.set("tema", 'light', { expires: 7, path: '/',domain: '.joaowalteramadeu.me' });
-    
-  }else if(tema=="light"){
+    Cookies.set("tema", '', { expires: 7, path: '/',domain: '.joaowalteramadeu.me' });
+    }
+    else{
     var list = document.getElementsByClassName("bg-light");
     var listabtn = document.getElementsByClassName("btn-light");
     var listafrmctrl = document.getElementsByClassName("form-control");
@@ -76,8 +75,9 @@ function tema(tema){
     }
     document.getElementsByTagName("body")[0].style.color = "white";
     document.getElementsByTagName("body")[0].style.backgroundColor = "black";
+    if(!string){
     Cookies.set("tema", 'dark', { expires: 7, path: '/',domain: '.joaowalteramadeu.me' });
+    }
   }
-Cookies.set("tema_s", 'true', { expires: 7, path: '/',domain: '.joaowalteramadeu.me' });
 return Cookies.get('tema');
 }
