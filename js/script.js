@@ -1,5 +1,5 @@
 var temac = localStorage.getItem('temac') | 0;
-if(window.location.pathname=="index.html"){
+if(window.location.pathname=="/index.html"){
 $.ajax({
   type: 'POST',
   url: 'https://xue-hua-piao.herokuapp.com/post/',
