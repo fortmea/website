@@ -39,7 +39,7 @@ function tema(string){
     for(i = 0;i<listabtn.length;i++){
       listabtn[i].classList.replace('btn-dark','btn-light');
       if(listabtn[i].innerHTML=='<i class="gg-moon"></i>Modo diurno'){
-        listabtn[i].innerHTML == '<i class="gg-sun"></i>Modo noturno';
+        listabtn[i].innerHTML = '<i class="gg-sun"></i>Modo noturno';
       }
     }
     var i = 0;
@@ -68,7 +68,7 @@ function tema(string){
     for(i = 0;i<listabtn.length;i++){
       listabtn[i].classList.replace('btn-light','btn-dark');
       if(listabtn[i].innerHTML=='<i class="gg-sun"></i>Modo noturno'){
-        listabtn[i].innerHTML == '<i class="gg-moon"></i>Modo diurno';
+        listabtn[i].innerHTML = '<i class="gg-moon"></i>Modo diurno';
       }
     }
     var i = 0;
