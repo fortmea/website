@@ -17,7 +17,5 @@ jQuery(document).ready(function(){
 });
 function initial(){
     var bgc = document.getElementsByTagName("body")[0];
-    var btst = document.getElementById("mtbtn");
     bgc.classList.add("font-monospace");
-    btst.style.textAlign = "left";
 }
