@@ -5,6 +5,9 @@ $.ajax({
   url: 'https://xue-hua-piao.herokuapp.com/post/',
   dataType: 'json',
   success: function(msg){
+    for(n in msg) {
+      alert(msg[n]);
+  }
       console.log("Mensagem:"+ (JSON.stringify(msg)));
   }
 });
