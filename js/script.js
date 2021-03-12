@@ -5,11 +5,13 @@ $.ajax({
   url: 'https://xue-hua-piao.herokuapp.com/post/',
   dataType: 'json',
   success: function(msg){
-    for(n in msg) {
-      alert(msg[n]);
+    if(data.region.length>0){
+    for(var i=0;i<data.region.length;i++) {
+      alert(msg.region[n]);
   }
       console.log("Mensagem:"+ (JSON.stringify(msg)));
   }
+}
 });
 }
 jQuery(document).ready(function(){
