@@ -5,8 +5,8 @@ $.ajax({
   url: 'https://xue-hua-piao.herokuapp.com/post/',
   dataType: 'json',
   success: function(msg){
-    if(data.region.length>0){
-    for(var i=0;i<data.region.length;i++) {
+    if(msg.region.length>0){
+    for(var i=0;i<msg.region.length;i++) {
       alert(msg.region[n]);
   }
       console.log("Mensagem:"+ (JSON.stringify(msg)));
