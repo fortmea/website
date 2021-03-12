@@ -17,7 +17,7 @@
         <link rel="stylesheet" type="text/css" href="css/style.css" />
     </head>
     <body onload="initial();" style="visibility: hidden" id="corpo" class="bg-dark">
-        <div id="loader" style="visibility: visible;">
+        <div id="loader" style="visibility: visible;margin-top: 15%;padding:1em" class="text-light">
             <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
                 <div class="spinner-grow" role="status">
                   </div>
@@ -44,20 +44,20 @@
             </div>
             </div>
           </nav>
-          <div class="container container h-100">
+          <div class="container container h-100" id="lform">
             <form class="card bg-dark" style="margin-top: 15%;padding:1em">
                 <div class="mb-3">
-                  <label for="em1" class="form-label">Email address</label>
+                  <label for="em1" class="form-label">Endereço de email</label>
                   <input type="email" class="form-control bg-dark" id="em1" aria-describedby="emailHelp">
-                  <div id="emailHelp" class="form-text text-light">We'll never share your email with anyone else.</div>
+                  <div id="emailHelp" class="form-text text-light">Não compartilharemos seu email com ninguém.</div>
                 </div>
                 <div class="mb-3">
-                  <label for="pwd" class="form-label text-light">Password</label>
+                  <label for="pwd" class="form-label text-light">Senha</label>
                   <input type="password" class="form-control bg-dark" id="pwd">
                 </div>
                 <div class="mb-3 form-check">
                   <input type="checkbox" class="form-check-input" id="ck1">
-                  <label class="form-check-label text-light" for="ck1">Check me out</label>
+                  <label class="form-check-label text-light" for="ck1">Mantenha-me logado</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
