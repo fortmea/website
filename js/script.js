@@ -25,7 +25,7 @@ function initial(){
     }
 }
 function tema(string){
-  if(Cookies.get('tema')=='dark'){
+  if(Cookies.get('tema')==''){
     var list = document.getElementsByClassName("bg-dark");
     var listabtn = document.getElementsByClassName("btn-dark");
     var listafrmctrl = document.getElementsByClassName("form-control");
