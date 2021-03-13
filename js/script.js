@@ -6,9 +6,7 @@ $.ajax({
   dataType: 'json',
   success: function(data){
     var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
-    while (getName === null || !isNaN(getName)){
-        getName = prompt("Qual seu nome?");
-    }
+    var getName = prompt("Diga-me, visitante... Qual seu nome?");
     for(x in post){
         var target = document.getElementById( "post-container" );
         var newElement = document.createElement( "div" );
