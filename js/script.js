@@ -64,13 +64,13 @@ function tema_claro(){
     var listabtn = document.getElementsByClassName("btn-dark");
     var listafrmctrl = document.getElementsByClassName("form-control");
     var listacard = document.getElementsByClassName("card");
-    for(i in listafrmctrl){
+    for(i in listafrmctrl.length){
       listafrmctrl[i].classList.replace('bg-dark','bg-light');
     }
-    for(i in listacard){
+    for(i in listacard.length){
       listacard[i].classList.replace('bg-dark','bg-light');
     }
-    for(i in listabtn){
+    for(i in listabtn.length){
       listabtn[i].classList.replace('btn-dark','btn-light');
       if(listabtn[i].innerHTML=='<i class="gg-moon"></i>Modo diurno'){
         listabtn[i].innerHTML = '<i class="gg-sun"></i>Modo noturno';
