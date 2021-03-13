@@ -53,70 +53,85 @@ jQuery(document).ready(function(){
 function initial(){
     var bgc = document.getElementsByTagName("body")[0];
     bgc.classList.add("font-monospace");
+    tema();
+  }
+  function tema(){
     if(Cookies.get('tema_claro')){
       tema_claro();
     }else if(Cookies.get('tema_escuro')){
-      Cookies.get('tema_escuro');
+      tema_escuro();
+    }else{
+      tema_escuro(); 
     }
-}
+  }
 function tema_claro(){
+  var z = 0;
+  while(z<1500){
+    try{
     var list = document.getElementsByClassName("bg-dark");
     var listabtn = document.getElementsByClassName("btn-dark");
     var listafrmctrl = document.getElementsByClassName("form-control");
     var listacard = document.getElementsByClassName("card");
-    for(var i in listafrmctrl.length){
-      listafrmctrl[i].classList.replace('bg-dark','bg-light');
+    for(var a = 0; a< listafrmctrl.length;a++){
+      listafrmctrl[a].classList.replace('bg-dark','bg-light');
     }
-    for(var i in listacard.length){
-      listacard[i].classList.replace('bg-dark','bg-light');
+    for(var b = 0; b< listacard.length;b++){
+      listacard[b].classList.replace('bg-dark','bg-light');
     }
-    for(var i in listabtn.length){
-      listabtn[i].classList.replace('btn-dark','btn-light');
-      if(listabtn[i].innerHTML=='<i class="gg-moon"></i>Modo diurno'){
-        listabtn[i].innerHTML = '<i class="gg-sun"></i>Modo noturno';
+    for(var b = 0; b < listabtn.length;b++){
+      listabtn[b].classList.replace('btn-dark','btn-light');
+      if(listabtn[b].innerHTML=='<i class="gg-moon"></i>Modo diurno'){
+        listabtn[b].innerHTML = '<i class="gg-sun"></i>Modo noturno';
       }
     }
-    var i = 0;
-    while(i<list.length){
-      if(list[i].tagName == 'NAV'){
-        list[i].classList.replace('navbar-dark','navbar-light');
+    for(c =0; c<list.length;c++){
+      if(list[c].tagName == 'NAV'){
+        list[c].classList.replace('navbar-dark','navbar-light');
       }
-        list[i].classList.replace('bg-dark','bg-light');
-      i++;
+        list[c].classList.replace('bg-dark','bg-light');
     }
-    document.getElementsByTagName("body")[0].style.color = "black";
-    document.getElementsByTagName("body")[0].style.classList = "bg-light container text-dark";
+    document.getElementById('corpo').classList = "bg-light container text-dark";
     Cookies.set("tema_claro", 'light', { expires: 7, path: '/',domain: '.joaowalteramadeu.me' });
     Cookies.remove('tema_escuro', { path: '', domain: '.joaowalteramadeu.me' });
+  }catch(error){
+    return;
+  }
+  z++;
+}
+
 }
 function tema_escuro(){
+  var z = 0;
+  while(z<1500){
+    try{
     var list = document.getElementsByClassName("bg-light");
     var listabtn = document.getElementsByClassName("btn-light");
-    var listafrmctrl = document.getElementsByClassName("form-control");
+    //var listafrmctrl = document.getElementsByClassName("form-control");
     var listacard = document.getElementsByClassName("card");
-    for(var i in listafrmctrl.length){
-      listafrmctrl[i].classList.replace('bg-light','bg-dark');
+    //for(var i =0; i<listafrmctrl.length;i++){
+    //  listafrmctrl[i].classList.replace('bg-light','bg-dark');
+    //}
+    for(var a = 0; a < listacard.length;a++){
+      listacard[a].classList.replace('bg-light','bg-dark');
     }
-    for(var i in listacard.length){
-      listacard[i].classList.replace('bg-light','bg-dark');
-    }
-    for(var i in listabtn.length){
+    for(var b =0; b < listabtn.length;b++){
       listabtn[i].classList.replace('btn-light','btn-dark');
       if(listabtn[i].innerHTML=="<i class='gg-sun'></i>Modo noturno"){
         listabtn[i].innerHTML = "<i class='gg-moon'></i>Modo diurno";
       }
     }
-    var i = 0;
-    while(i<list.length){
-      if(list[i].tagName == 'NAV'){
-        list[i].classList.replace('navbar-light','navbar-dark');
+    for(c = 0; c<list.length;c++){
+      if(list[c].tagName == 'NAV'){
+        list[c].classList.replace('navbar-light','navbar-dark');
       }
-      list[i].classList.replace('bg-light','bg-dark');
-      i++;
+      list[c].classList.replace('bg-light','bg-dark');
     }
-    document.getElementsByTagName("body")[0].style.color = "white";
-    document.getElementsByTagName("body")[0].style.classList = "bg-dark container text-light";
+    document.getElementById('corpo').classList = "bg-dark container text-light";
     Cookies.set("tema", 'dark', { expires: 7, path: '/',domain: '.joaowalteramadeu.me' });
     Cookies.remove('tema_claro', { path: '', domain: '.joaowalteramadeu.me' });
-    
+  }catch(error){
+return;
+}
+z++;
+}
 }
