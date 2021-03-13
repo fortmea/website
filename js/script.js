@@ -1,4 +1,5 @@
 var temac = localStorage.getItem('temac') | 0;
+var getName = prompt("Diga-me, visitante... Qual seu nome?");
 if((window.location.pathname=="/index.html")||(window.location.pathname=="/")){
 $.ajax({
   type: 'POST',
@@ -6,7 +7,7 @@ $.ajax({
   dataType: 'json',
   success: function(data){
     var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
-    var getName = prompt("Diga-me, visitante... Qual seu nome?");
+    
     for(x in post){
         var target = document.getElementById( "post-container" );
         var newElement = document.createElement( "div" );
