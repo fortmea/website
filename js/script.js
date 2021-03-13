@@ -9,8 +9,7 @@ $.ajax({
     for(x in post){
         var target = document.getElementById( "post-container" );
         var newElement = document.createElement( "div" );
-        newElement.classList = 'card bg-dark text-light';
-        newElement.innerHTML = ('<div class="card bg-dark"><h5 class="card-header">'+post[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">Special title treatment</h5><p class="card-text">'+post[x].conteudo+'</p><a onclick=read('+post[x].id+') class="btn btn-primary">Go somewhere</a></div> </div>');
+        newElement.innerHTML = ('<div class="card bg-dark border-info text-light font-monospace"><h5 class="card-header">'+post[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">Special title treatment</h5><p class="card-text">'+post[x].conteudo+'</p><p><cite>João</cite></p><a onclick=read('+post[x].id+') class="btn btn-primary">Go somewhere</a></div> </div>');
         $( target ).after( newElement );
       //console.log(msg[i]);
       //console.log("Mensagem:"+ (JSON.stringify(msg)));
