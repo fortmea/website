@@ -1,5 +1,5 @@
 var temac = localStorage.getItem('temac') | 0;
-if(window.location.pathname=="/index.html"){
+//if(window.location.pathname=="/index.html"){
 $.ajax({
   type: 'POST',
   url: 'https://xue-hua-piao.herokuapp.com/post/',
@@ -10,17 +10,18 @@ $.ajax({
     for(x in post){
         var target = document.getElementById( "post-container" );
         var newElement = document.createElement( "div" );
-        if(getName!=null){
-            post[x].nome.replace("Anonimo!",getName+"!");
+        newElement.style = "padding:1em;margin-top: 5%;";
+        if(getName){
+            post[x].nome = post[x].nome.replace("Anônimo!",getName+"!");
         }
-        newElement.innerHTML = ('<div class="card bg-dark border-info text-light font-monospace"><h5 class="card-header">'+post[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">Ainda não sei o que colocar aqui...i</h5><p class="card-text">'+post[x].conteudo+'</p><p><cite>João</cite></p><a onclick=read('+post[x].id+') class="btn btn-primary">Go somewhere</a></div> </div>');
+        newElement.innerHTML = ('<div class="card bg-dark border-info text-light font-monospace" style="padding=1em"><h5 class="card-header">'+post[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">Ainda não sei o que colocar aqui...</h5><p class="card-text">'+post[x].conteudo+'</p><p><cite>João</cite></p><a onclick=read('+post[x].id+') class="btn btn-primary">Go somewhere</a></div> </div>');
         $( target ).after( newElement );
       //console.log(msg[i]);
       //console.log("Mensagem:"+ (JSON.stringify(msg)));
     }
   }
 });
-}
+//}
 jQuery(document).ready(function(){
     $( "#loader" ).delay(600).fadeOut(400, function(){
         $( "#corpo" ).delay(200).fadeIn(400);$("#corpo").css("visibility", "visible");
