@@ -94,13 +94,13 @@ function tema_escuro(){
     var listabtn = document.getElementsByClassName("btn-light");
     var listafrmctrl = document.getElementsByClassName("form-control");
     var listacard = document.getElementsByClassName("card");
-    for(var i in listafrmctrl){
+    for(var i in listafrmctrl.length){
       listafrmctrl[i].classList.replace('bg-light','bg-dark');
     }
-    for(var i in listacard){
+    for(var i in listacard.length){
       listacard[i].classList.replace('bg-light','bg-dark');
     }
-    for(var i in listabtn){
+    for(var i in listabtn.length){
       listabtn[i].classList.replace('btn-light','btn-dark');
       if(listabtn[i].innerHTML=="<i class='gg-sun'></i>Modo noturno"){
         listabtn[i].innerHTML = "<i class='gg-moon'></i>Modo diurno";
