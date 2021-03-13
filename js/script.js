@@ -8,34 +8,30 @@ $.ajax({
   success: function(data){
     var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
     for(x in post){
-      try{
-      let data2 = autor(post[x].autor);
-      data2.then(function(data3){
-        try{
-        var autores = document.getElementsByName("promise["+post[x].autor+"]");
-      }catch(error){
-
-      }
-        var autordata = jQuery.parseJSON((JSON.stringify(data3)))['data'];
-        for(x in autores){
-
-          autores[x].innerHTML = autordata.nome;
-
-        }
-      });
-    }catch(error){
-    }
         var target = document.getElementById( "post-container" );
         var newElement = document.createElement( "div" );
-        newElement.style = "padding:1em;margin-top: 5%;";
+        newElement.style = "padding:1em;";
         if(getName){
             post[x].nome = post[x].nome.replace("Anônimo!",getName+"!");
         }
-        newElement.innerHTML = ('<div class="card bg-dark border-info text-light font-monospace" style="padding=1em"><h5 class="card-header bg-dark-50">'+post[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">Ainda não sei o que colocar aqui...</h5><p class="card-text">'+post[x].conteudo+'</p><p><cite name="promise['+post[x].autor+']">promise['+post[x].autor+']</cite></p><a onclick=read('+post[x].id+') class="btn btn-primary">Go somewhere</a></div> </div>');
+        min = Math.ceil(15000);
+        max = Math.floor(1);
+        var rand = Math.floor(Math.random() * (max - min + 1)) + min;
+        newElement.innerHTML = ('<div class="card bg-dark border-info text-light font-monospace" onload="nomeautor('+post[x].autor+');" style="padding=1em"><h5 class="card-header bg-dark-50">'+post[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">Ainda não sei o que colocar aqui...</h5><p class="card-text">'+post[x].conteudo+'</p><p><cite id="autor'+post[x].autor+" "+rand+'""></cite></p><a onclick=read('+post[x].id+') class="btn btn-primary">Go somewhere</a></div> </div>');
+        nomeautor(post[x].autor,rand);
         $( target ).after( newElement );
     }
   }
 });
+}
+function nomeautor(id,rand){
+  let data2 = autor(id);
+  data2.then(function(data3){
+    var autor = document.getElementById("autor"+id+" "+rand);
+    var autordata = jQuery.parseJSON((JSON.stringify(data3)))['data'];
+    autor.innerHTML = autordata.nome;
+  });
+  return id;
 }
 function autor(id){
  return Promise.resolve($.ajax({
@@ -51,6 +47,7 @@ jQuery(document).ready(function(){
         $( "#corpo" ).delay(200).fadeIn(400);$("#corpo").css("visibility", "visible");
     });  
 });
+
 function initial(){
     var bgc = document.getElementsByTagName("body")[0];
     bgc.classList.add("font-monospace");
