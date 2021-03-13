@@ -64,13 +64,13 @@ function tema_claro(){
     var listabtn = document.getElementsByClassName("btn-dark");
     var listafrmctrl = document.getElementsByClassName("form-control");
     var listacard = document.getElementsByClassName("card");
-    for(i = 0;i<listafrmctrl.length;i++){
+    for(i in listafrmctrl){
       listafrmctrl[i].classList.replace('bg-dark','bg-light');
     }
-    for(i = 0;i<listacard.length;i++){
+    for(i in listacard){
       listacard[i].classList.replace('bg-dark','bg-light');
     }
-    for(i = 0;i<listabtn.length;i++){
+    for(i in listabtn){
       listabtn[i].classList.replace('btn-dark','btn-light');
       if(listabtn[i].innerHTML=='<i class="gg-moon"></i>Modo diurno'){
         listabtn[i].innerHTML = '<i class="gg-sun"></i>Modo noturno';
@@ -94,13 +94,13 @@ function tema_escuro(){
     var listabtn = document.getElementsByClassName("btn-light");
     var listafrmctrl = document.getElementsByClassName("form-control");
     var listacard = document.getElementsByClassName("card");
-    for(i = 0;i<listafrmctrl.length;i++){
+    for(i in listafrmctrl){
       listafrmctrl[i].classList.replace('bg-light','bg-dark');
     }
-    for(i = 0;i<listacard.length;i++){
+    for(i in listacard){
       listacard[i].classList.replace('bg-light','bg-dark');
     }
-    for(i = 0;i<listabtn.length;i++){
+    for(i in listabtn){
       listabtn[i].classList.replace('btn-light','btn-dark');
       if(listabtn[i].innerHTML=="<i class='gg-sun'></i>Modo noturno"){
         listabtn[i].innerHTML = "<i class='gg-moon'></i>Modo diurno";
