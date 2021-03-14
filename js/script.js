@@ -19,7 +19,7 @@ $.ajax({
         var data = new Date(post[x].data);
         data.setSeconds(0, 0);
         var stamp = data.toISOString().replace(/T/, " ").replace(/:00.000Z/, "");
-        newElement.classList="rounded-circle";
+        newElement.classList="float-none";
         var conteudo = post[x].conteudo;
         if(conteudo.length>=100){
           conteudo = conteudo.substring(0,100) +"...";
