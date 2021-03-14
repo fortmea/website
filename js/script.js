@@ -58,14 +58,18 @@ function initial(){
       botao.toggle;
       botao.classList.remove('active');
     }
-    tema();
+    tema(true);
   }
-  function tema(){
-    delay(100);
-    var botao = document.getElementById("tematbt");
-    if(botao.classList.contains('active')){
-      console.log('eu');
-    }
+  function tema(ini){
+    if(!ini){
+    temac++;
+  }
+  if(temac%2==0){
+    tema_escuro();
+  }else{
+    tema_claro();
+  }
+  localStorage.setItem('temac',temac);
   }
 function tema_claro(){
   var z = 0;
