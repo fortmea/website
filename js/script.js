@@ -1,13 +1,14 @@
 var temac = localStorage.getItem('temac') | 0;
-//if((window.location.pathname=="/index.html")||(window.location.pathname=="/")){
+if((window.location.pathname=="/index.html")||(window.location.pathname=="/")){
 $.ajax({
   type: 'POST',
   url: 'https://xue-hua-piao.herokuapp.com/post/',
   dataType: 'json',
   success: function(data){
     var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
+    var target = document.getElementById( "post-container" );
+    if(target){
     for(x in post){
-        var target = document.getElementById( "post-container" );
         var newElement = document.createElement( "div" );
         newElement.style = "padding:1em;";
         //if(getName){
@@ -28,10 +29,12 @@ $.ajax({
         nomeautor(post[x].autor,rand);
         $(target).after(newElement);
     }
+  }
     tema(true);
   }
-});
-//}
+}
+);
+}
 function nomeautor(id,rand){
   let data2 = autor(id);
   data2.then(function(data3){
