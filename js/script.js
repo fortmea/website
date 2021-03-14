@@ -51,18 +51,15 @@ jQuery(document).ready(function(){
 });
 
 function initial(){
-    var bgc = document.getElementsByTagName("body")[0];
-    bgc.classList.add("font-monospace");
-    timeFunction();
-
-  }
-  function timeFunction() {
-    setTimeout(function(){ console.log(''); }, 100);
-    tema(true);
+  var bgc = document.getElementsByTagName("body")[0];
+  bgc.classList.add("font-monospace");
+  timeFunction();
+  tema(true);
 }
 function tema(ini){
 if(!ini){
   temac++;
+  localStorage.setItem('temac',temac);
 }
 for(var a = 0;a<4;a++){
   if(temac%2==0){
@@ -71,7 +68,6 @@ for(var a = 0;a<4;a++){
     tema_claro();
   }
 }
-localStorage.setItem('temac',temac);
 }
 function tema_claro(){
   var z = 0;
