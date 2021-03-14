@@ -61,6 +61,7 @@ function initial(){
     tema();
   }
   function tema(){
+    delay(100);
     var botao = document.getElementById("tematbt");
     if(botao.classList.contains('active')){
       console.log('eu');
