@@ -53,11 +53,6 @@ jQuery(document).ready(function(){
 function initial(){
     var bgc = document.getElementsByTagName("body")[0];
     bgc.classList.add("font-monospace");
-    if(Cookies.get('tema_claro')){
-      var botao = document.getElementById("tematbt");
-      botao.toggle;
-      botao.classList.remove('active');
-    }
     timeFunction();
     tema(true);
   }
