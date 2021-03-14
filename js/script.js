@@ -55,7 +55,7 @@ function initial(){
     bgc.classList.add("font-monospace");
     if(Cookies.get('tema_claro')){
       var botao = document.getElementById("tematbt");
-      botao.aria-pressed='false';
+      botao.toggle;
       botao.classList.remove('active');
     }
     tema();
