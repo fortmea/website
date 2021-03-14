@@ -59,19 +59,19 @@ function initial(){
   function timeFunction() {
     setTimeout(function(){ console.log(''); }, 50);
 }
-  function tema(ini){
-    if(!ini){
-    temac++;
-  }
-  for(var a = 0;a<4;a++){
+function tema(ini){
+if(!ini){
+  temac++;
+}
+for(var a = 0;a<4;a++){
   if(temac%2==0){
     tema_escuro();
   }else{
     tema_claro();
   }
 }
-  localStorage.setItem('temac',temac);
-  }
+localStorage.setItem('temac',temac);
+}
 function tema_claro(){
   var z = 0;
   do{
