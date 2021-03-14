@@ -57,7 +57,7 @@ function initial(){
     tema(true);
   }
   function timeFunction() {
-    setTimeout(function(){ console.log(''); }, 5000);
+    setTimeout(function(){ console.log(''); }, 50);
 }
   function tema(ini){
     if(!ini){
