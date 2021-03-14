@@ -61,12 +61,12 @@ function initial(){
     }else if(Cookies.get('tema_escuro')){
       tema_escuro();
     }else{
-      tema_escuro(); 
+      tema_escuro();
     }
   }
 function tema_claro(){
   var z = 0;
-  while(z<1500){
+  do{
     try{
     var list = document.getElementsByClassName("bg-dark");
     var listabtn = document.getElementsByClassName("btn-dark");
@@ -91,26 +91,25 @@ function tema_claro(){
         list[c].classList.replace('bg-dark','bg-light');
     }
     document.getElementById('corpo').classList = "bg-light container text-dark";
-    Cookies.set("tema_claro", 'light', { expires: 7, path: '/',domain: '.joaowalteramadeu.me' });
+    Cookies.set("tema_claro", '', { expires: 7, path: '/',domain: '.joaowalteramadeu.me' });
     Cookies.remove('tema_escuro', { path: '', domain: '.joaowalteramadeu.me' });
+    z++;
   }catch(error){
     return;
   }
-  z++;
-}
-
+}while(z<=150)
 }
 function tema_escuro(){
   var z = 0;
-  while(z<1500){
+  do{
     try{
     var list = document.getElementsByClassName("bg-light");
     var listabtn = document.getElementsByClassName("btn-light");
-    //var listafrmctrl = document.getElementsByClassName("form-control");
+    var listafrmctrl = document.getElementsByClassName("form-control");
     var listacard = document.getElementsByClassName("card");
-    //for(var i =0; i<listafrmctrl.length;i++){
-    //  listafrmctrl[i].classList.replace('bg-light','bg-dark');
-    //}
+    for(var i =0; i<listafrmctrl.length;i++){
+      listafrmctrl[i].classList.replace('bg-light','bg-dark');
+    }
     for(var a = 0; a < listacard.length;a++){
       listacard[a].classList.replace('bg-light','bg-dark');
     }
@@ -127,11 +126,11 @@ function tema_escuro(){
       list[c].classList.replace('bg-light','bg-dark');
     }
     document.getElementById('corpo').classList = "bg-dark container text-light";
-    Cookies.set("tema", 'dark', { expires: 7, path: '/',domain: '.joaowalteramadeu.me' });
+    Cookies.set("tema_escuro", '', { expires: 7, path: '/',domain: '.joaowalteramadeu.me' });
     Cookies.remove('tema_claro', { path: '', domain: '.joaowalteramadeu.me' });
+    z++;
   }catch(error){
 return;
 }
-z++;
-}
+}while(z<=150)
 }
