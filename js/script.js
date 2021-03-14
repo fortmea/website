@@ -64,7 +64,7 @@ function initial(){
     if(!ini){
     temac++;
   }
-  for(var a = 0;a<3;a++){
+  for(var a = 0;a<4;a++){
   if(temac%2==0){
     tema_escuro();
   }else{
