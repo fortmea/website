@@ -53,7 +53,6 @@ jQuery(document).ready(function(){
 function initial(){
   var bgc = document.getElementsByTagName("body")[0];
   bgc.classList.add("font-monospace");
-  timeFunction();
   tema(true);
 }
 function tema(ini){
