@@ -62,7 +62,7 @@ function initial(){
   }
   function tema(){
     var botao = document.getElementById("tematbt");
-    if(botao.isToggled){
+    if(botao.classList.contains('active')){
       console.log('eu');
     }
   }
