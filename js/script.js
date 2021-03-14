@@ -64,11 +64,13 @@ function initial(){
     if(!ini){
     temac++;
   }
+  for(var a = 0;a<3;a++){
   if(temac%2==0){
     tema_escuro();
   }else{
     tema_claro();
   }
+}
   localStorage.setItem('temac',temac);
   }
 function tema_claro(){
@@ -98,8 +100,6 @@ function tema_claro(){
         list[c].classList.replace('bg-dark','bg-light');
     }
     document.getElementById('corpo').classList = "bg-light container text-dark";
-    Cookies.set("tema_claro", '', { expires: 7, path: '/',domain: '.joaowalteramadeu.me' });
-    Cookies.remove('tema_escuro', { path: '', domain: '.joaowalteramadeu.me' });
     z++;
   }catch(error){
     return;
@@ -133,8 +133,6 @@ function tema_escuro(){
       list[c].classList.replace('bg-light','bg-dark');
     }
     document.getElementById('corpo').classList = "bg-dark container text-light";
-    Cookies.set("tema_escuro", '', { expires: 7, path: '/',domain: '.joaowalteramadeu.me' });
-    Cookies.remove('tema_claro', { path: '', domain: '.joaowalteramadeu.me' });
     z++;
   }catch(error){
 return;
