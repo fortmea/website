@@ -54,10 +54,11 @@ function initial(){
     var bgc = document.getElementsByTagName("body")[0];
     bgc.classList.add("font-monospace");
     timeFunction();
-    tema(true);
+
   }
   function timeFunction() {
-    setTimeout(function(){ console.log(''); }, 50);
+    setTimeout(function(){ console.log(''); }, 100);
+    tema(true);
 }
 function tema(ini){
 if(!ini){
