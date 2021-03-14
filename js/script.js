@@ -61,12 +61,9 @@ function initial(){
     tema();
   }
   function tema(){
-    if(Cookies.get('tema_claro')){
-      tema_claro();
-    }else if(Cookies.get('tema_escuro')){
-      tema_escuro();
-    }else{
-      tema_escuro();
+    var botao = document.getElementById("tematbt");
+    if(botao.isToggled){
+      console.log('eu');
     }
   }
 function tema_claro(){
