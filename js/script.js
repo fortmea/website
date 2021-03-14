@@ -19,7 +19,8 @@ $.ajax({
         var data = new Date(post[x].data);
         data.setSeconds(0, 0);
         var stamp = data.toISOString().replace(/T/, " ").replace(/:00.000Z/, "");
-        newElement.innerHTML = ('<div class="card bg-dark border-info font-monospace" style="padding=1em"><h5 class="card-header bg-dark bg-gradient">'+post[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">'+post[x].resumo+'</h5><p class="card-text">'+post[x].conteudo.substring(0,100)+'...'+'</p><p><img></img><cite id="autor'+post[x].autor+" "+rand+'""><i class="gg-loadbar-alt"></i></cite><br>'+stamp+'</p><a onclick=read('+post[x].id+') class="btn btn-primary">Ir para publicação</a></div> </div>');
+        newElement.classList="rounded-circle";
+        newElement.innerHTML = ('<div class="card bg-dark border-info font-monospace" style="padding=1em"><h5 class="card-header bg-dark bg-gradient">'+post[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">'+post[x].resumo+'</h5><p class="card-text">'+post[x].conteudo.substring(0,100)+'</p><p><img></img><cite id="autor'+post[x].autor+" "+rand+'""><i class="gg-loadbar-alt"></i></cite><br>'+stamp+'</p><a onclick=read('+post[x].id+') class="btn btn-primary rounded-pill">Ir para publicação</a></div> </div>');
         nomeautor(post[x].autor,rand);
         $(target).after(newElement);
     }
@@ -71,7 +72,7 @@ for(var a = 0;a<5;a++){
 }
 function tema_claro(){
     try{
-    document.getElementById('corpo').classList = "bg-light container text-dark";
+    document.getElementById('corpo').classList = "bg-light container text-dark font-monospace";
     var listafrmctrl = document.getElementsByClassName("form-control");
     for(var a = 0; a< listafrmctrl.length;a++){
       listafrmctrl[a].classList.replace('bg-dark','bg-light');
@@ -100,7 +101,7 @@ function tema_claro(){
 function tema_escuro(){
   var z = 0;
     try{
-    document.getElementById('corpo').classList = "bg-dark container text-light";
+    document.getElementById('corpo').classList = "bg-dark container text-light font-monospace";
     var listafrmctrl = document.getElementsByClassName("form-control");
     for(var i =0; i<listafrmctrl.length;i++){
       listafrmctrl[i].classList.replace('bg-light','bg-dark');
