@@ -1,5 +1,5 @@
 var temac = localStorage.getItem('temac') | 0;
-if((window.location.pathname=="/index.html")||(window.location.pathname=="/")){
+//if((window.location.pathname=="/index.html")||(window.location.pathname=="/")){
 $.ajax({
   type: 'POST',
   url: 'https://xue-hua-piao.herokuapp.com/post/',
@@ -20,14 +20,18 @@ $.ajax({
         data.setSeconds(0, 0);
         var stamp = data.toISOString().replace(/T/, " ").replace(/:00.000Z/, "");
         newElement.classList="rounded-circle";
-        newElement.innerHTML = ('<div class="card bg-dark border-info font-monospace" style="padding=1em"><h5 class="card-header bg-dark bg-gradient">'+post[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">'+post[x].resumo+'</h5><p class="card-text">'+post[x].conteudo.substring(0,100)+'</p><p><img></img><cite id="autor'+post[x].autor+" "+rand+'""><i class="gg-loadbar-alt"></i></cite><br>'+stamp+'</p><a onclick=read('+post[x].id+') class="btn btn-primary rounded-pill">Ir para publicação</a></div> </div>');
+        var conteudo = post[x].conteudo;
+        if(conteudo.length>=100){
+          conteudo = conteudo.substring(0,100) +"...";
+        }
+        newElement.innerHTML = ('<div class="card bg-dark border-info font-monospace" style="padding=1em"><h5 class="card-header bg-dark bg-gradient">'+post[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">'+post[x].resumo+'</h5><p class="card-text">'+conteudo+'</p><p><img></img><cite id="autor'+post[x].autor+" "+rand+'""><i class="gg-loadbar-alt"></i></cite><br>'+stamp+'</p><a onclick=read('+post[x].id+') class="btn btn-primary rounded-pill">Ir para publicação</a></div> </div>');
         nomeautor(post[x].autor,rand);
         $(target).after(newElement);
     }
     tema(true);
   }
 });
-}
+//}
 function nomeautor(id,rand){
   let data2 = autor(id);
   data2.then(function(data3){
