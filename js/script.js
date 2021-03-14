@@ -58,8 +58,12 @@ function initial(){
       botao.toggle;
       botao.classList.remove('active');
     }
+    timeFunction();
     tema(true);
   }
+  function timeFunction() {
+    setTimeout(function(){ console.log(''); }, 5000);
+}
   function tema(ini){
     if(!ini){
     temac++;
