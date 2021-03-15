@@ -17,11 +17,25 @@ body{
 }
 .bg-zigzag-dark{
 	background-color: #000000;
-	opacity: 0.8;
+	opacity: 1;
 	background: linear-gradient(135deg, #5a5d5355 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(225deg, #5a5d53 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(315deg, #5a5d5355 25%, transparent 25%) 0px 0/ 80px 80px, linear-gradient(45deg, #5a5d53 25%, #000000 25%) 0px 0/ 80px 80px;
 }
 .bg-zigzag-light{
 	background-color: #ffffff;
-	opacity: 0.8;
+	opacity: 1;
 	background: linear-gradient(135deg, #5a5d5355 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(225deg, #5a5d53 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(315deg, #5a5d5355 25%, transparent 25%) 0px 0/ 80px 80px, linear-gradient(45deg, #5a5d53 25%, #ffffff 25%) 0px 0/ 80px 80px;
+}
+.pressDownButton {
+    /*background-color: hsl(222, 100%, 95%);*/
+    padding: 12px 24px;
+    color: hsl(243, 80%, 62%);
+    border-radius: 6px;
+    border-bottom: 4px solid hsl(221, 89%, 85%);
+    border-top: 0px solid rgba(249, 250, 251);
+    transition: all 0.1s ease-in-out;
+}
+
+.pressDownButton:hover {
+    border-bottom-width: 0;
+    border-top-width: 4px;
 }
