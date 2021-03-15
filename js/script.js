@@ -7,6 +7,7 @@ $.ajax({
   success: function(data){
     var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
     var target = document.getElementById( "post-container" );
+    var contador = 0;
     if(target){
     for(x in post){
         var newElement = document.createElement( "div" );
@@ -28,6 +29,7 @@ $.ajax({
         newElement.innerHTML = ('<div class="card bg-dark font-monospace buttonOverlay" style="padding=1em"><h5 class="card-header bg-dark bg-gradient">'+post[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">'+post[x].resumo+'</h5><p class="card-text">'+conteudo+'</p><p><img></img><cite id="autor'+post[x].autor+" "+rand+'""><i class="gg-loadbar-alt"></i></cite><br>'+stamp+'</p><a onclick=read('+post[x].id+') class="btn btn-primary rounded-pill">Ir para publicação</a></div> </div>');
         nomeautor(post[x].autor,rand);
         $(target).append(newElement);
+        contador++;
     }
   }
     tema(true);
@@ -79,7 +81,7 @@ for(var a = 0;a<5;a++){
 }
 function tema_claro(){
     try{
-    document.getElementById('corpo').classList = "bg-zigzag-light container text-dark font-monospace";
+    document.getElementById('corpo').classList = "bg-zigzag-light text-dark font-monospace";
     var listafrmctrl = document.getElementsByClassName("form-control");
     for(var a = 0; a< listafrmctrl.length;a++){
       listafrmctrl[a].classList.replace('bg-dark','bg-light');
@@ -108,7 +110,7 @@ function tema_claro(){
 function tema_escuro(){
   var z = 0;
     try{
-    document.getElementById('corpo').classList = "bg-zigzag-dark container text-light font-monospace";
+    document.getElementById('corpo').classList = "bg-zigzag-dark text-light font-monospace";
     var listafrmctrl = document.getElementsByClassName("form-control");
     for(var i =0; i<listafrmctrl.length;i++){
       listafrmctrl[i].classList.replace('bg-light','bg-dark');
