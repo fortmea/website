@@ -79,7 +79,7 @@ for(var a = 0;a<5;a++){
 }
 function tema_claro(){
     try{
-    document.getElementById('corpo').classList = "bg-light container text-dark font-monospace";
+    document.getElementById('corpo').classList = "bg-zigzag-light container text-dark font-monospace";
     var listafrmctrl = document.getElementsByClassName("form-control");
     for(var a = 0; a< listafrmctrl.length;a++){
       listafrmctrl[a].classList.replace('bg-dark','bg-light');
@@ -108,7 +108,7 @@ function tema_claro(){
 function tema_escuro(){
   var z = 0;
     try{
-    document.getElementById('corpo').classList = "bg-dark container text-light font-monospace";
+    document.getElementById('corpo').classList = "bg-zigzag-dark container text-light font-monospace";
     var listafrmctrl = document.getElementsByClassName("form-control");
     for(var i =0; i<listafrmctrl.length;i++){
       listafrmctrl[i].classList.replace('bg-light','bg-dark');

@@ -15,3 +15,13 @@ body{
     visibility: visible;
     /*display: block;*/
 }
+.bg-zigzag-dark{
+	background-color: #000000;
+	opacity: 0.8;
+	background: linear-gradient(135deg, #5a5d5355 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(225deg, #5a5d53 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(315deg, #5a5d5355 25%, transparent 25%) 0px 0/ 80px 80px, linear-gradient(45deg, #5a5d53 25%, #000000 25%) 0px 0/ 80px 80px;
+}
+.bg-zigzag-light{
+	background-color: #ffffff;
+	opacity: 0.8;
+	background: linear-gradient(135deg, #5a5d5355 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(225deg, #5a5d53 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(315deg, #5a5d5355 25%, transparent 25%) 0px 0/ 80px 80px, linear-gradient(45deg, #5a5d53 25%, #ffffff 25%) 0px 0/ 80px 80px;
+}
