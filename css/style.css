@@ -78,4 +78,16 @@ background: linear-gradient(135deg, #64321855 25%, transparent 25%) -40px 0/ 80p
 	box-shadow: 0 15px 24px rgba(0,0,0,0.11),
 	  0 15px 24px var(--box-shadow-color);
   }
-  
+  .sc4::-webkit-scrollbar {
+	width: 12px;
+	height: 12px;
+  }
+  .sc4::-webkit-scrollbar-track {
+	border-radius: 10px;
+	background-color: rgba(0, 0, 0, 0.4);
+  }
+  .sc4::-webkit-scrollbar-thumb {
+	background-color: #0d6efd;
+	background-image:-webkit-linear-gradient(45deg,rgba(255,255,255,.3) 20%,transparent 20%,transparent 40%,rgba(255, 255, 255, 0.3) 40%,rgba(255,255,255,.3) 60%,transparent 60%,transparent 80%,rgba(255, 255, 255, 0.3) 80%);
+	border-radius: 10px;
+  }

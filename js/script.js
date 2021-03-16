@@ -27,7 +27,7 @@ $.ajax({
           conteudo = conteudo.substring(0,100) +"...";
         }
         newElement.innerHTML = ('<div class="card bg-dark font-monospace buttonOverlay mb-3" style="padding=1em"><h5 class="card-header bg-dark bg-gradient">'+post[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">'+post[x].resumo+'</h5><p class="card-text">'+conteudo+'</p><p><img></img><cite id="autor'+post[x].autor+" "+rand+'""><i class="gg-loadbar-alt"></i></cite><br>'+stamp+'</p><button class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#modal'+post[x].id+'">Ir para publicação</button></div> </div>');
-        modal.innerHTML=('<div class="modal fade" tabindex="-1"  id="modal'+post[x].id+'" aria-labelledby="modalaria'+post[x].id+'" style="display:none"aria-hidden="true"><div class= "modal-dialog modal-dialog-centered modal-dialog-scrollable modal-sm"><div class="modal-dialog modal-lg"><div class="modal-content bg-dark"><div class="modal-header"><h5 class="modal-title">'+post[x].resumo+'</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><p>'+post[x].conteudo+'</p><p><cite id="autor'+post[x].autor+" "+rand2+'""><i class="gg-loadbar-alt"></i></cite></p></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button></div></div></div></div></div>');
+        modal.innerHTML=('<div class="modal fade" tabindex="-1"  id="modal'+post[x].id+'" aria-labelledby="modalaria'+post[x].id+'" style="display:none"aria-hidden="true"><div class= "modal-dialog modal-dialog-centered modal-dialog-scrollable modal-sm"><div class="modal-dialog modal-lg"><div class="modal-content bg-dark"><div class="modal-header"><h5 class="modal-title">'+post[x].resumo+'</h5><button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><p>'+post[x].conteudo+'</p><p><cite id="autor'+post[x].autor+" "+rand2+'""><i class="gg-loadbar-alt"></i></cite></p></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button></div></div></div></div></div>');
         nomeautor(post[x].autor,rand);
         nomeautor(post[x].autor,rand2);
         $(target).append(newElement);
@@ -84,7 +84,7 @@ for(var a = 0;a<5;a++){
 }
 function tema_claro(){
     try{
-    document.getElementById('corpo').classList = "bg-zigzag-light text-dark font-monospace";
+    document.getElementById('corpo').classList = "bg-zigzag-light text-dark font-monospace sc4";
     var listafrmctrl = document.getElementsByClassName("form-control");
     for(var a = 0; a< listafrmctrl.length;a++){
       listafrmctrl[a].classList.replace('bg-dark','bg-light');
@@ -113,7 +113,7 @@ function tema_claro(){
 function tema_escuro(){
   var z = 0;
     try{
-    document.getElementById('corpo').classList = "bg-zigzag-dark text-light font-monospace";
+    document.getElementById('corpo').classList = "bg-zigzag-dark text-light font-monospace sc4";
     var listafrmctrl = document.getElementsByClassName("form-control");
     for(var i =0; i<listafrmctrl.length;i++){
       listafrmctrl[i].classList.replace('bg-light','bg-dark');
