@@ -7,17 +7,17 @@ $.ajax({
   success: function(data){
     var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
     var target = document.getElementById( "post-container" );
+    var modal_target = document.getElementById( "modal-container" );
     var contador = 0;
     if(target){
     for(x in post){
         var newElement = document.createElement( "div" );
+        var modal = document.createElement("div");
         newElement.style = "padding:1em;";
-        //if(getName){
-        //    post[x].nome = post[x].nome.replace("Anônimo!",getName+"!");
-        //}
         min = Math.ceil(15000);
         max = Math.floor(1);
         var rand = Math.floor(Math.random() * (max - min + 1)) + min;
+        var rand2 = Math.floor(Math.random() * (max - min + 1)) + min;
         var data = new Date(post[x].data);
         data.setSeconds(0, 0);
         var stamp = data.toISOString().replace(/T/, " ").replace(/:00.000Z/, "");
@@ -26,10 +26,13 @@ $.ajax({
         if(conteudo.length>=100){
           conteudo = conteudo.substring(0,100) +"...";
         }
-        newElement.innerHTML = ('<div class="card bg-dark font-monospace buttonOverlay" style="padding=1em"><h5 class="card-header bg-dark bg-gradient">'+post[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">'+post[x].resumo+'</h5><p class="card-text">'+conteudo+'</p><p><img></img><cite id="autor'+post[x].autor+" "+rand+'""><i class="gg-loadbar-alt"></i></cite><br>'+stamp+'</p><a onclick=read('+post[x].id+') class="btn btn-primary rounded-pill">Ir para publicação</a></div> </div>');
+        newElement.innerHTML = ('<div class="card bg-dark font-monospace buttonOverlay mb-3" style="padding=1em"><h5 class="card-header bg-dark bg-gradient">'+post[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">'+post[x].resumo+'</h5><p class="card-text">'+conteudo+'</p><p><img></img><cite id="autor'+post[x].autor+" "+rand+'""><i class="gg-loadbar-alt"></i></cite><br>'+stamp+'</p><button class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#modal'+post[x].id+'">Ir para publicação</button></div> </div>');
+        modal.innerHTML=('<div class="modal fade" tabindex="-1"  id="modal'+post[x].id+'" aria-labelledby="modalaria'+post[x].id+'" style="display:none"aria-hidden="true"><div class= "modal-dialog modal-dialog-centered modal-dialog-scrollable modal-sm"><div class="modal-dialog modal-lg"><div class="modal-content bg-dark"><div class="modal-header"><h5 class="modal-title">'+post[x].resumo+'</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><p>'+post[x].conteudo+'</p><p><cite id="autor'+post[x].autor+" "+rand2+'""><i class="gg-loadbar-alt"></i></cite></p></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button></div></div></div></div></div>');
         nomeautor(post[x].autor,rand);
+        nomeautor(post[x].autor,rand2);
         $(target).append(newElement);
-        contador++;
+        $(modal_target).append(modal);
+        //contador++;
     }
   }
     tema(true);
