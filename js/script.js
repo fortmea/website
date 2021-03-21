@@ -131,7 +131,7 @@ function register(){
         $(target).append(newElement);
       }else{
         var newElement = document.createElement( "div" );
-        newElement.innerHTML='<div class="alert alert-primary alert-dismissible" role="alert">'+post+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
+        newElement.innerHTML='<div class="alert alert-primary alert-dismissible" role="alert"><h2>Anote o código abaixo, ele vai servir para sua autênticação!</h2><br><b>'+post+'</b><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
         $(target).append(newElement);
       }
           
