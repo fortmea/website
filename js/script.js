@@ -1,5 +1,5 @@
 var temac = localStorage.getItem('temac') | 0;
-if((window.location.pathname=="/index.html")||(window.location.pathname=="/")||(window.location.pathname=="/site/website/index.html")){
+if((window.location.pathname=="/index.html")||(window.location.pathname=="/")||(window.location.pathname=="/site/website/index.html")||(window.location.pathname=="/post.html")||(window.location.pathname=="/site/website/post.html")){
 $.ajax({
   type: 'POST',
   url: 'https://xue-hua-piao.herokuapp.com/post/',
@@ -26,7 +26,7 @@ $.ajax({
           conteudo = conteudo.substring(0,100) +"...";
         }
         newElement.innerHTML = ('<div class="card bg-dark font-monospace buttonOverlay mb-3" style="padding=1em"><h5 class="card-header bg-dark bg-gradient">'+post[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">'+post[x].resumo+'</h5><p class="card-text">'+conteudo+'</p><p><img></img><cite id="autor'+post[x].autor+" "+rand+'""><i class="gg-loadbar-alt"></i></cite><br>'+stamp+'</p><button class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#modal'+post[x].id+'">Ir para publicação</button></div> </div>');
-        modal.innerHTML=('<div class="modal fade" tabindex="-1"  id="modal'+post[x].id+'" aria-labelledby="modalaria'+post[x].id+'" style="display:none"aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-sm"><div class="modal-content bg-dark"><div class="modal-header"><h5 class="modal-title">'+post[x].resumo+'</h5><button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><p>'+post[x].conteudo+'</p><p><cite id="autor'+post[x].autor+" "+rand2+'""><i class="gg-loadbar-alt"></i></cite></p></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button></div></div></div></div>');
+        modal.innerHTML=('<div class="modal fade" tabindex="-1"  id="modal'+post[x].id+'" aria-labelledby="modalaria'+post[x].id+'" style="display:none"aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"><div class="modal-content bg-dark"><div class="modal-header"><h5 class="modal-title">'+post[x].resumo+'</h5><button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><p>'+post[x].conteudo+'</p><p><cite id="autor'+post[x].autor+" "+rand2+'""><i class="gg-loadbar-alt"></i></cite></p></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button></div></div></div></div>');
         nomeautor(post[x].autor,rand);
         nomeautor(post[x].autor,rand2);
         $(target).append(newElement);
@@ -75,21 +75,27 @@ $.ajax({
   }
   );
 }*/
-function login(){
+function sendpost(){
   let email = document.getElementById("InputEmail1").value;
   let hash = document.getElementById("InputPassword1").value;
+  let titulo = document.getElementById("InputTitulo1").value;
+  let titulo2 = document.getElementById("InputTitulo2").value;
+  let content = document.getElementsByClassName("ql-editor")[0].innerHTML;
   $.ajax({
     type: 'POST',
-    url: 'https://xue-hua-piao.herokuapp.com/login/',
+    url: 'https://xue-hua-piao.herokuapp.com/addpost/',
     dataType: 'json',
     data: { 
       'hash':hash,
-      'email':email 
+      'email':email,
+      'titulo': titulo,
+      'subtitulo':titulo2,
+      'conteudo':content
     },
     success: function(data){
       var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
       var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
-      var target = document.getElementById( "corpo-login" );
+      var target = document.getElementById( "footer" );
       if(tipo=="true"){
         var newElement = document.createElement( "div" );
         newElement.innerHTML='<div class="alert alert-danger alert-dismissible" role="alert">'+post+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
