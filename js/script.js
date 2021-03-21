@@ -106,7 +106,7 @@ function login(){
 }
 function register(){
   let email = document.getElementById("InputEmail2").value;
-  let nome = document.getElementById("InputName").value;
+  let nome = document.getElementById("InputNome").value;
   $.ajax({
     type: 'POST',
     url: 'https://xue-hua-piao.herokuapp.com/register/',
