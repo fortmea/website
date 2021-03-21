@@ -92,11 +92,11 @@ function login(){
       var target = document.getElementById( "corpo-login" );
       if(tipo=="true"){
         var newElement = document.createElement( "div" );
-        newElement.innerHTML='<div class="alert alert-danger" role="alert">'+post+'!</div>'
+        newElement.innerHTML='<div class="alert alert-danger alert-dismissible" role="alert">'+post+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
         $(target).append(newElement);
       }else{
         var newElement = document.createElement( "div" );
-        newElement.innerHTML='<div class="alert alert-primary" role="alert">'+post+'!</div>'
+        newElement.innerHTML='<div class="alert alert-primary alert-dismissible" role="alert">'+post+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
         $(target).append(newElement);
       }
           
@@ -121,11 +121,11 @@ function register(){
       var target = document.getElementById( "corpo-registro" );
       if(tipo=="true"){
         var newElement = document.createElement( "div" );
-        newElement.innerHTML='<div class="alert alert-danger" role="alert">'+post+'!</div>'
+        newElement.innerHTML='<div class="alert alert-danger alert-dismissible" role="alert">'+post+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
         $(target).append(newElement);
       }else{
         var newElement = document.createElement( "div" );
-        newElement.innerHTML='<div class="alert alert-primary" role="alert">'+post+'!</div>'
+        newElement.innerHTML='<div class="alert alert-primary alert-dismissible" role="alert">'+post+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
         $(target).append(newElement);
       }
           
