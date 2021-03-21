@@ -59,22 +59,50 @@
                   <h5 class="modal-title" id="ModalCenterTitle">Login</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="corpo-login">
                   <form>
                     <div class="mb-3">
-                      <label for="InputEmail1" class="form-label">Endereço de Email</label>
+                      <label for="InputEmail1" class="form-label">Endereço de Email</label><br>
                       <input type="email" class="input" id="InputEmail1" aria-describedby="emailHelp">
                       <div id="emailHelp" class="form-text">Não compartilharemos seu Email com ninguém.</div>
                     </div>
                     <div class="mb-3">
-                      <label for="InputPassword1" class="form-label">HashCode</label>
+                      <label for="InputPassword1" class="form-label">HashCode</label><br>
                       <input type="password" class="input" id="InputPassword1">
                     </div>
                   </form>
                 </div>
                 <div class="modal-footer">
+                  <button type="button" class="btn btn-info"  data-bs-toggle="modal" data-bs-target="#register-modal">Registrar-se</button>
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                   <button type="button" class="btn btn-primary" onclick="login()">Fazer login</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal fade" id="register-modal" tabindex="-1" aria-labelledby="ModalCenterTitle" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content bg-dark">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="ModalCenterTitle">Registro</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="corpo-registro">
+                  <form>
+                    <div class="mb-3">
+                      <label for="InputEmail2" class="form-label">Endereço de Email</label><br>
+                      <input type="email" class="input" id="InputEmail2" aria-describedby="emailHelp">
+                      <div id="emailHelp" class="form-text">Não compartilharemos seu Email com ninguém.</div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="InputNome" class="form-label">Nome</label><br>
+                      <input type="text" class="input" id="InputNome">
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                  <button type="button" class="btn btn-primary" onclick="register()">Registrar-me</button>
                 </div>
               </div>
             </div>

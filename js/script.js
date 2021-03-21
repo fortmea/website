@@ -76,23 +76,59 @@ $.ajax({
   );
 }*/
 function login(){
+  let email = document.getElementById("InputEmail1").value;
+  let hash = document.getElementById("InputPassword1").value;
   $.ajax({
     type: 'POST',
     url: 'https://xue-hua-piao.herokuapp.com/login/',
-    data: JSON.stringify({ 
-      'hash':document.getElementById("InputPassword1").textContent,
-      'email': document.getElementById("InputEmail1").textContent
-    }),
     dataType: 'json',
+    data: { 
+      'hash':hash,
+      'email':email 
+    },
     success: function(data){
       var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
-      if(target){
-      for(x in post){
-          var newElement = document.createElement( "div" );
-          newElement.innerHTML('<div class="alert alert-primary" role="alert">'+post+'!</div>')
-          $(target).append(newElement);
+      var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
+      var target = document.getElementById( "corpo-login" );
+      if(tipo=="true"){
+        var newElement = document.createElement( "div" );
+        newElement.innerHTML='<div class="alert alert-danger" role="alert">'+post+'!</div>'
+        $(target).append(newElement);
+      }else{
+        var newElement = document.createElement( "div" );
+        newElement.innerHTML='<div class="alert alert-primary" role="alert">'+post+'!</div>'
+        $(target).append(newElement);
       }
+          
     }
+  }
+  );
+}
+function register(){
+  let email = document.getElementById("InputEmail2").value;
+  let nome = document.getElementById("InputName").value;
+  $.ajax({
+    type: 'POST',
+    url: 'https://xue-hua-piao.herokuapp.com/register/',
+    dataType: 'json',
+    data: { 
+      'nome':nome,
+      'email':email 
+    },
+    success: function(data){
+      var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
+      var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
+      var target = document.getElementById( "corpo-registro" );
+      if(tipo=="true"){
+        var newElement = document.createElement( "div" );
+        newElement.innerHTML='<div class="alert alert-danger" role="alert">'+post+'!</div>'
+        $(target).append(newElement);
+      }else{
+        var newElement = document.createElement( "div" );
+        newElement.innerHTML='<div class="alert alert-primary" role="alert">'+post+'!</div>'
+        $(target).append(newElement);
+      }
+          
     }
   }
   );
