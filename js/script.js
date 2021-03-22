@@ -113,6 +113,9 @@ function sendpost(){
 function register(){
   let email = document.getElementById("InputEmail2").value;
   let nome = document.getElementById("InputNome").value;
+  var target = document.getElementById( "corpo-registro" );
+  var newElement = document.createElement( "div" );
+  if((nome)&&(email)){
   $.ajax({
     type: 'POST',
     url: 'https://xue-hua-piao.herokuapp.com/register/',
@@ -124,13 +127,11 @@ function register(){
     success: function(data){
       var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
       var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
-      var target = document.getElementById( "corpo-registro" );
+      
       if(tipo==true){
-        var newElement = document.createElement( "div" );
         newElement.innerHTML='<div class="alert alert-danger alert-dismissible" role="alert">'+post+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
         $(target).append(newElement);
       }else{
-        var newElement = document.createElement( "div" );
         newElement.innerHTML='<div class="alert alert-primary alert-dismissible" role="alert"><h4>Anote o código abaixo, ele vai servir para sua autênticação!</h4><br><b>'+post+'<br>Verifique seu email!</b><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
         $(target).append(newElement);
       }
@@ -138,7 +139,12 @@ function register(){
     }
   }
   );
+}else{
+  newElement.innerHTML='<div class="alert alert-danger alert-dismissible" role="alert">Informe nome de usuário e email!<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
+  $(target).append(newElement);
 }
+}
+
 function nomeautor(id,rand){
   let data2 = autor(id);
   data2.then(function(data3){
