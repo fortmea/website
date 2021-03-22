@@ -131,7 +131,7 @@ function register(){
         $(target).append(newElement);
       }else{
         var newElement = document.createElement( "div" );
-        newElement.innerHTML='<div class="alert alert-primary alert-dismissible" role="alert"><h2>Anote o código abaixo, ele vai servir para sua autênticação!</h2><br><b>'+post+'</b><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
+        newElement.innerHTML='<div class="alert alert-primary alert-dismissible" role="alert"><h2>Anote o código abaixo, ele vai servir para sua autênticação!</h2><br><b>'+post+'<br>Confirme seu email!</b><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
         $(target).append(newElement);
       }
           
@@ -240,6 +240,7 @@ return;
 function confirma(){
   let email = document.getElementById("InputEmail1").value;
   let hash = document.getElementById("InputPassword1").value;
+  var newElement = document.createElement( "div" );
   if((window.location.pathname=="/confirmar.html")||(window.location.pathname=="/site/website/confirmar.html")){
     $.ajax({
       type: 'POST',
@@ -254,7 +255,7 @@ function confirma(){
         var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
         var target = document.getElementById( "alert-container" );
         if(target){
-          if(tipo=="false"){
+          if(tipo=="true"){
             newElement.innerHTML = ('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Erro!</strong>'+post+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
             $(target).append(newElement);
           }else{
