@@ -6,10 +6,9 @@
         <meta name="description" content="Um site">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href='css/gg.css' rel='stylesheet'>
-        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
         <title>
-            Criar postagem
+            João Walter Amadeu
         </title>
         <script type="text/javascript" src="js/jquery-3.6.0.js"></script>
         <!--<script type="text/javascript" src="js/js.cookie.js"></script>-->
@@ -18,7 +17,8 @@
         <link rel="shortcut icon" type="image/jpg" href="favicon.ico"/>
         <link rel="stylesheet" type="text/css" href="css/style.css" />
     </head>
-    <body onload="initial();" style="visibility: hidden;position: relative;" class="bg-zigzag-dark text-light" id="corpo">
+    <body onload="initial();" style="visibility: hidden;position: relative;" class="bg-zigzag-dark" id="corpo">
+      
         <div id="loader" class="text-danger" >
             <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
                 <div class="spinner-grow" role="status">
@@ -41,42 +41,43 @@
                     <a class="nav-link" href="projetos.html">Projetos</a>
                   </li>
                 </ul>
+                <li class="navbar-nav nav-item">
+                  <a type="button" class="btn btn-dark  text-start" href="index.html" style="margin: 1em;"><i class="gg-profile"></i>Registrar</a>
+                </li>
                 <li class = "navbar-nav nav-item">
-                  <button class='btn btn-dark text-start' onclick="tema();" id='temabtn'><i class='gg-sun'></i>Modo noturno</button>
+                  <button class='btn btn-dark text-start pressDownButton' onclick="tema();" id='temabtn'><i class='gg-sun'></i>Modo noturno</button>
             </li>
             </div>
             </div>
           </nav>
-          <div class="container card bg-dark" style="margin-top:10%">
-            <div class="card-header bg-dark">
-            <label for="InputTitulo1" class="form-label" style="width: max-content;">Titulo da postagem</label><br>
-            <input type="text" class="input" id="InputTitulo1" aria-describedby="tituloHelp"><br>
-              <label for="InputTitulo2" class="form-label" style="width: max-content;">Resumo/subtitulo da postagem</label><br>
-              <input type="text" class="input" id="InputTitulo2" aria-describedby="tituloHelp2">
+          <div class="container" style="position: relative;margin-top: 1em;">
+            <div class="card-content bg-dark ">
+                <div class="card-header bg-gradient">
+                  <h5 class="card-title" id="ModalCenterTitle">Confirmar email</h5>
+                </div>
+                <div class="card-body">
+                  <form>
+                    <div class="mb-3">
+                      <label for="InputEmail1" class="form-label">Endereço de Email</label><br>
+                      <input type="email" class="input" id="InputEmail1" aria-describedby="emailHelp">
+                      <div id="emailHelp" class="form-text">Não compartilharemos seu Email com ninguém.</div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="InputPassword1" class="form-label">HashCode</label><br>
+                      <input type="password" class="input" id="InputPassword1">
+                    </div>
+                  </form>
+                </div>
+                <div id="alert-container">
+                    
+                </div>
+                <div class="card-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                  <button type="button" class="btn btn-primary" onclick="confirma()">Confirmar email</button>
+                </div>
+              </div>
           </div>
-          <div id="editor" class=" card-body bg-dark">
-
-        </div>
-        <form class="card-footer bg-dark" id="footer">
-          <div class="mb-3">
-            <label for="InputEmail1" class="form-label">Endereço de Email</label><br>
-            <input type="email" class="input" id="InputEmail1" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">Não compartilharemos seu Email com ninguém.</div>
-          </div>
-          <div class="mb-3">
-            <label for="InputPassword1" class="form-label">HashCode</label><br>
-            <input type="password" class="input" id="InputPassword1">
-          </div>
-        </form>
-        <button type="submit" class="btn btn-primary" onclick="sendpost()">Enviar</button>
-      </div>
-          <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-        <script>
-            var quill = new Quill('#editor', {
-              theme: 'snow'
-            });
-          </script>
     </body>
     
 </html>

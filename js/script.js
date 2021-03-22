@@ -1,5 +1,5 @@
 var temac = localStorage.getItem('temac') | 0;
-if((window.location.pathname=="/index.html")||(window.location.pathname=="/")||(window.location.pathname=="/site/website/index.html")||(window.location.pathname=="/post.html")||(window.location.pathname=="/site/website/post.html")){
+if((window.location.pathname=="/index.html")||(window.location.pathname=="/")||(window.location.pathname=="/site/website/index.html")){
 $.ajax({
   type: 'POST',
   url: 'https://xue-hua-piao.herokuapp.com/post/',
@@ -20,6 +20,7 @@ $.ajax({
         var data = new Date(post[x].data);
         data.setSeconds(0, 0);
         var stamp = data.toISOString().replace(/T/, " ").replace(/:00.000Z/, "");
+        stamp = stamp.replace("00:00","");
         newElement.classList="float-none";
         var conteudo = post[x].conteudo;
         if(conteudo.length>=100){
@@ -33,7 +34,6 @@ $.ajax({
         $(modal_target).append(modal);
     }
   }
-    tema(true);
   }
 }
 );
@@ -166,7 +166,7 @@ jQuery(document).ready(function(){
 function initial(){
   var bgc = document.getElementsByTagName("body")[0];
   bgc.classList.add("font-monospace");
- 
+  tema(true);
 }
 function tema(ini){
 if(!ini){
@@ -236,4 +236,34 @@ function tema_escuro(){
   }catch(error){
 return;
 }
+}
+function confirma(){
+  let email = document.getElementById("InputEmail1").value;
+  let hash = document.getElementById("InputPassword1").value;
+  if((window.location.pathname=="/confirmar.html")||(window.location.pathname=="/site/website/confirmar.html")){
+    $.ajax({
+      type: 'POST',
+      url: 'https://xue-hua-piao.herokuapp.com/confirmar/',
+      dataType: 'json',
+      data:{
+        'email': email,
+        'hash':hash
+      },
+      success: function(data){
+        var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
+        var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
+        var target = document.getElementById( "alert-container" );
+        if(target){
+          if(tipo=="false"){
+            newElement.innerHTML = ('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Erro!</strong>'+post+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+            $(target).append(newElement);
+          }else{
+            newElement.innerHTML = ('<div class="alert alert-primary alert-dismissible fade show" role="alert"><strong>Sucesso!</strong>'+post+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+            $(target).append(newElement);
+          }
+      }
+      }
+    }
+    );
+    }
 }
