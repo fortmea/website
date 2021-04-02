@@ -17,6 +17,12 @@
         <link rel="manifest" href="site.webmanifest">
         <link rel="shortcut icon" type="image/jpg" href="favicon.ico"/>
         <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <style>
+          .card:hover{
+            transform: translateY(0px) scale(1.000) translateZ(0);
+
+          }
+        </style>
     </head>
     <body onload="initial();" style="visibility: hidden;position: relative;" class="bg-zigzag-dark text-light" id="corpo">
         <div id="loader" class="text-danger" >
@@ -48,16 +54,21 @@
             </div>
           </nav>
           <div class="container card bg-dark" style="margin-top:10%">
-            <div class="card-header bg-dark">
+            <div class="card-header bg-gradient">
+              Criar publicação
+            </div>
+            <div class="card-body">
             <label for="InputTitulo1" class="form-label" style="width: max-content;">Titulo da postagem</label><br>
             <input type="text" class="input col-12" id="InputTitulo1" aria-describedby="tituloHelp"><br>
               <label for="InputTitulo2" class="form-label" style="width: max-content;">Resumo/subtitulo da postagem</label><br>
               <input type="text" class="input col-12" id="InputTitulo2" aria-describedby="tituloHelp2">
-          </div>
-          <div id="editor" class=" card-body bg-dark">
+          
+          <div id="editor" class="card-body">
 
         </div>
-        <form class="card-footer bg-dark" id="footer">
+      </div>
+      <div class="card-footer">
+        <form class="bg-dark" id="footer">
           <div class="mb-3">
             <label for="InputEmail1" class="form-label">Endereço de Email</label><br>
             <input type="email" class="input col-12" id="InputEmail1" aria-describedby="emailHelp">
@@ -68,8 +79,9 @@
             <input type="password" class="input col-12" id="InputPassword1">
           </div>
         </form>
-        <button type="submit" class="btn btn-primary" onclick="sendpost()">Enviar</button>
+        <button type="submit" class="btn btn-primary" style="width:100%" onclick="sendpost()">Enviar</button>
       </div>
+    </div>
           <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
         <script>

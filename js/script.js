@@ -9,10 +9,12 @@ $.ajax({
     var target = document.getElementById( "post-container" );
     var modal_target = document.getElementById( "modal-container" );
     if(target){
+      var conta = 0;
     for(x in post){
         var newElement = document.createElement( "div" );
         var modal = document.createElement("div");
         newElement.style = "padding:1em;";
+        
         min = Math.ceil(15000);
         max = Math.floor(1);
         var rand = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -167,7 +169,7 @@ jQuery(document).ready(function(){
     $( "#loader" ).delay(600).fadeOut(400, function(){
         $( "#corpo" ).delay(200).fadeIn(400);$("#corpo").css("visibility", "visible");
     });  
-});
+  });
 
 function initial(){
   var bgc = document.getElementsByTagName("body")[0];
