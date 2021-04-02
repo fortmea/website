@@ -31,15 +31,35 @@ jQuery(document).ready(function(){
                 <div class="card-body">
                   <h5 class="card-title">`+post.nome+`</h5>
                   <p class="card-text">Email:<a style="text-decoration:none" href="mailto:`+post.email+`">`+post.email+`</a>.</p>
-                  <p class="card-text"><small class="text-muted">Membro desde: `+data+`</small></p>
+                  <p class="card-text"><small >Membro desde: `+data+`</small></p>
                 </div>
               </div>
             </div>
           </div>`
             $(target).append(newElement);
+            $.ajax({
+                type: 'POST',
+                url: 'https://xue-hua-piao.herokuapp.com/userpost/',
+                dataType: 'json',
+                data: { 
+                  'uid':$_GET['uid']
+                },
+                success: function(data){
+                    var target = document.getElementById( "post-container" );
+                    var data = new Date(post2[x].data);
+                    data.setSeconds(0, 0);
+                    var stamp = data.toISOString().replace(/T/, " ").replace(/:00.000Z/, "");
+                    stamp = stamp.replace("00:00","");
+                    newElement.classList="float-none";
+                    var conteudo = post2[x].conteudo;
+                    
+                    newElement.innerHTML = ('<div class="card bg-dark font-monospace buttonOverlay mb-3" style="padding=1em"><h5 class="card-header bg-dark bg-gradient">'+post2[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">'+post2[x].resumo+'</h5><p class="card-text">'+conteudo+'</p><p><img></img><cite>'+post.nome+'</cite>,<br>'+stamp+'</p><button class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#modal'+post2[x].id+'">Expandir</button></div> </div>');
+                    $(target2).append(newElement);
+                }
+            });
           }else{
             var newElement = document.createElement( "div" );
-            newElement.innerHTML='<div class="alert alert-primary alert-dismissible" role="alert">'+post+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
+            newElement.innerHTML='<div class="alert alert-danger alert-dismissible" role="alert">'+post+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
             $(target).append(newElement);
           }
               
