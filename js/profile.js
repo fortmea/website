@@ -45,7 +45,10 @@ jQuery(document).ready(function(){
                   'uid':$_GET['uid']
                 },
                 success: function(data){
-                    var target = document.getElementById( "post-container" );
+                    var post2 = jQuery.parseJSON((JSON.stringify(data)))['data'];
+                    var target2 = document.getElementById( "post-container" );
+                    for(x in post2){
+                    var newElement = document.createElement( "div" );
                     var data = new Date(post2[x].data);
                     data.setSeconds(0, 0);
                     var stamp = data.toISOString().replace(/T/, " ").replace(/:00.000Z/, "");
@@ -53,8 +56,9 @@ jQuery(document).ready(function(){
                     newElement.classList="float-none";
                     var conteudo = post2[x].conteudo;
                     
-                    newElement.innerHTML = ('<div class="card bg-dark font-monospace buttonOverlay mb-3" style="padding=1em"><h5 class="card-header bg-dark bg-gradient">'+post2[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">'+post2[x].resumo+'</h5><p class="card-text">'+conteudo+'</p><p><img></img><cite>'+post.nome+'</cite>,<br>'+stamp+'</p><button class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#modal'+post2[x].id+'">Expandir</button></div> </div>');
+                    newElement.innerHTML = ('<div class="card bg-dark font-monospace buttonOverlay mb-3" style="padding=1em"><h5 class="card-header bg-dark bg-gradient">'+post2[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">'+post2[x].resumo+'</h5><p class="card-text">'+conteudo+'</p><p><img></img><cite>'+post.nome+'</cite>,<br>'+stamp+'</p>    </div> </div>');
                     $(target2).append(newElement);
+                }
                 }
             });
           }else{
