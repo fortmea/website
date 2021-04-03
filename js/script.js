@@ -1,4 +1,5 @@
 var temac = localStorage.getItem('temac') | 0;
+function loadposts(){
 if((window.location.pathname=="/index.html")||(window.location.pathname=="/")||(window.location.pathname=="/site/website/index.html")){
 $.ajax({
   type: 'POST',
@@ -14,7 +15,6 @@ $.ajax({
         var newElement = document.createElement( "div" );
         var modal = document.createElement("div");
         newElement.style = "padding:1em;";
-        
         min = Math.ceil(15000);
         max = Math.floor(1);
         var rand = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -28,7 +28,22 @@ $.ajax({
         if(conteudo.length>=100){
           conteudo = conteudo.substring(0,100) +"...";
         }
-        newElement.innerHTML = ('<div class="card bg-dark font-monospace buttonOverlay mb-3" style="padding=1em"><h5 class="card-header bg-dark bg-gradient">'+post[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">'+post[x].resumo+'</h5><p class="card-text">'+conteudo+'</p><p><img></img><a href="profile.html?uid='+post[x].autor+'" style="text-decoration:none"><cite id="autor'+post[x].autor+" "+rand+'"">"<i class="gg-loadbar-alt"></i></cite></a>,<br>'+stamp+'</p><button class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#modal'+post[x].id+'">Expandir</button></div> </div>');
+        if(temac%2==1){
+          var bg = "bg-dark";
+        }else{
+          var bg = "bg-light";
+        }
+        newElement.innerHTML = (`
+          <div class="card `+bg+` font-monospace buttonOverlay mb-3" style="padding=1em">
+          <h5 class="card-header `+bg+` bg-gradient">`+post[x].nome+`</h5>
+          <div class="card-body `+bg+`">
+          <h5 class="card-title">`+post[x].resumo+`</h5>
+          <p class="card-text">`+conteudo+`</p><p><img></img>
+          <a href="profile.html?uid=`+post[x].autor+`" style="text-decoration:none"><img id="img`+post[x].autor+` `+rand+`"><br>
+          <cite id="autor`+post[x].autor+` `+rand+`"><i class="gg-loadbar-alt"></i></cite></a>,<br>`+stamp+`</p>
+          <button class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#modal`+post[x].id+`">Expandir</button></div> </div>`);
+        
+        
         modal.innerHTML=('<div class="modal fade" tabindex="-1"  id="modal'+post[x].id+'" aria-labelledby="modalaria'+post[x].id+'" style="display:none"aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"><div class="modal-content bg-dark"><div class="modal-header"><h5 class="modal-title">'+post[x].resumo+'</h5><button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><p>'+post[x].conteudo+'</p><p><cite id="autor'+post[x].autor+" "+rand2+'""><i class="gg-loadbar-alt"></i></cite>,<br>'+stamp+'</p></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button></div></div></div></div>');
         nomeautor(post[x].autor,rand);
         nomeautor(post[x].autor,rand2);
@@ -39,6 +54,7 @@ $.ajax({
   }
 }
 );
+}
 }
 /*function create_account(){
   $.ajax({
@@ -150,9 +166,15 @@ function register(){
 function nomeautor(id,rand){
   let data2 = autor(id);
   data2.then(function(data3){
+    var img_autor = document.getElementById("img"+id+" "+"rand");
+    //img_autor.innerHTML = "";
+
     var autor = document.getElementById("autor"+id+" "+rand);
     var autordata = jQuery.parseJSON((JSON.stringify(data3)))['data'];
     autor.innerHTML ="- "+ autordata.nome;
+    if(autordata.image!=null){
+      img_autor.src = autordata.image;
+    }
   });
   return id;
 }
@@ -168,7 +190,9 @@ function autor(id){
 jQuery(document).ready(function(){
     $( "#loader" ).delay(600).fadeOut(400, function(){
         $( "#corpo" ).delay(200).fadeIn(400);$("#corpo").css("visibility", "visible");
-    });  
+    });
+    loadposts();
+    initial();
   });
 
 function initial(){

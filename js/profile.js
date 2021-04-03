@@ -19,10 +19,14 @@ jQuery(document).ready(function(){
           }else{
               imagem = post.image
           }
+          if($_GET['uid']==21){
+            post.nome = "Sr. Supremo Rei do Universo " + post.nome
+          }
           var target = document.getElementById( "profile" );
           if(tipo==false){
+            $('meta[property="og:title"]').replaceWith('<meta property="og:title" content="Perfil de '+post.nome+'">');
             var newElement = document.createElement( "div" );
-            newElement.innerHTML=`<div class="card mb-3 bg-dark" >
+            newElement.innerHTML=`<div class="card mb-3 bg-dark font-monospace" >
             <div class="row g-0">
               <div class="col-md-4">
                 <img src="`+imagem+`" class="img-thumbnail">
@@ -58,15 +62,17 @@ jQuery(document).ready(function(){
                     
                     newElement.innerHTML = ('<div class="card bg-dark font-monospace buttonOverlay mb-3" style="padding=1em"><h5 class="card-header bg-dark bg-gradient">'+post2[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">'+post2[x].resumo+'</h5><p class="card-text">'+conteudo+'</p><p><img></img><cite>'+post.nome+'</cite>,<br>'+stamp+'</p>    </div> </div>');
                     $(target2).append(newElement);
+                    initial();
                 }
                 }
             });
           }else{
             var newElement = document.createElement( "div" );
-            newElement.innerHTML='<div class="alert alert-danger alert-dismissible" role="alert">'+post+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
+            newElement.innerHTML='<div class="alert alert-danger" role="alert"><div class="header"><h4>Erro!</h4></div><br>'+post+'</div>'
             $(target).append(newElement);
           }
-              
+          
         }
       });
+      
 });
