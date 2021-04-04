@@ -57,43 +57,6 @@ $.ajax({
 );
 }
 }
-/*function create_account(){
-  $.ajax({
-    type: 'POST',
-    url: 'https://xue-hua-piao.herokuapp.com/post/',
-    dataType: 'json',
-    success: function(data){
-      var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
-      var target = document.getElementById( "post-container" );
-      var modal_target = document.getElementById( "modal-container" );
-      if(target){
-      for(x in post){
-          var newElement = document.createElement( "div" );
-          var modal = document.createElement("div");
-          newElement.style = "padding:1em;";
-          min = Math.ceil(15000);
-          max = Math.floor(1);
-          var rand = Math.floor(Math.random() * (max - min + 1)) + min;
-          var rand2 = Math.floor(Math.random() * (max - min + 1)) + min;
-          var data = new Date(post[x].data);
-          data.setSeconds(0, 0);
-          var stamp = data.toISOString().replace(/T/, " ").replace(/:00.000Z/, "");
-          newElement.classList="float-none";
-          var conteudo = post[x].conteudo;
-          if(conteudo.length>=100){
-            conteudo = conteudo.substring(0,100) +"...";
-          }
-          newElement.innerHTML = ('<div class="card bg-dark font-monospace buttonOverlay mb-3" style="padding=1em"><h5 class="card-header bg-dark bg-gradient">'+post[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">'+post[x].resumo+'</h5><p class="card-text">'+conteudo+'</p><p><img></img><cite id="autor'+post[x].autor+" "+rand+'""><i class="gg-loadbar-alt"></i></cite><br>'+stamp+'</p><button class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#modal'+post[x].id+'">Ir para publicação</button></div> </div>');
-          nomeautor(post[x].autor,rand);
-          nomeautor(post[x].autor,rand2);
-          $(target).append(newElement);
-          $(modal_target).append(modal);
-      }
-    }
-    }
-  }
-  );
-}*/
 function sendpost(){
   let email = document.getElementById("InputEmail1").value;
   let hash = document.getElementById("InputPassword1").value;
@@ -129,16 +92,6 @@ function sendpost(){
   }
   );
 }
-/*function loadimage(){
-  var fileReader  = new FileReader();
-  var resultado;
-  fileReader.onload = function (e) {
-     resultado = e.target.result;
-  };
-  var formimage = document.getElementById("formFile");
-  console.log(fileReader.readAsDataURL(formimage.files[0]));
-  //return reader.readAsDataURL(formimage.files[0]);
-}*/
 function openFile(){
   var input = document.getElementById("formFile");
   var reader = new FileReader();
