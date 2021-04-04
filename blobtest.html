@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<script>
+    var xhr = new XMLHttpRequest();
+xhr.open("GET", "http://127.0.0.1/site/website/resources/icons8-dinosaur.svg");
+xhr.responseType = "blob";
+xhr.onload = response;
+xhr.send();
+function response(e) {
+    console.log(this.response);
+    var urlCreator = window.URL || window.webkitURL;
+    var imageUrl = urlCreator.createObjectURL(this.response);
+    document.querySelector("#image").src = imageUrl;
+}
+</script>
+    </head>
+    <body>
+        <img id="image"/>
+    </body>
+</html>

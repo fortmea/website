@@ -1,4 +1,5 @@
 var temac = localStorage.getItem('temac') | 0;
+var img_data = null;
 function loadposts(){
 if((window.location.pathname=="/index.html")||(window.location.pathname=="/")||(window.location.pathname=="/site/website/index.html")){
 $.ajax({
@@ -128,11 +129,48 @@ function sendpost(){
   }
   );
 }
+/*function loadimage(){
+  var fileReader  = new FileReader();
+  var resultado;
+  fileReader.onload = function (e) {
+     resultado = e.target.result;
+  };
+  var formimage = document.getElementById("formFile");
+  console.log(fileReader.readAsDataURL(formimage.files[0]));
+  //return reader.readAsDataURL(formimage.files[0]);
+}*/
+function openFile(){
+  var input = document.getElementById("formFile");
+  var reader = new FileReader();
+  reader.onload = function(){
+    if(reader.result.length>1048576){
+      let target = document.getElementById( "corpo-registro" );
+      let newElement = document.createElement( "div" );
+      newElement.innerHTML='<div class="alert alert-danger alert-dismissible" role="alert">Arquivo muito grande(maior que 1MB)!<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
+        $(target).append(newElement);
+        $('#formFile').val('')
+    }else{
+      assinala_valor(reader.result);
+    }
+  };
+  try{
+  reader.readAsDataURL(input.files[0]);
+}catch(exception){}
+}
+async function assinala_valor(data){
+  img_data = data;
+}
 function register(){
   let email = document.getElementById("InputEmail2").value;
   let nome = document.getElementById("InputNome").value;
-  var target = document.getElementById( "corpo-registro" );
-  var newElement = document.createElement( "div" );
+  let target = document.getElementById( "corpo-registro" );
+  let newElement = document.createElement( "div" );
+  let image;
+  if(img_data!=null){
+   image = img_data.toString();
+}else{
+  image = null;
+}
   if((nome)&&(email)){
   $.ajax({
     type: 'POST',
@@ -140,7 +178,8 @@ function register(){
     dataType: 'json',
     data: { 
       'nome':nome,
-      'email':email 
+      'email':email,
+      'imagem':image
     },
     success: function(data){
       var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
@@ -205,7 +244,7 @@ if(!ini){
   temac++;
   localStorage.setItem('temac',temac);
 }
-for(var a = 0;a<5;a++){
+for(var a = 0;a<150;a++){
   if(temac%2==1){
     tema_escuro();
   }else{
@@ -216,12 +255,12 @@ for(var a = 0;a<5;a++){
 function tema_claro(){
     try{
     document.getElementById('corpo').classList = "bg-zigzag-light text-dark font-monospace sc4";
-    var listafrmctrl = document.getElementsByClassName("form-control");
-    for(var a = 0; a< listafrmctrl.length;a++){
+    /*var listafrmctrl = document.getElementsByClassName("form-control");
+    for(var a = 0; a < listafrmctrl.length;a++){
       listafrmctrl[a].classList.replace('bg-dark','bg-light');
-    }
+    }*/
     var listacard = document.getElementsByClassName("card");
-    for(var b = 0; b< listacard.length;b++){
+    for(var b = 0; b < listacard.length;b++){
       listacard[b].classList.replace('bg-dark','bg-light');
     }
     var listabtn = document.getElementsByClassName("btn-dark");

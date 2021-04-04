@@ -22,12 +22,25 @@
             João Walter Amadeu - 404
         </title>
         <script type="text/javascript" src="js/jquery-3.6.0.js"></script>
-        <script type="text/javascript" src="js/script.js"></script>
         <link rel="manifest" href="site.webmanifest">
         <link rel="shortcut icon" type="image/jpg" href="favicon.ico"/>
-        
+        <script>
+            jQuery(document).ready(function(){
+                $( "#loader" ).delay(600).fadeOut(400, function(){
+                $( "#corpo" ).delay(200).fadeIn(400);$("#corpo").css("visibility", "visible");
+            });
+            a404();
+            });
+            function a404(){
+                var body = document.getElementById("corpo");
+                body.classList = "text-dark" 
+                var msg = document.getElementById("msg");
+                var position = msg.getBoundingClientRect();
+                window.scrollTo(position.left, position.top);
+            }
+        </script>
     </head>
-    <body style="visibility: hidden;position: relative;" class="text-dark" id="corpo">
+    <body style="visibility: hidden;position: relative;text-align: center;" id="corpo">
       
         <div id="loader" class="text-danger" >
             <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
@@ -36,10 +49,11 @@
               </div>
         </div>
          <div class="container !direction !spacing ">
-            <h1 class="position-absolute top-50 start-50 text-danger " style="background-color:unset;border:none">Erro 404 - Página não encontrada!<br>
-            <a href="index.html" class="text-info" style="text-decoration: none;">
-                Voltar</a></h1>
-            <img src="resources/fogg-page-not-found-1.svg"></img>
+            <img src="resources/fogg-page-not-found-1.svg"  class="rounded mx-auto d-block img-fluid" ></img>
+            <p class="text-danger fs-1" style="background-color:unset;" id="msg">Página não encontrada!<br>
+            <a href="index.html" class="text-light btn btn-primary" style="text-decoration: none;width: 50%;">
+                Voltar</a></p>
+            
             
           </div>
           

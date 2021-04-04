@@ -1,6 +1,10 @@
 jQuery(document).ready(function(){
     var $_GET=[];
     window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(a,name,value){$_GET[name]=value;});
+    if(!$_GET['uid']){
+      window.location.pathname=window.location.pathname.replace("profile.html","404.html");
+      return;
+    }
     $.ajax({
         type: 'POST',
         url: 'https://xue-hua-piao.herokuapp.com/usuario/',
