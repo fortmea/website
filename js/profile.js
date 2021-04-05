@@ -1,7 +1,5 @@
 var temac = localStorage.getItem('temac') | 0;
-jQuery(document).ready(function(){
-  initial();
-});
+var username;
 jQuery(document).ready(function(){
     var $_GET=[];
     window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(a,name,value){$_GET[name]=value;});
@@ -25,6 +23,7 @@ jQuery(document).ready(function(){
           if($_GET['uid']==21){
             post.nome = "Sr. Supremo Rei do Universo " + post.nome
           }
+          username = post.nome;
           var target = document.getElementById( "profile" );
           if(tipo==false){
             $('meta[property="og:title"]').replaceWith('<meta property="og:title" content="Perfil de '+post.nome+'">');
@@ -48,65 +47,78 @@ jQuery(document).ready(function(){
           </div>`
             $(target).append(newElement);
             setimg(post.image);
-            $.ajax({
-                type: 'POST',
-                url: 'https://xue-hua-piao.herokuapp.com/userpost/',
-                dataType: 'json',
-                data: { 
-                  'uid':$_GET['uid']
-                },
-                success: function(data){
-                    var post2 = jQuery.parseJSON((JSON.stringify(data)))['data'];
-                    var target2 = document.getElementById( "post-container" );
-                    for(x in post2){
-                    var newElement = document.createElement( "div" );
-                    var data = new Date(post2[x].data);
-                    data.setSeconds(0, 0);
-                    var stamp = data.toISOString().replace(/T/, " ").replace(/:00.000Z/, "");
-                    stamp = stamp.replace("00:00","");
-                    newElement.classList="float-none";
-                    var conteudo = post2[x].conteudo;
-                    
-                    newElement.innerHTML = ('<div class="card bg-dark font-monospace buttonOverlay mb-3" style="padding=1em"><h5 class="card-header bg-dark bg-gradient">'+post2[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">'+post2[x].resumo+'</h5><p class="card-text">'+conteudo+'</p><p><img></img><cite>'+post.nome+'</cite>,<br>'+stamp+'</p>    </div> </div>');
-                    $(target2).append(newElement);
-                    
-                }
-                
-                
-                }
-            });
+            
           }else{
             var newElement = document.createElement( "div" );
             newElement.innerHTML='<div class="alert alert-danger" role="alert"><div class="header"><h4>Erro!</h4></div><br>'+post+'</div>'
             $(target).append(newElement);
+            initial();
           }
           
         }
       });
       
 });
-function setimg(imgdata){
+function load_posts(){
+  var $_GET=[];
+  window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(a,name,value){$_GET[name]=value;});
+  $.ajax({
+    type: 'POST',
+    url: 'https://xue-hua-piao.herokuapp.com/userpost/',
+    dataType: 'json',
+    data: { 
+      'uid':$_GET['uid']
+    },
+    success: function(data){
+        var post2 = jQuery.parseJSON((JSON.stringify(data)))['data'];
+        var target2 = document.getElementById( "post-container" );
+        for(x in post2){
+        var newElement = document.createElement( "div" );
+        var data = new Date(post2[x].data);
+        data.setSeconds(0, 0);
+        var stamp = data.toISOString().replace(/T/, " ").replace(/:00.000Z/, "");
+        stamp = stamp.replace("00:00","");
+        newElement.classList="float-none";
+        var conteudo = post2[x].conteudo;
+        
+        newElement.innerHTML = ('<div class="card bg-dark font-monospace buttonOverlay mb-3" style="padding=1em"><h5 class="card-header bg-dark bg-gradient">'+post2[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">'+post2[x].resumo+'</h5><p class="card-text">'+conteudo+'</p><p><img></img><cite>'+username+'</cite>,<br>'+stamp+'</p>    </div> </div>');
+        $(target2).append(newElement);
+        
+    }
+    tema(true);
+    }
+});
+}
+function loader(){
   $( "#loader" ).delay(600).fadeOut(400, function(){
     $( "#corpo" ).delay(200).fadeIn(400);$("#corpo").css("visibility", "visible");
 });
+}
+function setimg(imgdata){
   if(imgdata==null){
     var img = document.getElementById("prfimg");
     img.src = "resources/icons8-dinosaur.svg";
     img.classList.add("img-thumbnail");
+    initial();
+    load_posts();
 }else{
     imagem = imgdata;
     var img = document.getElementById("prfimg");
     img.src = imagem;
     img.classList.add("img-thumbnail");
+    initial();
+    load_posts(); 
 }
 var imgloadstatus = document.getElementById("imgloadstatus");
     imgloadstatus.remove();
+    
 }
 
 function initial(){
   var bgc = document.getElementsByTagName("body")[0];
   bgc.classList.add("font-monospace");
   tema(true);
+  loader();
 }
 function tema(ini){
   if(!ini){
