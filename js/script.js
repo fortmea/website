@@ -140,7 +140,7 @@ function register(){
         newElement.innerHTML='<div class="alert alert-danger alert-dismissible" role="alert">'+post+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
         $(target).append(newElement);
       }else{
-        newElement.innerHTML='<div class="alert alert-primary alert-dismissible" role="alert"><h4>Anote o código abaixo, ele vai servir para sua autênticação!</h4><br><b>'+post+'<br>Verifique seu email!</b><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
+        newElement.innerHTML='<div class="alert alert-primary alert-dismissible text-wrapaaa" role="alert"><h4>Anote o código abaixo, ele vai servir para sua autênticação!</h4><br><b>'+post+'<br>Verifique seu email!</b><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
         $(target).append(newElement);
       }
           
