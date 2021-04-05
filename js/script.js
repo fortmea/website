@@ -111,19 +111,17 @@ function openFile(){
 }catch(exception){}
 }
 async function assinala_valor(data){
+  if(data){
   img_data = data;
+  }else{
+    return img_data;
+  }
 }
 function register(){
   let email = document.getElementById("InputEmail2").value;
   let nome = document.getElementById("InputNome").value;
   let target = document.getElementById( "corpo-registro" );
   let newElement = document.createElement( "div" );
-  let image;
-  if(img_data!=null){
-   image = img_data.toString();
-}else{
-  image = null;
-}
   if((nome)&&(email)){
   $.ajax({
     type: 'POST',
@@ -132,7 +130,7 @@ function register(){
     data: { 
       'nome':nome,
       'email':email,
-      'imagem':image
+      'imagem':img_data
     },
     success: function(data){
       var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
