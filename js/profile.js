@@ -60,6 +60,7 @@ jQuery(document).ready(function(){
       
 });
 function load_posts(){
+  var target2 = document.getElementById( "post-container" );
   var $_GET=[];
   window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(a,name,value){$_GET[name]=value;});
   $.ajax({
@@ -71,7 +72,7 @@ function load_posts(){
     },
     success: function(data){
         var post2 = jQuery.parseJSON((JSON.stringify(data)))['data'];
-        var target2 = document.getElementById( "post-container" );
+        
         for(x in post2){
         var newElement = document.createElement( "div" );
         var data = new Date(post2[x].data);
@@ -84,6 +85,11 @@ function load_posts(){
         newElement.innerHTML = ('<div class="card bg-dark font-monospace buttonOverlay mb-3" style="padding=1em"><h5 class="card-header bg-dark bg-gradient">'+post2[x].nome+'</h5><div class="card-body bg-dark"><h5 class="card-title">'+post2[x].resumo+'</h5><p class="card-text">'+conteudo+'</p><p><img></img><cite>'+username+'</cite>,<br>'+stamp+'</p>    </div> </div>');
         $(target2).append(newElement);
         
+    }
+    if(post2.length === 0){
+      var newElement = document.createElement( "div" );
+      newElement.innerHTML='<div class="alert alert-info" role="alert"><div class="header"><h4>Nada para ver por aqui!</h4></div><br>O usuário não tem nenhuma publicação/menção</div>'
+      $(target2).append(newElement);
     }
     tema(true);
     }
