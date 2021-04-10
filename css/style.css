@@ -191,3 +191,6 @@ label {
   cursor: pointer;
   font-size: 10pt;
 }
+.card:hover{
+  transform: translateY(0px) scale(1.000) translateZ(0);
+}
