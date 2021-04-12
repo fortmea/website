@@ -39,15 +39,15 @@ $.ajax({
           <h5 class="card-header `+bg+` bg-gradient">`+post[x].nome+`</h5>
           <div class="card-body `+bg+`">
           <h5 class="card-title">`+post[x].resumo+`</h5>
-          <p class="card-text">`+conteudo+`</p><p><img></img>
-          <a href="profile.html?uid=`+post[x].autor+`" style="text-decoration:none"><img id="img`+post[x].autor+` `+rand+`"><br>
-          <cite id="autor`+post[x].autor+` `+rand+`"><i class="gg-loadbar-alt"></i></cite></a>,<br>`+stamp+`</p>
+          <p class="card-text">`+conteudo+`</p><p>
+          <a href="profile.html?uid=`+post[x].autor+`" style="text-decoration:none"><div class="col-md-4 d-flex justify-content-between" ><img name="img`+post[x].autor+` `+rand+`">
+          <br>
+          <cite name="autor`+post[x].autor+` `+rand+`"><i class="gg-loadbar-alt"></i></cite></div></a>`+stamp+`</p>
           <button class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#modal`+post[x].id+`">Expandir</button></div> </div>`);
         
         
-        modal.innerHTML=('<div class="modal fade" tabindex="-1"  id="modal'+post[x].id+'" aria-labelledby="modalaria'+post[x].id+'" style="display:none"aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"><div class="modal-content bg-dark"><div class="modal-header"><h5 class="modal-title">'+post[x].resumo+'</h5><button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><p>'+post[x].conteudo+'</p><p><cite id="autor'+post[x].autor+" "+rand2+'""><i class="gg-loadbar-alt"></i></cite>,<br>'+stamp+'</p></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button></div></div></div></div>');
+        modal.innerHTML=('<div class="modal fade" tabindex="-1"  id="modal'+post[x].id+'" aria-labelledby="modalaria'+post[x].id+'" style="display:none"aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"><div class="modal-content bg-dark"><div class="modal-header"><h5 class="modal-title">'+post[x].resumo+'</h5><button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><p>'+post[x].conteudo+'</p><p><cite name="autor'+post[x].autor+" "+rand+'"><i class="gg-loadbar-alt"></i></cite>,<br>'+stamp+'</p></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button></div></div></div></div>');
         nomeautor(post[x].autor,rand);
-        nomeautor(post[x].autor,rand2);
         $(target).append(newElement);
         $(modal_target).append(modal);
     }
@@ -140,7 +140,7 @@ function register(){
         newElement.innerHTML='<div class="alert alert-danger alert-dismissible" role="alert">'+post+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
         $(target).append(newElement);
       }else{
-        newElement.innerHTML='<div class="alert alert-primary alert-dismissible text-wrapaaa" role="alert"><h4>Anote o código abaixo, ele vai servir para sua autênticação!</h4><br><b>'+post+'<br>Verifique seu email!</b><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
+        newElement.innerHTML='<div class="alert alert-primary alert-dismissible text-wrap" role="alert"><h4>Anote o código abaixo, ele vai servir para sua autênticação!</h4><br><b>'+post+'<br>Verifique seu email!</b><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
         $(target).append(newElement);
       }
           
@@ -156,17 +156,24 @@ function register(){
 function nomeautor(id,rand){
   let data2 = autor(id);
   data2.then(function(data3){
-    var img_autor = document.getElementById("img"+id+" "+"rand");
-    //img_autor.innerHTML = "";
-
-    var autor = document.getElementById("autor"+id+" "+rand);
+    var img_autor = document.getElementsByName("img"+id+" "+rand);
+    var autor = document.getElementsByName("autor"+id+" "+rand);
     var autordata = jQuery.parseJSON((JSON.stringify(data3)))['data'];
-    autor.innerHTML ="- "+ autordata.nome;
-    if(autordata.image!=null){
-      img_autor.src = autordata.image;
+    for(x in autor){
+    autor[x].innerHTML ="- "+ autordata.nome;
+    }
+    if(autordata.image){
+      imagemautor(img_autor, autordata);
     }
   });
   return id;
+}
+function imagemautor(img,data){
+  for(x in img){
+    img[x].src = data.image;
+    img[x].classList = "img-thumbnail bg-dark border-primary";
+    img[x].style = "max-width:10em";
+  }
 }
 function autor(id){
  return Promise.resolve($.ajax({
