@@ -103,7 +103,7 @@ function load_projects() {
               <a href="profile.html?uid=`+ proj[x].autor + `" style="text-decoration:none"><div class="col-md-4 d-flex justify-content-between" ><img name="img` + proj[x].autor + ` ` + rand + `">
               <br>
               <cite name="autor`+ proj[x].autor + ` ` + rand + `"><i class="gg-loadbar-alt"></i></cite></div></a>` + stamp + `</p>
-              <button class="btn btn-primary rounded-pill" href="`+ proj[x].addr + `">Visitar</button></div> </div>`);
+              <a class="btn btn-primary rounded-pill" href="`+ proj[x].addr + `">Visitar</a></div> </div>`);
             nomeautor(proj[x].autor, rand);
             $(target).append(newElement);
           }
@@ -121,14 +121,14 @@ function sendpost() {
   let content = document.getElementsByClassName("ql-editor")[0].innerHTML;
   let addr = document.getElementById("divaddr");
   if(count_1%2==0){
-    addr = 'https://xue-hua-piao.herokuapp.com/addpost/'
+    apiaddr = 'https://xue-hua-piao.herokuapp.com/addpost/'
   }else{
-    addr = 'https://xue-hua-piao.herokuapp.com/addproj/'
+    apiaddr = 'https://xue-hua-piao.herokuapp.com/addproj/'
   }
   
   $.ajax({
     type: 'POST',
-    url: addr,
+    url: apiaddr,
     dataType: 'json',
     data: {
       'hash': hash,
