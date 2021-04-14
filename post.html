@@ -41,6 +41,9 @@
                     <a class="nav-link" href="projetos.html">Projetos</a>
                   </li>
                 </ul>
+                <li class="navbar-nav nav-item">
+                  <a href="registro.html" class="btn btn-dark text-start"><i class="gg-profile"></i>Registrar</a>
+                </li>
                 <li class = "navbar-nav nav-item">
                   <button class='btn btn-dark text-start' onclick="tema();" id='temabtn'><i class='gg-sun'></i>Modo noturno</button>
             </li>
@@ -54,9 +57,9 @@
             <div class="card-body">
               
             <label for="InputTitulo1" class="form-label" style="width: max-content;">Titulo da postagem</label><br>
-            <input type="text" class="input col-12" id="InputTitulo1" aria-describedby="tituloHelp"><br>
+            <input type="text" class="input bg-dark col-12" id="InputTitulo1" aria-describedby="tituloHelp"><br>
               <label for="InputTitulo2" class="form-label" style="width: max-content;">Resumo/subtitulo da postagem</label><br>
-              <input type="text" class="input col-12" id="InputTitulo2" aria-describedby="tituloHelp2">
+              <input type="text" class="input bg-dark col-12" id="InputTitulo2" aria-describedby="tituloHelp2">
           
           <div id="editor" class="card-body">
 
@@ -66,16 +69,16 @@
         <form class="bg-dark" id="footer">
           <div class="mb-3">
             <label for="InputEmail1" class="form-label">Endereço de Email</label><br>
-            <input type="email" class="input col-12" id="InputEmail1" aria-describedby="emailHelp">
+            <input type="email" class="input bg-dark col-12" id="InputEmail1" aria-describedby="emailHelp">
             <div id="emailHelp" class="form-text">Não compartilharemos seu Email com ninguém.</div>
           </div>
           <div class="mb-3">
             <label for="InputPassword1" class="form-label">HashCode</label><br>
-            <input type="password" class="input col-12" id="InputPassword1">
+            <input type="password" class="input bg-dark col-12" id="InputPassword1">
           </div>
           <div class="mb-3" style="visibility: hidden;" id="divaddr">
             <label for="InputAddr" class="form-label">Endereço do Projeto</label><br>
-            <input type="text" class="input col-12" id="InputAddr">
+            <input type="text" class="input bg-dark col-12" id="InputAddr">
           </div>
         </form>
         <button type="button" class="btn btn-primary" data-bs-toggle="button" onclick="projeto()" autocomplete="off">É Projeto</button><br>

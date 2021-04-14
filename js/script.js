@@ -42,11 +42,12 @@ function loadposts() {
           <div class="card-body `+ bg + `">
           <h5 class="card-title">`+ post[x].resumo + `</h5>
           <p class="card-text">`+ conteudo + `</p><p>
-          <a href="profile.html?uid=`+ post[x].autor + `" style="text-decoration:none"><div class="col-md-4 d-flex justify-content-between" ><img name="img` + post[x].autor + ` ` + rand + `">
+          <a href="profile.html?uid=`+ post[x].autor + `" style="text-decoration:none" class="text-info"><div class="col-md-4 d-flex justify-content-between" >
+          <img name="img` + post[x].autor + ` ` + rand + `">
           <br>
-          <cite name="autor`+ post[x].autor + ` ` + rand + `"><i class="gg-loadbar-alt"></i></cite></div></a>` + stamp + `</p>
+          <cite name="autor`+ post[x].autor + ` ` + rand + `"><i class="gg-loadbar-alt"></i></cite></div></a>Data: ` + stamp + `</p>
           <button class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#modal`+ post[x].id + `">Expandir</button></div> </div>`);
-            modal.innerHTML = ('<div class="modal fade" tabindex="-1"  id="modal' + post[x].id + '" aria-labelledby="modalaria' + post[x].id + '" style="display:none"aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"><div class="modal-content bg-dark"><div class="modal-header"><h5 class="modal-title">' + post[x].resumo + '</h5><button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><p>' + post[x].conteudo + '</p><p><cite name="autor' + post[x].autor + " " + rand + '"><i class="gg-loadbar-alt"></i></cite>,<br>' + stamp + '</p></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button></div></div></div></div>');
+            modal.innerHTML = ('<div class="modal fade" tabindex="-1"  id="modal' + post[x].id + '" aria-labelledby="modalaria' + post[x].id + '" style="display:none"aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"><div class="modal-content bg-dark"><div class="modal-header"><h5 class="modal-title">' + post[x].resumo + '</h5><button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><p>' + post[x].conteudo + '</p><p><cite name="autor' + post[x].autor + " " + rand + '"><i class="gg-loadbar-alt"></i></cite>,<br>Data: ' + stamp + '</p></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button></div></div></div></div>');
             nomeautor(post[x].autor, rand);
             $(target).append(newElement);
             $(modal_target).append(modal);
@@ -100,9 +101,9 @@ function load_projects() {
               <div class="card-body `+ bg + `">
               <h5 class="card-title">`+ proj[x].resumo + `</h5>
               <p class="card-text">`+ conteudo + `</p><p>
-              <a href="profile.html?uid=`+ proj[x].autor + `" style="text-decoration:none"><div class="col-md-4 d-flex justify-content-between" ><img name="img` + proj[x].autor + ` ` + rand + `">
+              <a href="profile.html?uid=`+ proj[x].autor + `" style="text-decoration:none" class="text-info"><div class="col-md-4 d-flex justify-content-between" ><img name="img` + proj[x].autor + ` ` + rand + `">
               <br>
-              <cite name="autor`+ proj[x].autor + ` ` + rand + `"><i class="gg-loadbar-alt"></i></cite></div></a>` + stamp + `</p>
+              <cite name="autor`+ proj[x].autor + ` ` + rand + `"><i class="gg-loadbar-alt"></i></cite></div></a>Data: ` + stamp + `</p>
               <a class="btn btn-primary rounded-pill" href="`+ proj[x].addr + `">Visitar</a></div> </div>`);
             nomeautor(proj[x].autor, rand);
             $(target).append(newElement);
@@ -235,7 +236,7 @@ function nomeautor(id, rand) {
 function imagemautor(img, data) {
   for (x in img) {
     img[x].src = data;
-    img[x].classList = "img-thumbnail bg-dark border-primary";
+    img[x].classList = "img-thumbnail bg-dark border-info";
     img[x].style = "max-width:10em";
   }
 }

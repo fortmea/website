@@ -194,3 +194,6 @@ label {
 .card:hover{
   transform: translateY(0px) scale(1.000) translateZ(0);
 }
+a{
+  text-decoration: none;
+}
