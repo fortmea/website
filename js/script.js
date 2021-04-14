@@ -3,7 +3,7 @@ var count_1 = 0;
 var img_data = null;
 function loadposts() {
   if ((window.location.pathname == "/index.html") || (window.location.pathname == "/") || (window.location.pathname == "/site/website/index.html")) {
-    var addr = 'https://xue-hua-piao.herokuapp.com/addpost/';
+    var addr = 'https://xue-hua-piao.herokuapp.com/post/';
     $.ajax({
       type: 'POST',
       url: addr,
@@ -255,9 +255,7 @@ jQuery(document).ready(function () {
   });
   loadposts();
   initial();
-  if ((window.location.pathname == "/projetos.html") || (window.location.pathname == "/site/website/projetos.html")) {
   load_projects();
-  }
 });
 
 function initial() {
