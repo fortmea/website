@@ -71,7 +71,7 @@ function load_projects() {
   if ((window.location.pathname == "/projetos.html") || (window.location.pathname == "/site/website/projetos.html")) {
     $.ajax({
       type: 'POST',
-      url: 'https://xue-hua-piao.herokuapp.com/projects/',
+      url: 'https://xue-hua-piao.herokuapp.com/proj/',
       dataType: 'json',
       success: function (data) {
         var proj = jQuery.parseJSON((JSON.stringify(data)))['data'];
@@ -255,6 +255,7 @@ jQuery(document).ready(function () {
   });
   loadposts();
   initial();
+  load_projects();
 });
 
 function initial() {
