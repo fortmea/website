@@ -13,7 +13,7 @@
         </title>
         <script type="text/javascript" src="js/jquery-3.6.0.js"></script>
         <!--<script type="text/javascript" src="js/js.cookie.js"></script>-->
-        <script type="text/javascript" src="js/script_obf.js"></script>
+        <script type="text/javascript" src="js/script.js"></script>
         <link rel="manifest" href="site.webmanifest">
         <link rel="shortcut icon" type="image/jpg" href="favicon.ico"/>
         <link rel="stylesheet" type="text/css" href="css/style.css" />
@@ -47,11 +47,12 @@
             </div>
             </div>
           </nav>
-          <div class="container card bg-dark" style="margin-top:10%">
+          <div class="container card bg-dark" style="margin-top:2em">
             <div class="card-header bg-gradient">
               Criar publicação
             </div>
             <div class="card-body">
+              
             <label for="InputTitulo1" class="form-label" style="width: max-content;">Titulo da postagem</label><br>
             <input type="text" class="input col-12" id="InputTitulo1" aria-describedby="tituloHelp"><br>
               <label for="InputTitulo2" class="form-label" style="width: max-content;">Resumo/subtitulo da postagem</label><br>
@@ -72,8 +73,13 @@
             <label for="InputPassword1" class="form-label">HashCode</label><br>
             <input type="password" class="input col-12" id="InputPassword1">
           </div>
+          <div class="mb-3" style="visibility: hidden;" id="divaddr">
+            <label for="InputAddr" class="form-label">Endereço do Projeto</label><br>
+            <input type="text" class="input col-12" id="InputAddr">
+          </div>
         </form>
-        <button type="submit" class="btn btn-primary" style="width:100%" onclick="sendpost()">Enviar</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="button" onclick="projeto()" autocomplete="off">É Projeto</button><br>
+        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:1em" onclick="sendpost()">Enviar</button>
       </div>
     </div>
           <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
