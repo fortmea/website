@@ -255,7 +255,9 @@ jQuery(document).ready(function () {
   });
   loadposts();
   initial();
+  if ((window.location.pathname == "/projetos.html") || (window.location.pathname == "/site/website/projetos.html")) {
   load_projects();
+  }
 });
 
 function initial() {
