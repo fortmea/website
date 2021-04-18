@@ -37,21 +37,7 @@ body{
 opacity: 1;
 background: linear-gradient(135deg, #64321855 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(225deg, #643218 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(315deg, #64321855 25%, transparent 25%) 0px 0/ 80px 80px, linear-gradient(45deg, #643218 25%, #f8f9fa 25%) 0px 0/ 80px 80px;
 }
-.pressDownButton {
-    /*background-color: hsl(222, 100%, 95%);*/
-    padding: 12px 24px;
-    color: #0d6efd;
-    border-radius: 6px;
-    border-bottom: 4px solid #0d6efd;
-    border-top: 0px solid #0d6efd;
-    transition: all 0.1s ease-in-out;
-}
 
-.pressDownButton:hover {
-    border-bottom-width: 0;
-    border-top-width: 4px;
-	color:#0d6efd;
-}
 .card {
 	box-shadow: 0 14px 26px rgba(0,0,0,0.04);
 	transition: all 0.3s ease-out;

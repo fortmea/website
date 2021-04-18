@@ -122,9 +122,9 @@ function sendpost() {
   let content = document.getElementsByClassName("ql-editor")[0].innerHTML;
   let addr = document.getElementById("divaddr");
   if(count_1%2==0){
-    apiaddr = 'https://xue-hua-piao.herokuapp.com/addpost/'
+    var apiaddr = 'https://xue-hua-piao.herokuapp.com/addpost/'
   }else{
-    apiaddr = 'https://xue-hua-piao.herokuapp.com/addproj/'
+    var apiaddr = 'https://xue-hua-piao.herokuapp.com/addproj/'
   }
   
   $.ajax({
@@ -236,7 +236,7 @@ function nomeautor(id, rand) {
 function imagemautor(img, data) {
   for (x in img) {
     img[x].src = data;
-    img[x].classList = "img-thumbnail bg-dark border-info";
+    img[x].classList = "bg-dark border-info";
     img[x].style = "max-width:10em";
   }
 }
