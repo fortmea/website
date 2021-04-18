@@ -121,10 +121,11 @@ function sendpost() {
   let titulo2 = document.getElementById("InputTitulo2").value;
   let content = document.getElementsByClassName("ql-editor")[0].innerHTML;
   let addr = document.getElementById("divaddr");
+  var apiaddr;
   if(count_1%2==0){
-    var apiaddr = 'https://xue-hua-piao.herokuapp.com/addpost/'
+    apiaddr = 'https://xue-hua-piao.herokuapp.com/addpost/'
   }else{
-    var apiaddr = 'https://xue-hua-piao.herokuapp.com/addproj/'
+    apiaddr = 'https://xue-hua-piao.herokuapp.com/addproj/'
   }
   
   $.ajax({
