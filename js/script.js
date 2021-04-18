@@ -120,7 +120,7 @@ function sendpost() {
   let titulo = document.getElementById("InputTitulo1").value;
   let titulo2 = document.getElementById("InputTitulo2").value;
   let content = document.getElementsByClassName("ql-editor")[0].innerHTML;
-  let addr = document.getElementById("divaddr");
+  let addr = document.getElementById("divaddr").value;
   var apiaddr;
   if(count_1%2==0){
     apiaddr = 'https://xue-hua-piao.herokuapp.com/addpost/'
