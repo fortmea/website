@@ -17,9 +17,6 @@ jQuery(document).ready(function(){
         success: function(data){
           var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
           var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
-          var data =  new Date();
-          data.setTime(post.date);
-         
           if($_GET['uid']==21){
             post.nome = "Sr. Supremo Rei do Universo " + post.nome
           }
@@ -40,7 +37,7 @@ jQuery(document).ready(function(){
                 <div class="card-body">
                   <h5 class="card-title">`+post.nome+`</h5>
                   <p class="card-text">Email:<a style="text-decoration:none" href="mailto:`+post.email+`">`+post.email+`</a>.</p>
-                  <p class="card-text"><small >Membro desde: `+data+`</small></p>
+                  <p class="card-text"><small >Membro desde: `+post.date+`</small></p>
                 </div>
               </div>
             </div>
