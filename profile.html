@@ -9,7 +9,7 @@
         <meta name="reply-to" content="joao@piroca.ninja">
         <meta name="author" content="João, joao@piroca.ninja">
         <meta name="Classification" content="Personal">
-        <meta property="og:title" content="Perfil não encontrado"/>
+        <meta property="og:title" content="Perfil"/>
         <meta property="og:url" content="https://joaowalteramadeu.me/" />
         <meta property="og:description" content="Encontre as publicações de quem você procura!">
         <meta property="og:type" content="Personal" />
@@ -23,6 +23,7 @@
         </title>
         <script type="text/javascript" src="js/jquery-3.6.0.js"></script>
         <script type="text/javascript" src="js/profile.js"></script>
+        <script type="text/javascript" src="js/js.cookie.js"></script>
         <link rel="manifest" href="site.webmanifest">
         <link rel="shortcut icon" type="image/jpg" href="favicon.ico"/>
     </head>
@@ -51,7 +52,7 @@
                   
                 </ul>
                 <li class="navbar-nav nav-item">
-                  <a href="login.html" class="btn btn-dark text-start"><i class="gg-profile"></i>Login/Registro</a>
+                  <a href="login.html" id="lpbtn" class="btn btn-dark text-start"><i class="gg-profile"></i>Login/Registro</a>
                 </li>
                 <li class = "navbar-nav nav-item">
                   <button class='btn btn-dark text-start  ' onclick="tema();" id='temabtn'><i class='gg-sun'></i>Modo noturno</button>

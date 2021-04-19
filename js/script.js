@@ -258,6 +258,11 @@ jQuery(document).ready(function () {
   loadposts();
   initial();
   load_projects();
+  if(Cookies.get("session")){
+      let btn = document.getElementById("lpbtn");
+      btn.href = "profile.html";
+      btn.innerHTML = `<i class="gg-profile"></i>Perfil`;
+  }
 });
 
 function initial() {
@@ -367,6 +372,7 @@ function confirma() {
 }
 function login() {
   if ((window.location.pathname == "/login.html") || (window.location.pathname == "/site/website/login.html")) {
+    var newElement = document.createElement("div");
     let email = document.getElementById("InputEmail");
     let hash = document.getElementById("InputHash");
     $.ajax({
