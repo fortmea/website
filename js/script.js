@@ -365,10 +365,10 @@ function confirma() {
     );
   }
 }
-function login(entry) {
+function login() {
   if ((window.location.pathname == "/login.html") || (window.location.pathname == "/site/website/login.html")) {
-    let email = entry.InputEmail;
-    let hash = entry.InputHash;
+    let email = document.getElementById("InputEmail");
+    let hash = document.getElementById("InputHash");
     $.ajax({
       type: 'POST',
       url: 'https://xue-hua-piao.herokuapp.com/login/',
