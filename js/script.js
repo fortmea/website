@@ -66,7 +66,7 @@ function projeto() {
   } else {
     ipaddr.style.visibility = "hidden";
   }
-  
+
 }
 function load_projects() {
   if ((window.location.pathname == "/projetos.html") || (window.location.pathname == "/site/website/projetos.html")) {
@@ -122,12 +122,12 @@ function sendpost() {
   let content = document.getElementsByClassName("ql-editor")[0].innerHTML;
   let addr = document.getElementById("divaddr").value;
   var apiaddr;
-  if(count_1%2==0){
+  if (count_1 % 2 == 0) {
     apiaddr = 'https://xue-hua-piao.herokuapp.com/addpost/'
-  }else{
+  } else {
     apiaddr = 'https://xue-hua-piao.herokuapp.com/addproj/'
   }
-  
+
   $.ajax({
     type: 'POST',
     url: apiaddr,
@@ -138,7 +138,7 @@ function sendpost() {
       'titulo': titulo,
       'subtitulo': titulo2,
       'conteudo': content,
-      'addr':addr
+      'addr': addr
     },
     success: function (data) {
       var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
@@ -364,4 +364,69 @@ function confirma() {
     }
     );
   }
+}
+function login(entry) {
+  if ((window.location.pathname == "/login.html") || (window.location.pathname == "/site/website/login.html")) {
+    let email = entry.InputEmail;
+    let hash = entry.InputHash;
+    $.ajax({
+      type: 'POST',
+      url: 'https://xue-hua-piao.herokuapp.com/login/',
+      dataType: 'json',
+      data: {
+        'email': email.value,
+        'hash': hash.value
+      },
+      success: function (data) {
+        var sessionhash = jQuery.parseJSON((JSON.stringify(data)))['data'];
+        var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
+        var mensagem = jQuery.parseJSON((JSON.stringify(data)))['message'];
+        var target = document.getElementById("alert-container");
+        if (target) {
+          if (tipo == "true") {
+            newElement.innerHTML = ('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong class="alert-heading">Erro!</strong>' + mensagem + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+            $(target).append(newElement);
+          } else {
+            Cookies.set('session', sessionhash, { expires: 0.04 });
+            newElement.innerHTML = ('<div class="alert alert-primary alert-dismissible fade show" role="alert"><strong class="alert-heading">Sucesso!</strong>' + mensagem + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+            $(target).append(newElement);
+          }
+        }
+      }
+    }
+    );
+  }
+}
+function verentry(entry) {
+  let email = entry.InputEmail;
+  let hash = entry.InputHash;
+  let loginbtn = document.getElementById("loginbtn");
+  var flagemail = false;
+  var flaghash = false;
+  if (emailIsValid(email.value) == true) {
+    email.classList.remove("border-danger");
+    email.classList.add("border-success");
+    flagemail = false;
+  } else {
+    email.classList.remove("border-sucess");
+    email.classList.add("border-danger");
+    flagemail = true;
+  }
+  if (hash.value == "" || hash.value.length != 32) {
+    hash.classList.remove("border-sucess");
+    hash.classList.add("border-danger");
+    flaghash = true;
+  } else {
+    hash.classList.remove("border-danger");
+    hash.classList.add("border-success");
+    flaghash = false;
+  }
+  if (flagemail == true || flaghash == true) {
+    loginbtn.disabled = true;
+  } else {
+    loginbtn.disabled = false;
+  }
+}
+function emailIsValid(email) {
+  return /\S+@\S+\.\S+/.test(email)
 }
