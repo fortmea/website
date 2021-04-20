@@ -393,6 +393,25 @@ function confirma() {
     );
   }
 }
+function logout() {
+  Cookies.remove("session");
+  $.ajax({
+    type: 'POST',
+    url: 'https://xue-hua-piao.herokuapp.com/logout/',
+    dataType: 'json',
+    data: {
+      'session': Cookies.get("session")
+    },
+    success: function () {
+      $("#loader").delay(600).fadeIn(400, function () {
+        $("#corpo").delay(200).fadeOut(400); $("#corpo").css("visibility", "visible");
+      });
+      setTimeout(() => {
+        window.location.pathname = window.location.pathname.replace(window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1),"index.html")
+      }, 1000);
+    }
+  });
+}
 function login() {
   if ((window.location.pathname == "/login.html") || (window.location.pathname == "/site/website/login.html")) {
     var newElement = document.createElement("div");
