@@ -112,6 +112,7 @@ function load_projects() {
               <br>
               <cite name="autor`+ proj[x].autor + ` ` + rand + `"><i class="gg-loadbar-alt"></i></cite></div></a>Data: ` + stamp + `</p>
               <a class="btn btn-primary rounded-pill" href="`+ proj[x].addr + `">Visitar</a></div> </div>`);
+              console.log(proj[x].addr);
             nomeautor(proj[x].autor, rand);
             $(target).append(newElement);
           }
