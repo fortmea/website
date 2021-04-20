@@ -19,6 +19,12 @@ jQuery(document).ready(function () {
       },
       success: function (data) {
         var session_info = jQuery.parseJSON((JSON.stringify(data)))['data']
+        if (session_info == "undo") {
+          Cookies.remove("session");
+          setTimeout(() => {
+            window.location.pathname = window.location.pathname.replace(window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1), "index.html")
+          }, 1000);
+        }
         id = get_id(session_info);
         loadprofiledata();
       }
@@ -75,7 +81,7 @@ function logout() {
       }, 1000);
     }
   });
-  
+
 }
 function loadprofiledata() {
   $.ajax({
