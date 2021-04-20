@@ -44,7 +44,7 @@ function shfunc() {
     var prfnav = document.getElementById("prfnav");
     var logoutbt = document.createElement("li");
     logoutbt.classList = "navbar-nav nav-item";
-    logoutbt.innerHTML = `<button onclick="logout()" class="btn btn-danger"><i class="gg-log-out" style="margin-left:0.1%"></i>Sair</button>`;
+    logoutbt.innerHTML = `<button onclick="logout()" class="btn btn-danger text-start"><i class="gg-log-out" style="margin-left:0.1%"></i>Sair</button>`;
     prfnav.after(logoutbt);
   } else {
     let plink = document.getElementById("addpub");
@@ -57,7 +57,7 @@ function shfunc() {
   }
 }
 function logout() {
-  Cookies.remove("session");
+
   $.ajax({
     type: 'POST',
     url: 'https://xue-hua-piao.herokuapp.com/logout/',
@@ -69,11 +69,13 @@ function logout() {
       $("#loader").delay(600).fadeIn(400, function () {
         $("#corpo").delay(200).fadeOut(400); $("#corpo").css("visibility", "visible");
       });
+      Cookies.remove("session");
       setTimeout(() => {
-        window.location.pathname = window.location.pathname.replace(window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1),"index.html")
+        window.location.pathname = window.location.pathname.replace(window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1), "index.html")
       }, 1000);
     }
   });
+  
 }
 function loadprofiledata() {
   $.ajax({

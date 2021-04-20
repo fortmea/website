@@ -157,9 +157,9 @@ function sendpost() {
         newElement.innerHTML = '<div class="alert alert-primary alert-dismissible" role="alert">' + post + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
         $(target).append(newElement);
         setTimeout(() => {
-          window.location.pathname = window.location.pathname.replace("post.html","profile.html")
+          window.location.pathname = window.location.pathname.replace("post.html", "profile.html")
         }, 500);
-        
+
       }
 
     }
@@ -268,20 +268,20 @@ jQuery(document).ready(function () {
   load_projects();
   shfunc();
 });
-function shfunc(){
+function shfunc() {
   if (Cookies.get("session")) {
     let btn = document.getElementById("lpbtn");
     btn.href = "profile.html";
     btn.innerHTML = `<i class="gg-profile"></i>Perfil`;
     var prfnav = document.getElementById("prfnav");
     var logoutbt = document.createElement("li");
-    logoutbt.classList="navbar-nav nav-item";
-    logoutbt.innerHTML = `<button onclick="logout()" class="btn btn-danger"><i class="gg-log-out" style="margin-left:0.1%"></i>Sair</button>`;
+    logoutbt.classList = "navbar-nav nav-item";
+    logoutbt.innerHTML = `<button onclick="logout()" class="btn btn-danger text-start"><i class="gg-log-out" style="margin-left:0.1%"></i>Sair</button>`;
     prfnav.after(logoutbt);
-  }else{
+  } else {
     let plink = document.getElementById("addpub");
-    if(plink){
-      plink.style.visibility="hidden";
+    if (plink) {
+      plink.style.visibility = "hidden";
     }
   }
   if (((window.location.pathname == "/post.html") || (window.location.pathname == "/site/website/post.html")) && (Cookies.get("session") == undefined)) {
@@ -394,7 +394,6 @@ function confirma() {
   }
 }
 function logout() {
-  Cookies.remove("session");
   $.ajax({
     type: 'POST',
     url: 'https://xue-hua-piao.herokuapp.com/logout/',
@@ -406,11 +405,13 @@ function logout() {
       $("#loader").delay(600).fadeIn(400, function () {
         $("#corpo").delay(200).fadeOut(400); $("#corpo").css("visibility", "visible");
       });
+      Cookies.remove("session");
       setTimeout(() => {
-        window.location.pathname = window.location.pathname.replace(window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1),"index.html")
+        window.location.pathname = window.location.pathname.replace(window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1), "index.html")
       }, 1000);
     }
   });
+  
 }
 function login() {
   if ((window.location.pathname == "/login.html") || (window.location.pathname == "/site/website/login.html")) {
@@ -442,7 +443,7 @@ function login() {
               $("#corpo").delay(200).fadeOut(400); $("#corpo").css("visibility", "visible");
             });
             setTimeout(() => {
-              window.location.pathname = window.location.pathname.replace("login.html","index.html")
+              window.location.pathname = window.location.pathname.replace("login.html", "index.html")
             }, 1000);
           }
         }
