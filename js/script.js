@@ -1,6 +1,13 @@
 var temac = localStorage.getItem('temac') | 0;
 var count_1 = 0;
 var img_data = null;
+function get_id(session_info) {
+  for (var i = 0; i < session_info.length; i++) {
+    if (session_info[i].indexOf('_') > 0) {
+      return session_info[i].split("_").pop();
+    }
+  }
+}
 function loadposts() {
   if ((window.location.pathname == "/index.html") || (window.location.pathname == "/") || (window.location.pathname == "/site/website/index.html")) {
     var addr = 'https://xue-hua-piao.herokuapp.com/post/';
@@ -115,8 +122,6 @@ function load_projects() {
   }
 }
 function sendpost() {
-  let email = document.getElementById("InputEmail1").value;
-  let hash = document.getElementById("InputPassword1").value;
   let titulo = document.getElementById("InputTitulo1").value;
   let titulo2 = document.getElementById("InputTitulo2").value;
   let content = document.getElementsByClassName("ql-editor")[0].innerHTML;
@@ -133,8 +138,7 @@ function sendpost() {
     url: apiaddr,
     dataType: 'json',
     data: {
-      'hash': hash,
-      'email': email,
+      'session': Cookies.get("session"),
       'titulo': titulo,
       'subtitulo': titulo2,
       'conteudo': content,
@@ -152,6 +156,10 @@ function sendpost() {
         var newElement = document.createElement("div");
         newElement.innerHTML = '<div class="alert alert-primary alert-dismissible" role="alert">' + post + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
         $(target).append(newElement);
+        setTimeout(() => {
+          window.location.pathname = window.location.pathname.replace("post.html","profile.html")
+        }, 500);
+        
       }
 
     }
@@ -258,13 +266,28 @@ jQuery(document).ready(function () {
   loadposts();
   initial();
   load_projects();
-  if(Cookies.get("session")){
-      let btn = document.getElementById("lpbtn");
-      btn.href = "profile.html";
-      btn.innerHTML = `<i class="gg-profile"></i>Perfil`;
-  }
+  shfunc();
 });
-
+function shfunc(){
+  if (Cookies.get("session")) {
+    let btn = document.getElementById("lpbtn");
+    btn.href = "profile.html";
+    btn.innerHTML = `<i class="gg-profile"></i>Perfil`;
+    var prfnav = document.getElementById("prfnav");
+    var logoutbt = document.createElement("li");
+    logoutbt.classList="navbar-nav nav-item";
+    logoutbt.innerHTML = `<button onclick="logout()" class="btn btn-danger"><i class="gg-log-out" style="margin-left:0.1%"></i>Sair</button>`;
+    prfnav.after(logoutbt);
+  }else{
+    let plink = document.getElementById("addpub");
+    if(plink){
+      plink.style.visibility="hidden";
+    }
+  }
+  if (((window.location.pathname == "/post.html") || (window.location.pathname == "/site/website/post.html")) && (Cookies.get("session") == undefined)) {
+    window.location.pathname = window.location.pathname.replace("post.html", "index.html");
+  }
+}
 function initial() {
   var bgc = document.getElementsByTagName("body")[0];
   bgc.classList.add("font-monospace");
@@ -396,6 +419,12 @@ function login() {
             Cookies.set('session', sessionhash, { expires: 0.04 });
             newElement.innerHTML = ('<div class="alert alert-primary alert-dismissible fade show" role="alert"><strong class="alert-heading">Sucesso!</strong>' + mensagem + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
             $(target).append(newElement);
+            $("#loader").delay(600).fadeIn(400, function () {
+              $("#corpo").delay(200).fadeOut(400); $("#corpo").css("visibility", "visible");
+            });
+            setTimeout(() => {
+              window.location.pathname = window.location.pathname.replace("login.html","index.html")
+            }, 1000);
           }
         }
       }

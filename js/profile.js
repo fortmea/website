@@ -2,6 +2,7 @@ var temac = localStorage.getItem('temac') | 0;
 var username;
 var id;
 jQuery(document).ready(function () {
+  shfunc();
   var $_GET = [];
   window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (a, name, value) { $_GET[name] = value; });
   if (!$_GET['uid'] && !Cookies.get("session")) {
@@ -17,15 +18,9 @@ jQuery(document).ready(function () {
         session: Cookies.get("session")
       },
       success: function (data) {
-        console.log(data);
         var session_info = jQuery.parseJSON((JSON.stringify(data)))['data']
-        var result = {};
-        for (var i = 0; i < session_info.length; i++) {
-          if (session_info[i].indexOf('_') > 0) {
-            id = session_info[i].split("_").pop();
-            loadprofiledata(id);
-          }
-        }
+        id = get_id(session_info);
+        loadprofiledata();
       }
     });
   } else {
@@ -33,9 +28,54 @@ jQuery(document).ready(function () {
     loadprofiledata();
   }
 
-
 });
-function loadprofiledata(){
+function get_id(session_info) {
+  for (var i = 0; i < session_info.length; i++) {
+    if (session_info[i].indexOf('_') > 0) {
+      return session_info[i].split("_").pop();
+    }
+  }
+}
+function shfunc() {
+  if (Cookies.get("session")) {
+    let btn = document.getElementById("lpbtn");
+    btn.href = "profile.html";
+    btn.innerHTML = `<i class="gg-profile"></i>Perfil`;
+    var prfnav = document.getElementById("prfnav");
+    var logoutbt = document.createElement("li");
+    logoutbt.classList = "navbar-nav nav-item";
+    logoutbt.innerHTML = `<button onclick="logout()" class="btn btn-danger"><i class="gg-log-out" style="margin-left:0.1%"></i>Sair</button>`;
+    prfnav.after(logoutbt);
+  } else {
+    let plink = document.getElementById("addpub");
+    if (plink) {
+      plink.style.visibility = "hidden";
+    }
+  }
+  if (((window.location.pathname == "/post.html") || (window.location.pathname == "/site/website/post.html")) && (Cookies.get("session") == undefined)) {
+    window.location.pathname = window.location.pathname.replace("post.html", "index.html");
+  }
+}
+function logout() {
+  Cookies.remove("session");
+  $.ajax({
+    type: 'POST',
+    url: 'https://xue-hua-piao.herokuapp.com/logout/',
+    dataType: 'json',
+    data: {
+      'session': Cookies.get("session")
+    },
+    success: function () {
+      $("#loader").delay(600).fadeIn(400, function () {
+        $("#corpo").delay(200).fadeOut(400); $("#corpo").css("visibility", "visible");
+      });
+      setTimeout(() => {
+        window.location.pathname = window.location.pathname.replace(window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1),"index.html")
+      }, 1000);
+    }
+  });
+}
+function loadprofiledata() {
   $.ajax({
     type: 'POST',
     url: 'https://xue-hua-piao.herokuapp.com/usuario/',
@@ -140,11 +180,11 @@ function setimg(imgdata) {
   }
   var imgloadstatus = document.getElementById("imgloadstatus");
   imgloadstatus.remove();
-  if(Cookies.get("session")){
+  if (Cookies.get("session")) {
     let btn = document.getElementById("lpbtn");
     btn.href = "profile.html";
     btn.innerHTML = `<i class="gg-profile"></i>Perfil`;
-}
+  }
 }
 
 function initial() {
