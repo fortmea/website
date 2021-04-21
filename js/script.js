@@ -112,7 +112,7 @@ function load_projects() {
               <br>
               <cite name="autor`+ proj[x].autor + ` ` + rand + `"><i class="gg-loadbar-alt"></i></cite></div></a>Data: ` + stamp + `</p>
               <a class="btn btn-primary rounded-pill" href="`+ proj[x].addr + `">Visitar</a></div> </div>`);
-              console.log(proj[x].addr);
+            console.log(proj[x].addr);
             nomeautor(proj[x].autor, rand);
             $(target).append(newElement);
           }
@@ -268,6 +268,25 @@ jQuery(document).ready(function () {
   initial();
   load_projects();
   shfunc();
+  if (Cookies.get('session')) {
+    $.ajax({
+      type: 'POST',
+      url: 'https://xue-hua-piao.herokuapp.com/sessiondata/',
+      dataType: 'json',
+      data: {
+        session: Cookies.get("session")
+      },
+      success: function (data) {
+        var session_info = jQuery.parseJSON((JSON.stringify(data)))['data']
+        if (session_info == "undo") {
+          Cookies.remove("session");
+          setTimeout(() => {
+            window.location.pathname = window.location.pathname.replace(window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1), "index.html")
+          }, 1000);
+        }
+      }
+    });
+  }
 });
 function shfunc() {
   if (Cookies.get("session")) {
@@ -412,7 +431,7 @@ function logout() {
       }, 1000);
     }
   });
-  
+
 }
 function login() {
   if ((window.location.pathname == "/login.html") || (window.location.pathname == "/site/website/login.html")) {
