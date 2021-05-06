@@ -233,7 +233,7 @@ function register() {
     let nome = document.getElementById("InputNome").value;
     let target = document.getElementById("corpo-registro");
     let newElement = document.createElement("div");
-    let senha = document.getElementById("InputPassword1");
+    let senha = document.getElementById("InputPassword1").value;
     if ((nome) && (email)) {
         $.ajax({
             type: 'POST',
@@ -247,7 +247,6 @@ function register() {
             },
             success: function (data) {
                 var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
-
                 if (tipo == true) {
                     newElement.innerHTML = '<div class="alert alert-danger alert-dismissible" role="alert">' + post + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
                     $(target).append(newElement);
