@@ -229,7 +229,7 @@ async function assinala_valor(data) {
 }
 
 function register() {
-    let email = document.getElementById("InputEmail2").value;
+    let email = document.getElementById("InputEmail").value;
     let nome = document.getElementById("InputNome").value;
     let target = document.getElementById("corpo-registro");
     let newElement = document.createElement("div");
