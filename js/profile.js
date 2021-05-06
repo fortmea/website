@@ -50,7 +50,7 @@ function shfunc() {
     var prfnav = document.getElementById("prfnav");
     var logoutbt = document.createElement("li");
     logoutbt.classList = "navbar-nav nav-item";
-    logoutbt.innerHTML = `<button onclick="logout()" class="btn btn-danger text-start"><i class="gg-log-out" style="margin-left:0.1%"></i>Sair</button>`;
+    logoutbt.innerHTML = `<button onclick="logout()" class="btn btn-dark text-start text-danger"><i class="gg-log-out" style="margin-left:0.1%"></i>Sair</button>`;
     prfnav.after(logoutbt);
   } else {
     let plink = document.getElementById("addpub");

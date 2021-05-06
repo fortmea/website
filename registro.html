@@ -65,15 +65,23 @@
                   <h5 class="card-title" id="cardCenterTitle">Registro</h5>
                 </div>
                 <div class="card-body" id="corpo-registro">
-                  <form>
-                    <div class="mb-3">
-                      <label for="InputEmail2" class="form-label">Endereço de Email</label><br>
-                      <input type="email" class="input col-12" id="InputEmail2" required aria-describedby="emailHelp">
-                      <div id="emailHelp" class="form-text">Não compartilharemos seu Email com ninguém.</div>
-                    </div>
+                  <form onkeyup="regver(this);return;">
                     <div class="mb-3">
                       <label for="InputNome" class="form-label">Nome</label><br>
                       <input type="text" class="input col-12" id="InputNome" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="InputEmail2" class="form-label">Endereço de Email</label><br>
+                      <input type="email" class="input col-12" id="InputEmail" required aria-describedby="emailHelp">
+                      <div id="emailHelp" class="form-text">Não compartilharemos seu Email com ninguém.</div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="InputPassword1" class="form-label">Senha</label><br>
+                      <input type="password" class="input col-12" id="InputPassword1" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="InputPassword2" class="form-label">Confirme sua Senha</label><br>
+                      <input type="password" class="input col-12" id="InputPassword2" required>
                     </div>
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Imagem de perfil</label>
@@ -82,7 +90,7 @@
                   </form>
                 </div>
                 <div class="card-footer">
-                  <button type="button" class="btn btn-primary" onclick="register()">Registrar-me</button>
+                  <button type="button" class="btn btn-primary" id="regbtn" onclick="register()">Registrar-me</button>
                   <a class="btn btn-info" href="login.html">Voltar para a página de login</a>
                 </div>
               </div>

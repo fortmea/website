@@ -1,91 +1,95 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta lang="pt_BR">
-        <meta name="description" content="Um website pessoal">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="url" content="https://joaowalteramadeu.me">
-        <meta name="reply-to" content="joao@piroca.ninja">
-        <meta name="author" content="João, joao@piroca.ninja">
-        <meta name="Classification" content="Personal">
-        <meta property="og:title" content="Registro" />
-        <meta property="og:url" content="https://joaowalteramadeu.me/" />
-        <meta property="og:description" content="Crie uma conta">
-        <meta property="og:type" content="Personal" />
-        <meta property="og:locale" content="pt_BR" />
-        <meta property="og:image" content="https://joaowalteramadeu.me/android-chrome-512x512.png"/>
-        <link href='css/gg.css' rel='stylesheet'>
-        <link href="css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
-        <title>
-            Login
-        </title>
-        <script type="text/javascript" src="js/jquery-3.6.0.js"></script>
-        <script type="text/javascript" src="js/script.js"></script>
-        <script type="text/javascript" src="js/js.cookie.js"></script>
-        <link rel="manifest" href="site.webmanifest">
-        <link rel="shortcut icon" type="image/jpg" href="favicon.ico"/>
-    </head>
-    <body  style="visibility: hidden;position: relative;" class="bg-zigzag-dark" id="corpo">
-      
-        <div id="loader" class="text-danger" >
-            <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
-                <div class="spinner-grow" role="status">
-                  </div>
-              </div>
+
+<head>
+    <meta charset="utf-8">
+    <meta lang="pt_BR">
+    <meta name="description" content="Um website pessoal">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="url" content="https://joaowalteramadeu.me">
+    <meta name="reply-to" content="joao@piroca.ninja">
+    <meta name="author" content="João, joao@piroca.ninja">
+    <meta name="Classification" content="Personal">
+    <meta property="og:title" content="Registro" />
+    <meta property="og:url" content="https://joaowalteramadeu.me/" />
+    <meta property="og:description" content="Crie uma conta">
+    <meta property="og:type" content="Personal" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:image" content="https://joaowalteramadeu.me/android-chrome-512x512.png" />
+    <link href='css/gg.css' rel='stylesheet'>
+    <link href="css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <title>
+        Login
+    </title>
+    <script type="text/javascript" src="js/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/js.cookie.js"></script>
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/jpg" href="favicon.ico" />
+</head>
+
+<body style="visibility: hidden;position: relative;" class="bg-zigzag-dark" id="corpo">
+
+    <div id="loader" class="text-danger">
+        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+            <div class="spinner-grow" role="status">
+            </div>
         </div>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="nav1">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="index.html">João Walter Amadeu</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="nav1">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">João Walter Amadeu</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
-              <div class="collapse navbar-collapse" id="navbarText">
+            <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.html">Início</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="projetos.html">Projetos</a>
-                  </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="projetos.html">Projetos</a>
+                    </li>
                 </ul>
                 <li class="navbar-nav nav-item">
                     <a href="login.html" id="lpbtn" class="btn btn-dark text-start"><i class="gg-profile"></i>Login/Registro</a>
-                  </li>
-                <li class = "navbar-nav nav-item">
-                  <button class='btn btn-dark text-start  ' onclick="tema();" id='temabtn'><i class='gg-sun'></i>Modo noturno</button>
-            </li>
+                </li>
+                <li class="navbar-nav nav-item">
+                    <button class='btn btn-dark text-start  ' onclick="tema();" id='temabtn'><i class='gg-sun'></i>Modo noturno</button>
+                </li>
             </div>
-            </div>
-          </nav>
-          <div class="container"  style="position: relative; margin-top: 1em;">
-          <div class="card bg-dark" id="login-card">
-                <div class="card-header">
-                  <h5 class="card-title" id="cardCenterTitle">Login</h5>
-                </div>
-                <div class="card-body" id="corpo-login">
-                  <form onkeyup="verentry(this)">
-                    <div class="mb-3">
-                      <label for="InputEmail" class="form-label">Endereço de Email</label><br>
-                      <input type="email" class="input col-12" id="InputEmail" required aria-describedby="emailHelp" required>
-                      <div id="emailHelp" class="form-text">Não compartilharemos seu Email com ninguém.</div>
-                    </div>
-                    <div class="mb-3">
-                      <label for="InputHash" class="form-label">HashCode</label><br>
-                      <input type="password" class="input col-12" id="InputHash" required>
-                    </div>
-                    
-                  </form>
-                  
-                </div>
-                <div class="card-footer">
-                  <button type="button" class="btn btn-primary" id="loginbtn" onclick="login()" disabled>Fazer login</button>
-                  <a class="btn btn-info" href="registro.html">Sou novo aqui e desejo registrar-me</a>
-                  <div id = "alert-container" style="margin-top: 1%;"></div>
-                </div>
-              </div>
         </div>
-        <script src="js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-    </body>
+    </nav>
+    <div class="container" style="position: relative; margin-top: 1em;">
+        <div class="card bg-dark" id="login-card">
+            <div class="card-header">
+                <h5 class="card-title" id="cardCenterTitle">Login</h5>
+            </div>
+            <div class="card-body" id="corpo-login">
+                <form onkeyup="verentry(this)">
+                    <div class="mb-3">
+                        <label for="InputEmail" class="form-label">Endereço de Email</label><br>
+                        <input type="email" class="input col-12" id="InputEmail" required aria-describedby="emailHelp" required>
+                        <div id="emailHelp" class="form-text">Não compartilharemos seu Email com ninguém.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="InputHash" class="form-label">Senha</label><br>
+                        <input type="password" class="input col-12" id="InputHash" required>
+                    </div>
+                </form>
+                <button type="button" onclick="redefinir(this)" class="btn btn-outline-primary">
+                  Esqueci minha senha
+                </button>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary" id="loginbtn" onclick="login()" disabled>Fazer login</button>
+                <a class="btn btn-info" href="registro.html">Sou novo aqui e desejo registrar-me</a>
+                <div id="alert-container" style="margin-top: 1%;"></div>
+            </div>
+        </div>
+    </div>
+    <script src="js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</body>
+
 </html>
