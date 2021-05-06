@@ -547,7 +547,7 @@ function verentry(entry) {
         email.classList.add("border-danger");
         flagemail = true;
     }
-    if (hash.value == "" || hash.value.length != 32) {
+    if (hash.value == "" || hash.value.length < 8) {
         hash.classList.remove("border-sucess");
         hash.classList.add("border-danger");
         flaghash = true;
