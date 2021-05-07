@@ -247,6 +247,7 @@ function register() {
             },
             success: function (data) {
                 var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
+                var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
                 if (tipo == true) {
                     newElement.innerHTML = '<div class="alert alert-danger alert-dismissible" role="alert">' + post + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
                     $(target).append(newElement);
