@@ -1,7 +1,8 @@
 var temac = localStorage.getItem('temac') | 0;
 var count_1 = 0;
 var img_data = null;
-
+var $_GET = [];
+window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (a, name, value) { $_GET[name] = value; });
 function get_id(session_info) {
     for (var i = 0; i < session_info.length; i++) {
         if (session_info[i].indexOf('_') > 0) {
@@ -299,12 +300,12 @@ function autor(id) {
     }));
 }
 jQuery(document).ready(function () {
+    var subst = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
     $("#loader").delay(600).fadeOut(400, function () {
         $("#corpo").delay(200).fadeIn(400);
         $("#corpo").css("visibility", "visible");
     });
     if (Cookies.get('session')) {
-        var subst = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
         if ((subst == "login.html") || (subst == "registro.html")) {
             setTimeout(() => {
                 window.location.pathname = window.location.pathname.replace(subst, "index.html")
@@ -337,7 +338,57 @@ jQuery(document).ready(function () {
     shfunc();
     initial();
     load_projects();
+    if ((subst == "novasenha.html") && ($_GET['pc'])) {
+        $.ajax({
+            type: 'POST',
+            url: 'https://xue-hua-piao.herokuapp.com/pcr/',
+            dataType: 'json',
+            data: {
+                pcr: $_GET['pc']
+            },
+            success: function (data) {
+                var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
+                var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
+                var target = document.getElementById("alert-container");
+                if (tipo == true) {
+                    let newElement = document.createElement("div");
+                    newElement.innerHTML = ('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong class="alert-heading"></strong>' + post + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                    $(target).append(newElement);
+                } else {
+                    document.getElementById("loginbtn").setAttribute("onclick","mudarsenha()");
+                    let iemail = document.getElementById("divemail");
+                    let email = document.getElementById("InputEmail");
+                    let fs = document.getElementById("form-nsenha");
+                    let isenha1 = document.createElement("input");
+                    let isenha2 = document.createElement("input");
+                    let txts = document.createElement("label");
+                    let div1 = document.createElement("div");
+                    div1.classList = "mb-3";
+                    let div2 = document.createElement("div");
+                    div2.classList = "mb-3";
+                    txts.innerHTML = "Nova Senha";
+                    let txts2 = document.createElement("label");
+                    email.value = post;
+                    email.setAttribute("readonly", true);
+                    txts2.innerHTML = "Confirme a Senha";
+                    isenha2.id = "InputSenha2";
+                    isenha1.id = "InputSenha1";
+                    isenha1.classList = "input col-12";
+                    isenha2.classList = "input col-12";
+                    isenha1.type = "password";
+                    isenha2.type = "password";
+                    fs.setAttribute("onkeyup", "nsenhaver(this);");;
+                    iemail.after(div1);
+                    div1.appendChild(isenha2);
+                    isenha2.before(txts2);
+                    iemail.after(div2);
+                    div2.appendChild(isenha1);
+                    isenha1.before(txts);
+                }
+            }
+        });
 
+    }
 });
 
 function shfunc() {
@@ -531,7 +582,78 @@ function login() {
         });
     }
 }
-
+function mudarsenha(){
+    var subst = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
+    if(subst=="novasenha.html"){
+        var newElement = document.createElement("div");
+        let hash = document.getElementById("InputSenha1");
+        $.ajax({
+            type: 'POST',
+            url: 'https://xue-hua-piao.herokuapp.com/changepassword/',
+            dataType: 'json',
+            data: {
+                'request_id': $_GET['pc'],
+                'senha': hash.value
+            },
+            success: function (data) {
+                var mensagem = jQuery.parseJSON((JSON.stringify(data)))['data'];
+                var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
+                var target = document.getElementById("alert-container");
+                if (target) {
+                    if (tipo == true) {
+                        newElement.innerHTML = ('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong class="alert-heading"></strong>' + mensagem + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                        $(target).append(newElement);
+                    } else {
+                        newElement.innerHTML = ('<div class="alert alert-primary alert-dismissible fade show" role="alert"><strong class="alert-heading">Sucesso!</strong>' + mensagem + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                        $(target).append(newElement);
+                        $("#loader").delay(600).fadeIn(400, function () {
+                            $("#corpo").delay(200).fadeOut(400);
+                            $("#corpo").css("visibility", "visible");
+                        });
+                        setTimeout(() => {
+                            window.location.pathname = window.location.pathname.replace("novasenha.html", "login.html")
+                        }, 1000);
+                    }
+                }
+            }
+        });
+    }
+}
+function nsenha() {
+    if ((window.location.pathname == "/novasenha.html") || (window.location.pathname == "/site/website/novasenha.html")) {
+        var newElement = document.createElement("div");
+        let email = document.getElementById("InputEmail");
+        $.ajax({
+            type: 'POST',
+            url: 'https://xue-hua-piao.herokuapp.com/passwordrequest/',
+            dataType: 'json',
+            data: {
+                'email': email.value,
+            },
+            success: function (data) {
+                var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
+                var mensagem = jQuery.parseJSON((JSON.stringify(data)))['data'];
+                var target = document.getElementById("alert-container");
+                if (target) {
+                    if (tipo == true) {
+                        newElement.innerHTML = ('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong class="alert-heading">Erro!</strong>' + mensagem + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                        $(target).append(newElement);
+                    } else {
+                        newElement.innerHTML = ('<div class="alert alert-primary alert-dismissible fade show" role="alert"><strong class="alert-heading">Sucesso!</strong>' + mensagem + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                        $(target).append(newElement);
+                        $("#loader").delay(600).fadeIn(400, function () {
+                            $("#corpo").delay(200).fadeOut(400);
+                            $("#corpo").css("visibility", "visible");
+                        });
+                        setTimeout(() => {
+                            window.location.pathname = window.location.pathname.replace("novasenha.html", "login.html")
+                        }, 1000);
+                    }
+                }
+            }
+        });
+    }
+}
 function verentry(entry) {
     let email = entry.InputEmail;
     let hash = entry.InputHash;
@@ -563,6 +685,25 @@ function verentry(entry) {
     }
 }
 
+function vernsenha(entry) {
+    let email = entry.InputEmail;
+    let loginbtn = document.getElementById("loginbtn");
+    var flagemail = false;
+    if (emailIsValid(email.value) == true) {
+        email.classList.remove("border-danger");
+        email.classList.add("border-success");
+        flagemail = false;
+    } else {
+        email.classList.remove("border-sucess");
+        email.classList.add("border-danger");
+        flagemail = true;
+    }
+    if (flagemail == true) {
+        loginbtn.disabled = true;
+    } else {
+        loginbtn.disabled = false;
+    }
+}
 function emailIsValid(email) {
     return /\S+@\S+\.\S+/.test(email)
 }
@@ -602,7 +743,36 @@ function regver(entry) {
         senha2.classList.remove("border-danger");
         senha2.classList.add("border-success");
     }
-    if (flagemail == true || flaghash == true|| nome.value=="") {
+    if (flagemail == true || flaghash == true || nome.value == "") {
+        reg.disabled = true;
+    } else {
+        reg.disabled = false;
+    }
+}
+function nsenhaver(entry) {
+    let senha1 = entry.InputSenha1;
+    let senha2 = entry.InputSenha2;
+    let reg = document.getElementById("loginbtn");
+    var flaghash = false;
+    if (senha1.value == "" || senha1.value.length < 8) {
+        senha1.classList.remove("border-sucess");
+        senha1.classList.add("border-danger");
+        flaghash = true;
+    } else {
+        senha1.classList.remove("border-danger");
+        senha1.classList.add("border-success");
+        flaghash = false;
+    }
+    if (senha1.value != senha2.value) {
+        senha2.classList.remove("border-sucess");
+        senha2.classList.add("border-danger");
+        flaghash = true;
+    } else {
+        flaghash = false;
+        senha2.classList.remove("border-danger");
+        senha2.classList.add("border-success");
+    }
+    if ( flaghash == true) {
         reg.disabled = true;
     } else {
         reg.disabled = false;
