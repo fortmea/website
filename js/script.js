@@ -545,6 +545,7 @@ function logout() {
 
 function login() {
     if ((window.location.pathname == "/login.html") || (window.location.pathname == "/site/website/login.html")) {
+        window.history.pushState({}, document.location.pathname, document.location.pathname );
         var newElement = document.createElement("div");
         let email = document.getElementById("InputEmail");
         let hash = document.getElementById("InputHash");
