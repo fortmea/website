@@ -88,7 +88,7 @@ function loadposts() {
           <img name="img` + post[x].autor + ` ` + rand + `">
           <br>
           <cite name="autor` + post[x].autor + ` ` + rand + `"><i class="gg-loadbar-alt"></i></cite></div></a>Data: ` + stamp + `</p>
-          <button class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#modal` + post[x].id + `">Expandir</button></div> </div>`);
+          <button class="btn btn-primary rounded-pill" name="ebtn" id=`+post[x].id+` data-bs-toggle="modal" data-bs-target="#modal` + post[x].id + `">Expandir</button></div> </div>`);
                         modal.innerHTML = ('<div class="modal fade" tabindex="-1"  id="modal' + post[x].id + '" aria-labelledby="modalaria' + post[x].id + '" style="display:none"aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"><div class="modal-content bg-dark"><div class="modal-header"><h5 class="modal-title">' + post[x].resumo + '</h5><button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><p>' + post[x].conteudo + '</p><p><cite name="autor' + post[x].autor + " " + rand + '"><i class="gg-loadbar-alt"></i></cite>,<br>Data: ' + stamp + '</p></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button></div></div></div></div>');
                         nomeautor(post[x].autor, rand);
                         $(target).append(newElement);
@@ -355,7 +355,7 @@ jQuery(document).ready(function () {
                     newElement.innerHTML = ('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong class="alert-heading"></strong>' + post + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
                     $(target).append(newElement);
                 } else {
-                    document.getElementById("loginbtn").setAttribute("onclick","mudarsenha()");
+                    document.getElementById("loginbtn").setAttribute("onclick", "mudarsenha()");
                     let iemail = document.getElementById("divemail");
                     let email = document.getElementById("InputEmail");
                     let fs = document.getElementById("form-nsenha");
@@ -393,6 +393,48 @@ jQuery(document).ready(function () {
 
 function shfunc() {
     if (Cookies.get("session")) {
+        $.ajax({
+            type: 'POST',
+            url: 'https://xue-hua-piao.herokuapp.com/sessiondata/',
+            dataType: 'json',
+            data: {
+                session: Cookies.get("session")
+            },
+            success: function (data) {
+                var session_info = jQuery.parseJSON((JSON.stringify(data)))['data']
+                if (session_info == "undo") {
+                    Cookies.remove("session");
+                    setTimeout(() => {
+                        window.location.pathname = window.location.pathname.replace(window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1), "index.html")
+                    }, 1000);
+                }
+                let id = get_id(session_info);
+                $.ajax({
+                    type: 'POST',
+                    url: 'https://xue-hua-piao.herokuapp.com/usuario/',
+                    dataType: 'json',
+                    data: {
+                        'id': id
+                    },
+                    success: function (data) {
+                        var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
+                        var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
+                        let btn = document.getElementsByName("ebtn");
+                        if ((post.level == 1)&&(tipo==false)) {
+                            for (x in btn) {
+                                let btnadm = document.createElement("btn");
+                                btnadm.classList="btn btn-outline-danger rounded-pill";
+                                btnadm.style = "margin-left:1em";
+                                btnadm.id = "btnadm" + x;
+                                btnadm.setAttribute("onclick","delete("+btn[x].id+")");
+                                btnadm.innerHTML="Deletar";
+                                btn[x].after(btnadm);
+                            }
+                        }
+                    }
+                });
+            }
+        });
         let btn = document.getElementById("lpbtn");
         btn.href = "profile.html";
         btn.innerHTML = `<i class="gg-profile"></i>Perfil`;
@@ -545,7 +587,7 @@ function logout() {
 
 function login() {
     if ((window.location.pathname == "/login.html") || (window.location.pathname == "/site/website/login.html")) {
-        window.history.pushState({}, document.location.pathname, document.location.pathname );
+        window.history.pushState({}, document.location.pathname, document.location.pathname);
         var newElement = document.createElement("div");
         let email = document.getElementById("InputEmail");
         let hash = document.getElementById("InputHash");
@@ -583,9 +625,9 @@ function login() {
         });
     }
 }
-function mudarsenha(){
+function mudarsenha() {
     var subst = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
-    if(subst=="novasenha.html"){
+    if (subst == "novasenha.html") {
         var newElement = document.createElement("div");
         let hash = document.getElementById("InputSenha1");
         $.ajax({
@@ -773,7 +815,7 @@ function nsenhaver(entry) {
         senha2.classList.remove("border-danger");
         senha2.classList.add("border-success");
     }
-    if ( flaghash == true) {
+    if (flaghash == true) {
         reg.disabled = true;
     } else {
         reg.disabled = false;
