@@ -63,7 +63,6 @@ function shfunc() {
   }
 }
 function logout() {
-
   $.ajax({
     type: 'POST',
     url: 'https://xue-hua-piao.herokuapp.com/logout/',
@@ -81,7 +80,6 @@ function logout() {
       }, 1000);
     }
   });
-
 }
 function loadprofiledata() {
   $.ajax({
@@ -139,11 +137,12 @@ function load_posts() {
     url: 'https://xue-hua-piao.herokuapp.com/userpost/',
     dataType: 'json',
     data: {
-      'uid': id
+      'uid': id,
+      'session': Cookies.get('session')
     },
     success: function (data) {
       var post2 = jQuery.parseJSON((JSON.stringify(data)))['data'];
-
+      var ownership = jQuery.parseJSON((JSON.stringify(data)))['is_owner'];
       for (x in post2) {
         var newElement = document.createElement("div");
         var data = new Date(post2[x].data);
@@ -152,8 +151,11 @@ function load_posts() {
         stamp = stamp.replace("00:00", "");
         newElement.classList = "float-none";
         var conteudo = post2[x].conteudo;
-
-        newElement.innerHTML = ('<div class="card bg-dark font-monospace buttonOverlay mb-3" style="padding=1em"><h5 class="card-header bg-dark bg-gradient">' + post2[x].nome + '</h5><div class="card-body bg-dark"><h5 class="card-title">' + post2[x].resumo + '</h5><p class="card-text">' + conteudo + '</p><p><img></img><cite>' + username + '</cite>,<br>' + stamp + '</p>    </div> </div>');
+        let adminbtn = "";
+        if(ownership==true){
+          adminbtn='<button class="btn btn-outline-danger rounded-pill" onclick="delete('+post2[x].id+')">Deletar</button>';
+        }
+        newElement.innerHTML = ('<div class="card bg-dark font-monospace buttonOverlay mb-3" style="padding=1em"><h5 class="card-header bg-dark bg-gradient">' + post2[x].nome + '</h5><div class="card-body bg-dark"><h5 class="card-title">' + post2[x].resumo + '</h5><p class="card-text">' + conteudo + '</p><p><img></img><cite>' + username + '</cite>,<br>' + stamp + '</p> '+adminbtn+'   </div> </div>');
         $(target2).append(newElement);
 
       }
