@@ -152,16 +152,16 @@ function load_posts() {
         newElement.classList = "float-none";
         var conteudo = post2[x].conteudo;
         let adminbtn = "";
-        if(ownership==true){
-          adminbtn='<button class="btn btn-outline-danger rounded-pill" onclick="delete('+post2[x].id+')">Deletar</button>';
+        if (ownership == true) {
+          adminbtn = '<button class="btn btn-outline-danger rounded-pill" onclick="delete_post(' + post2[x].id + ')">Deletar</button>';
         }
-        newElement.innerHTML = ('<div class="card bg-dark font-monospace buttonOverlay mb-3" style="padding=1em"><h5 class="card-header bg-dark bg-gradient">' + post2[x].nome + '</h5><div class="card-body bg-dark"><h5 class="card-title">' + post2[x].resumo + '</h5><p class="card-text">' + conteudo + '</p><p><img></img><cite>' + username + '</cite>,<br>' + stamp + '</p> '+adminbtn+'   </div> </div>');
+        newElement.innerHTML = ('<div class="card bg-dark font-monospace buttonOverlay mb-3" style="padding=1em" id="post_' + post2[x].id + '"><h5 class="card-header bg-dark bg-gradient">' + post2[x].nome + '</h5><div class="card-body bg-dark"><h5 class="card-title">' + post2[x].resumo + '</h5><p class="card-text">' + conteudo + '</p><p><img></img><cite>' + username + '</cite>,<br>' + stamp + '</p> ' + adminbtn + '   </div> </div>');
         $(target2).append(newElement);
 
       }
       if (post2.length === 0) {
         var newElement = document.createElement("div");
-        newElement.innerHTML = '<div class="alert alert-info" role="alert"><div class="header"><h4>Nada para ver por aqui!</h4></div><br>O usuário não tem nenhuma publicação/menção</div>'
+        newElement.innerHTML = '<div class="alert alert-info" role="alert" ><div class="header"><h4>Nada para ver por aqui!</h4></div><br>O usuário não tem nenhuma publicação/menção</div>'
         $(target2).append(newElement);
       }
       tema(true);
@@ -267,4 +267,24 @@ function tema_escuro() {
   } catch (error) {
     return;
   }
+}
+function delete_post(p_id) {
+  $.ajax({
+    type: 'POST',
+    url: 'https://xue-hua-piao.herokuapp.com/delete/',
+    dataType: 'json',
+    data: {
+      'post': p_id,
+      'session': Cookies.get('session')
+    },
+    success: function (data) {
+      var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
+      var data = jQuery.parseJSON((JSON.stringify(data)))['data'];
+      if (tipo == false) {
+        let post = document.getElementById("post_" + p_id);
+        post.remove();
+      }else{
+      }
+    }
+  });
 }

@@ -79,7 +79,7 @@ function loadposts() {
                             var bg = "bg-light";
                         }
                         newElement.innerHTML = (`
-          <div class="card ` + bg + ` font-monospace buttonOverlay mb-3" style="padding=1em">
+          <div class="card ` + bg + ` font-monospace buttonOverlay mb-3" style="padding=1em" id="post_` + post[x].id + `">
           <h5 class="card-header ` + bg + ` bg-gradient">` + post[x].nome + `</h5>
           <div class="card-body ` + bg + `">
           <h5 class="card-title">` + post[x].resumo + `</h5>
@@ -88,7 +88,7 @@ function loadposts() {
           <img name="img` + post[x].autor + ` ` + rand + `">
           <br>
           <cite name="autor` + post[x].autor + ` ` + rand + `"><i class="gg-loadbar-alt"></i></cite></div></a>Data: ` + stamp + `</p>
-          <button class="btn btn-primary rounded-pill" name="ebtn" id=`+ post[x].id + ` data-bs-toggle="modal" data-bs-target="#modal` + post[x].id + `">Expandir</button></div> </div>`);
+          <button class="btn btn-primary rounded-pill mb-3" style="margin-right:1em" name="ebtn" id=`+ post[x].id + ` data-bs-toggle="modal" data-bs-target="#modal` + post[x].id + `">Expandir</button></div> </div>`);
                         modal.innerHTML = ('<div class="modal fade" tabindex="-1"  id="modal' + post[x].id + '" aria-labelledby="modalaria' + post[x].id + '" style="display:none"aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"><div class="modal-content bg-dark"><div class="modal-header"><h5 class="modal-title">' + post[x].resumo + '</h5><button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><p>' + post[x].conteudo + '</p><p><cite name="autor' + post[x].autor + " " + rand + '"><i class="gg-loadbar-alt"></i></cite>,<br>Data: ' + stamp + '</p></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button></div></div></div></div>');
                         nomeautor(post[x].autor, rand);
                         $(target).append(newElement);
@@ -335,9 +335,9 @@ jQuery(document).ready(function () {
         }
     }
     loadposts();
-    shfunc();
     initial();
     load_projects();
+    shfunc();
     if ((subst == "novasenha.html") && ($_GET['pc'])) {
         $.ajax({
             type: 'POST',
@@ -419,20 +419,16 @@ function shfunc() {
                             'id': id
                         },
                         success: function (data) {
-                            var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
-                            var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
-                            let btn = document.getElementsByName("ebtn");
-                            if ((post.level == 1) && (tipo == false)) {
-                                for (x in btn) {
-                                    let btnadm = document.createElement("btn");
-                                    btnadm.classList = "btn btn-outline-danger rounded-pill";
-                                    btnadm.style = "margin-left:1em";
-                                    btnadm.id = "btnadm" + x;
-                                    btnadm.setAttribute("onclick", "delete(" + btn[x].id + ")");
-                                    btnadm.innerHTML = "Deletar";
-                                    btn[x].after(btnadm);
+                            setTimeout(() => {
+                                var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
+                                var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
+                                let btn = document.getElementsByName("ebtn");
+                                if ((post.level == 1) && (tipo == false)) {
+                                    for (x in btn) {
+                                        $("#"+btn[x].id).after("<button class='btn btn-outline-danger rounded-pill mb-3' onclick='delete_post("+btn[x].id+")'> Deletar</button>");
+                                    }
                                 }
-                            }
+                            }, 100);
                         }
                     });
                 }
@@ -824,3 +820,23 @@ function nsenhaver(entry) {
         reg.disabled = false;
     }
 }
+function delete_post(p_id) {
+    $.ajax({
+      type: 'POST',
+      url: 'https://xue-hua-piao.herokuapp.com/delete/',
+      dataType: 'json',
+      data: {
+        'post': p_id,
+        'session': Cookies.get('session')
+      },
+      success: function (data) {
+        var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
+        var data = jQuery.parseJSON((JSON.stringify(data)))['data'];
+        if (tipo == false) {
+          let post = document.getElementById("post_" + p_id);
+          post.remove();
+        }else{
+        }
+      }
+    });
+  }
