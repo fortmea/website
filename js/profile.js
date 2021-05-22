@@ -95,6 +95,10 @@ function loadprofiledata() {
       if (id == 21) {
         post.nome = "Sr. Supremo Rei do Universo " + post.nome
       }
+      let email = "";
+      if(post.cominf == 1){
+        email = `<p class="card-text">Email:<a style="text-decoration:none" href="mailto:`+ post.email + `">` + post.email + `</a>.</p>`;
+      }
       username = post.nome;
       var target = document.getElementById("profile");
       if (tipo == false) {
@@ -111,7 +115,7 @@ function loadprofiledata() {
               <div class="col-md-8">
                 <div class="card-body">
                   <h5 class="card-title">`+ post.nome + `</h5>
-                  <p class="card-text">Email:<a style="text-decoration:none" href="mailto:`+ post.email + `">` + post.email + `</a>.</p>
+                 `+email+`
                   <p class="card-text"><small >Membro desde: `+ post.date + `</small></p>
                 </div>
               </div>
