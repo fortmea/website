@@ -235,6 +235,11 @@ function register() {
     let target = document.getElementById("corpo-registro");
     let newElement = document.createElement("div");
     let senha = document.getElementById("InputPassword1").value;
+    let cominf = document.getElementById("switchemail").checked;
+    let cominfv = 0;
+    if (cominf == true) {
+        cominfv = 1;
+    }
     if ((nome) && (email)) {
         $.ajax({
             type: 'POST',
@@ -244,7 +249,8 @@ function register() {
                 'nome': nome,
                 'email': email,
                 'imagem': img_data,
-                'senha': senha
+                'senha': senha,
+                'cominf': cominfv
             },
             success: function (data) {
                 var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
@@ -425,7 +431,7 @@ function shfunc() {
                                 let btn = document.getElementsByName("ebtn");
                                 if ((post.level == 1) && (tipo == false)) {
                                     for (x in btn) {
-                                        $("#"+btn[x].id).after("<button class='btn btn-outline-danger rounded-pill mb-3' onclick='delete_post("+btn[x].id+")'> Deletar</button>");
+                                        $("#" + btn[x].id).after("<button class='btn btn-outline-danger rounded-pill mb-3' onclick='delete_prompt(" + btn[x].id + ")'> Deletar</button>");
                                     }
                                 }
                             }, 100);
@@ -820,23 +826,3 @@ function nsenhaver(entry) {
         reg.disabled = false;
     }
 }
-function delete_post(p_id) {
-    $.ajax({
-      type: 'POST',
-      url: 'https://xue-hua-piao.herokuapp.com/delete/',
-      dataType: 'json',
-      data: {
-        'post': p_id,
-        'session': Cookies.get('session')
-      },
-      success: function (data) {
-        var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
-        var data = jQuery.parseJSON((JSON.stringify(data)))['data'];
-        if (tipo == false) {
-          let post = document.getElementById("post_" + p_id);
-          post.remove();
-        }else{
-        }
-      }
-    });
-  }

@@ -157,7 +157,7 @@ function load_posts() {
         var conteudo = post2[x].conteudo;
         let adminbtn = "";
         if (ownership == true) {
-          adminbtn = '<button class="btn btn-outline-danger rounded-pill" onclick="delete_post(' + post2[x].id + ')">Deletar</button>';
+          adminbtn = '<button class="btn btn-outline-danger rounded-pill" onclick="delete_prompt(' + post2[x].id + ')">Deletar</button>';
         }
         newElement.innerHTML = ('<div class="card bg-dark font-monospace buttonOverlay mb-3" style="padding=1em" id="post_' + post2[x].id + '"><h5 class="card-header bg-dark bg-gradient">' + post2[x].nome + '</h5><div class="card-body bg-dark"><h5 class="card-title">' + post2[x].resumo + '</h5><p class="card-text">' + conteudo + '</p><p><img></img><cite>' + username + '</cite>,<br>' + stamp + '</p> ' + adminbtn + '   </div> </div>');
         $(target2).append(newElement);

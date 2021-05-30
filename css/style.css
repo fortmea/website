@@ -33,13 +33,19 @@ body {
 .bg-zigzag-dark {
     background-color: #212529;
     opacity: 1;
-    background: linear-gradient(135deg, #64321855 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(225deg, #643218 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(315deg, #64321855 25%, transparent 25%) 0px 0/ 80px 80px, linear-gradient(45deg, #643218 25%, #212529 25%) 0px 0/ 80px 80px;
+    background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #e5e5f7 40px ), repeating-linear-gradient( #212529, #64321855 );
+    /*background: linear-gradient(135deg, #64321855 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(225deg, #643218 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(315deg, #64321855 25%, transparent 25%) 0px 0/ 80px 80px, linear-gradient(45deg, #643218 25%, #212529 25%) 0px 0/ 80px 80px;*/
+    background-size: 400% 400%;
+    animation: gradient 180s ease infinite;
 }
 
 .bg-zigzag-light {
     background-color: #f8f9fa;
     opacity: 1;
-    background: linear-gradient(135deg, #64321855 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(225deg, #643218 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(315deg, #64321855 25%, transparent 25%) 0px 0/ 80px 80px, linear-gradient(45deg, #643218 25%, #f8f9fa 25%) 0px 0/ 80px 80px;
+    background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #e5e5f7 40px ), repeating-linear-gradient( #212529, #64321855 );
+    /*background: linear-gradient(135deg, #64321855 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(225deg, #643218 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(315deg, #64321855 25%, transparent 25%) 0px 0/ 80px 80px, linear-gradient(45deg, #643218 25%, #f8f9fa 25%) 0px 0/ 80px 80px;*/
+    background-size: 400% 400%;
+    animation: gradient 180s ease infinite;
 }
 
 .card {
@@ -183,4 +189,26 @@ a {
 
 .vertical {
     margin-top: 1em;
+}
+/*.bg-zigzag-dark {
+	background: linear-gradient(-45deg, #99B3C9, #C1C6C9, #6C757D, #C9AF85,#7D766B);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+}
+.bg-zigzag-light {
+    background: linear-gradient(-45deg, #99B3C9, #C1C6C9, #6C757D, #C9AF85,#7D766B);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+}
+*/
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
