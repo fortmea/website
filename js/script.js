@@ -42,7 +42,70 @@ function redefinir() {
         });
     }
 }
-
+function loadpost() {
+    var subst = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
+    if (subst == "ler.html") {
+        let p_id = $_GET['id'];
+        var addr = "https://xue-hua-piao.herokuapp.com/uniquepost";
+        $.ajax({
+            type: 'POST',
+            url: addr,
+            data: {
+                'id': p_id
+            },
+            dataType: 'json',
+            success: function (data) {
+                var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
+                var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
+                var target = document.getElementById("post-container");
+                if (tipo == false) {
+                    if (target) {
+                        var conta = 0;
+                        for (x in post) {
+                            var newElement = document.createElement("div");
+                            newElement.style = "padding:1em;";
+                            min = Math.ceil(15000);
+                            max = Math.floor(1);
+                            var rand = Math.floor(Math.random() * (max - min + 1)) + min;
+                            var data = new Date(post[x].data);
+                            data.setSeconds(0, 0);
+                            var stamp = data.toISOString().replace(/T/, " ").replace(/:00.000Z/, "");
+                            stamp = stamp.replace("00:00", "");
+                            newElement.classList = "float-none";
+                            var conteudo = post[x].conteudo;
+                            if (temac % 2 == 1) {
+                                var bg = "bg-dark";
+                            } else {
+                                var bg = "bg-light";
+                            }
+                            newElement.innerHTML = (`
+          <div class="card ` + bg + ` font-monospace buttonOverlay mb-3" style="padding=1em" id="post_` + post[x].id + `">
+          <h5 class="card-header ` + bg + ` bg-gradient">` + post[x].nome + `</h5>
+          <div class="card-body ` + bg + `">
+          <h5 class="card-title">` + post[x].resumo + `</h5>
+          <p class="card-text">` + conteudo + `</p><p>
+          <a href="profile.html?uid=` + post[x].autor + `" style="text-decoration:none" class="text-info"><div class="col-md-4 d-flex justify-content-between" >
+          <img name="img` + post[x].autor + ` ` + rand + `">
+          <br>
+          <cite name="autor` + post[x].autor + ` ` + rand + `"><i class="gg-loadbar-alt"></i></cite></div></a>Data: ` + stamp + `</p>
+          </div><div class="card-footer"><span name="ebtn" id="`+ post[x].id + `"></span></div> </div>`);
+                            nomeautor(post[x].autor, rand);
+                            $(target).append(newElement);
+                        }
+                    }
+                } else {
+                    if (target) {
+                        var elemento = document.createElement("div");
+                        elemento.classList = "container";
+                        elemento.innerHTML = "<br><br><br><br><br><br><br><br><br><div class='alert alert-warning ' style='margin:1em'><p class='alert-heading'>Erro!</p><p class='mb-0'>Post não encontrado.</p></div>";
+                        $(target).after(elemento);
+                        target.remove();
+                    }
+                }
+            }
+        });
+    }
+}
 function loadposts() {
     if ((window.location.pathname == "/index.html") || (window.location.pathname == "/") || (window.location.pathname == "/site/website/index.html")) {
         var addr = "https://xue-hua-piao.herokuapp.com/post";
@@ -58,17 +121,17 @@ function loadposts() {
                     var conta = 0;
                     for (x in post) {
                         var newElement = document.createElement("div");
-                        var modal = document.createElement("div");
-                        newElement.style = "padding:1em;";
+                        //var modal = document.createElement("div");
                         min = Math.ceil(15000);
                         max = Math.floor(1);
                         var rand = Math.floor(Math.random() * (max - min + 1)) + min;
-                        var rand2 = Math.floor(Math.random() * (max - min + 1)) + min;
+                        //var rand2 = Math.floor(Math.random() * (max - min + 1)) + min;
                         var data = new Date(post[x].data);
                         data.setSeconds(0, 0);
                         var stamp = data.toISOString().replace(/T/, " ").replace(/:00.000Z/, "");
                         stamp = stamp.replace("00:00", "");
                         newElement.classList = "float-none";
+                        newElement.id = "post_" + post[x].id;
                         var conteudo = post[x].conteudo;
                         if (conteudo.length >= 100) {
                             conteudo = conteudo.substring(0, 100) + "...";
@@ -79,7 +142,7 @@ function loadposts() {
                             var bg = "bg-light";
                         }
                         newElement.innerHTML = (`
-          <div class="card ` + bg + ` font-monospace buttonOverlay mb-3" style="padding=1em" id="post_` + post[x].id + `">
+          <div class="card ` + bg + ` font-monospace buttonOverlay mb-3" style="margin:1em">
           <h5 class="card-header ` + bg + ` bg-gradient">` + post[x].nome + `</h5>
           <div class="card-body ` + bg + `">
           <h5 class="card-title">` + post[x].resumo + `</h5>
@@ -88,11 +151,12 @@ function loadposts() {
           <img name="img` + post[x].autor + ` ` + rand + `">
           <br>
           <cite name="autor` + post[x].autor + ` ` + rand + `"><i class="gg-loadbar-alt"></i></cite></div></a>Data: ` + stamp + `</p>
-          <button class="btn btn-primary rounded-pill mb-3" style="margin-right:1em" name="ebtn" id=`+ post[x].id + ` data-bs-toggle="modal" data-bs-target="#modal` + post[x].id + `">Expandir</button></div> </div>`);
-                        modal.innerHTML = ('<div class="modal fade" tabindex="-1"  id="modal' + post[x].id + '" aria-labelledby="modalaria' + post[x].id + '" style="display:none"aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"><div class="modal-content bg-dark"><div class="modal-header"><h5 class="modal-title">' + post[x].resumo + '</h5><button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><p>' + post[x].conteudo + '</p><p><cite name="autor' + post[x].autor + " " + rand + '"><i class="gg-loadbar-alt"></i></cite>,<br>Data: ' + stamp + '</p></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button></div></div></div></div>');
+          </div><div class="card-footer">
+          <a href="ler.html?id=`+ post[x].id + `" class="btn btn-outline-primary rounded-pill mb-3" style="margin-right:1em" name="ebtn" id=` + post[x].id + ` >Expandir</a></div> </div>`);
+                        //modal.innerHTML = ('<div class="modal fade" tabindex="-1"  id="modal' + post[x].id + '" aria-labelledby="modalaria' + post[x].id + '" style="display:none"aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"><div class="modal-content bg-dark"><div class="modal-header"><h5 class="modal-title">' + post[x].resumo + '</h5><button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><p>' + post[x].conteudo + '</p><p><cite name="autor' + post[x].autor + " " + rand + '"><i class="gg-loadbar-alt"></i></cite>,<br>Data: ' + stamp + '</p></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button></div></div></div></div>');
                         nomeautor(post[x].autor, rand);
                         $(target).append(newElement);
-                        $(modal_target).append(modal);
+                        //$(modal_target).append(modal);
                     }
                 }
             }
@@ -184,6 +248,7 @@ function sendpost() {
         success: function (data) {
             var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
             var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
+            var rid = jQuery.parseJSON((JSON.stringify(data)))['pid'];
             var target = document.getElementById("footer");
             if (tipo == "true") {
                 var newElement = document.createElement("div");
@@ -194,7 +259,10 @@ function sendpost() {
                 newElement.innerHTML = '<div class="alert alert-primary alert-dismissible" role="alert">' + post + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
                 $(target).append(newElement);
                 setTimeout(() => {
-                    window.location.pathname = window.location.pathname.replace("post.html", "profile.html")
+                    let url;
+                    url = new URL(location.href.replace('post.html', 'ler.html'));
+                    url.searchParams.set('id', rid)
+                    $(location).attr('href', url);
                 }, 500);
 
             }
@@ -261,6 +329,11 @@ function register() {
                 } else {
                     newElement.innerHTML = '<div class="alert alert-primary alert-dismissible text-wrap" role="alert"><b>' + post + '<br>Verifique seu email!</b><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>'
                     $(target).append(newElement);
+                    setTimeout(() => {
+                        let url;
+                        url = new URL(location.href.replace('registro.html', 'login.html'));
+                        $(location).attr('href', url);
+                    }, 1000);
                 }
 
             }
@@ -340,6 +413,7 @@ jQuery(document).ready(function () {
             });
         }
     }
+    loadpost();
     loadposts();
     initial();
     load_projects();
@@ -415,7 +489,7 @@ function shfunc() {
                         window.location.pathname = window.location.pathname.replace(window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1), "index.html")
                     }, 1000);
                 }
-                if (subst == "index.html") {
+                if (subst == "index.html" || subst == "ler.html") {
                     let id = get_id(session_info);
                     $.ajax({
                         type: 'POST',
@@ -428,10 +502,10 @@ function shfunc() {
                             setTimeout(() => {
                                 var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
                                 var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
-                                let btn = document.getElementsByName("ebtn");
-                                if ((post.level == 1) && (tipo == false)) {
-                                    for (x in btn) {
-                                        $("#" + btn[x].id).after("<button class='btn btn-outline-danger rounded-pill mb-3' onclick='delete_prompt(" + btn[x].id + ")'> Deletar</button>");
+                                let ebtn = document.getElementsByName("ebtn");
+                                for (x in ebtn) {
+                                    if ((((post.level == 1)) || (post.id == ebtn[x].id)) && (tipo == false)) {
+                                        $("#" + ebtn[x].id).after("<button class='btn btn-outline-danger rounded-pill mb-3' onclick='delete_prompt(" + ebtn[x].id + ")'> Deletar</button>");
                                     }
                                 }
                             }, 100);
@@ -446,7 +520,7 @@ function shfunc() {
         var prfnav = document.getElementById("prfnav");
         var logoutbt = document.createElement("li");
         logoutbt.classList = "navbar-nav nav-item";
-        logoutbt.innerHTML = `<button onclick="logout()" class="btn btn-dark text-start text-danger"><i class="gg-log-out" style="margin-left:0.1%"></i>Sair</button>`;
+        logoutbt.innerHTML = `<button onclick="logout()" class="btn btn-outline-danger text-start"><i class="gg-log-out" style="margin-left:0.1%"></i>Sair</button>`;
         prfnav.after(logoutbt);
     } else {
         let plink = document.getElementById("addpub");
