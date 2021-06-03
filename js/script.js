@@ -61,37 +61,35 @@ function loadpost() {
                 if (tipo == false) {
                     if (target) {
                         var conta = 0;
-                        for (x in post) {
                             var newElement = document.createElement("div");
                             newElement.style = "padding:1em;";
                             min = Math.ceil(15000);
                             max = Math.floor(1);
                             var rand = Math.floor(Math.random() * (max - min + 1)) + min;
-                            var data = new Date(post[x].data);
+                            var data = new Date(post.data);
                             data.setSeconds(0, 0);
                             var stamp = data.toISOString().replace(/T/, " ").replace(/:00.000Z/, "");
                             stamp = stamp.replace("00:00", "");
                             newElement.classList = "float-none";
-                            var conteudo = post[x].conteudo;
+                            var conteudo = post.conteudo;
                             if (temac % 2 == 1) {
                                 var bg = "bg-dark";
                             } else {
                                 var bg = "bg-light";
                             }
                             newElement.innerHTML = (`
-          <div class="card ` + bg + ` font-monospace buttonOverlay mb-3" style="padding=1em" id="post_` + post[x].id + `">
-          <h5 class="card-header ` + bg + ` bg-gradient">` + post[x].nome + `</h5>
+          <div class="card ` + bg + ` font-monospace buttonOverlay mb-3" style="padding=1em" id="post_` + post.id + `">
+          <h5 class="card-header ` + bg + ` bg-gradient">` + post.nome + `</h5>
           <div class="card-body ` + bg + `">
-          <h5 class="card-title">` + post[x].resumo + `</h5>
+          <h5 class="card-title">` + post.resumo + `</h5>
           <p class="card-text">` + conteudo + `</p><p>
-          <a href="profile.html?uid=` + post[x].autor + `" style="text-decoration:none" class="text-info"><div class="col-md-4 d-flex justify-content-between" >
-          <img name="img` + post[x].autor + ` ` + rand + `">
+          <a href="profile.html?uid=` + post.autor + `" style="text-decoration:none" class="text-info"><div class="col-md-4 d-flex justify-content-between" >
+          <img name="img` + post.autor + ` ` + rand + `">
           <br>
-          <cite name="autor` + post[x].autor + ` ` + rand + `"><i class="gg-loadbar-alt"></i></cite></div></a>Data: ` + stamp + `</p>
-          </div><div class="card-footer"><span name="ebtn" id="`+ post[x].id + `"></span></div> </div>`);
-                            nomeautor(post[x].autor, rand);
+          <cite name="autor` + post.autor + ` ` + rand + `"><i class="gg-loadbar-alt"></i></cite></div></a>Data: ` + stamp + `</p>
+          </div><div class="card-footer"><span name="ebtn" id="`+ post.id + `"></span></div> </div>`);
+                            nomeautor(post.autor, rand);
                             $(target).append(newElement);
-                        }
                     }
                 } else {
                     if (target) {
@@ -499,16 +497,33 @@ function shfunc() {
                             'id': id
                         },
                         success: function (data) {
-                            setTimeout(() => {
-                                var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
-                                var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
-                                let ebtn = document.getElementsByName("ebtn");
-                                for (x in ebtn) {
-                                    if ((((post.level == 1)) || (post.id == ebtn[x].id)) && (tipo == false)) {
-                                        $("#" + ebtn[x].id).after("<button class='btn btn-outline-danger rounded-pill mb-3' onclick='delete_prompt(" + ebtn[x].id + ")'> Deletar</button>");
-                                    }
+                            var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
+                            var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
+                            let ebtn = document.getElementsByName("ebtn");
+                            for (x in ebtn) {
+                                let idbtn = ebtn[x].id;
+                                if (idbtn) {
+                                    var addr = "https://xue-hua-piao.herokuapp.com/uniquepost";
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: addr,
+                                        data: {
+                                            'id': ebtn[x].id
+                                        },
+                                        dataType: 'json',
+                                        success: function (data2) {
+                                            var post2 = jQuery.parseJSON((JSON.stringify(data2)))['data'];
+                                            var tipo2 = jQuery.parseJSON((JSON.stringify(data2)))['error'];
+                                            if ((tipo == false) && (tipo2 == false)) {
+                                                if ((post.level == 2) || (post.id == post2.autor)) {
+                                                    $("#" + idbtn).after("<button class='btn btn-outline-danger rounded-pill mb-3' onclick='delete_prompt(" + idbtn + ")'> Deletar</button>");
+                                                }
+                                            }
+                                        }
+                                    });
+
                                 }
-                            }, 100);
+                            }
                         }
                     });
                 }
@@ -630,11 +645,18 @@ function confirma() {
                 var target = document.getElementById("alert-container");
                 if (target) {
                     if (tipo == "true") {
-                        newElement.innerHTML = ('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong class="alert-heading">Erro!</strong>' + post + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                        newElement.innerHTML = ('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong class="alert-heading">Erro!<br></strong>' + post + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
                         $(target).append(newElement);
                     } else {
-                        newElement.innerHTML = ('<div class="alert alert-primary alert-dismissible fade show" role="alert"><strong class="alert-heading">Sucesso!</strong>' + post + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                        newElement.innerHTML = ('<div class="alert alert-primary alert-dismissible fade show" role="alert"><strong class="alert-heading">Sucesso!<br></strong>' + post + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
                         $(target).append(newElement);
+                        $("#loader").delay(600).fadeIn(400, function () {
+                            $("#corpo").delay(200).fadeOut(400);
+                            $("#corpo").css("visibility", "visible");
+                        });
+                        setTimeout(() => {
+                            window.location.pathname = window.location.pathname.replace("confirma.html", "login.html")
+                        }, 1000);
                     }
                 }
             }
@@ -847,15 +869,6 @@ function regver(entry) {
         email.classList.add("border-danger");
         flagemail = true;
     }
-    if (senha1.value == "" || senha1.value.length < 8) {
-        senha1.classList.remove("border-sucess");
-        senha1.classList.add("border-danger");
-        flaghash = true;
-    } else {
-        senha1.classList.remove("border-danger");
-        senha1.classList.add("border-success");
-        flaghash = false;
-    }
     if (senha1.value != senha2.value) {
         senha2.classList.remove("border-sucess");
         senha2.classList.add("border-danger");
@@ -865,7 +878,16 @@ function regver(entry) {
         senha2.classList.remove("border-danger");
         senha2.classList.add("border-success");
     }
-    if (flagemail == true || flaghash == true || nome.value == "") {
+    if (senha1.value == "" || senha1.value.length < 8) {
+        senha1.classList.remove("border-sucess");
+        senha1.classList.add("border-danger");
+        flaghash = true;
+    } else {
+        senha1.classList.remove("border-danger");
+        senha1.classList.add("border-success");
+        flaghash = false;
+    }
+    if (flagemail == true || flaghash == true || nome.value == "" || senha2.value != senha1.value) {
         reg.disabled = true;
     } else {
         reg.disabled = false;
