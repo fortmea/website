@@ -627,8 +627,7 @@ function tema_escuro() {
 }
 
 function confirma() {
-    let email = document.getElementById("InputEmail1").value;
-    let hash = document.getElementById("InputPassword1").value;
+    let acr = $_GET['acr'];
     var newElement = document.createElement("div");
     if ((window.location.pathname == "/confirmar.html") || (window.location.pathname == "/site/website/confirmar.html")) {
         $.ajax({
@@ -636,8 +635,7 @@ function confirma() {
             url: 'https://xue-hua-piao.herokuapp.com/confirmar/',
             dataType: 'json',
             data: {
-                'email': email,
-                'hash': hash
+                'acr': acr,
             },
             success: function (data) {
                 var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
@@ -645,10 +643,10 @@ function confirma() {
                 var target = document.getElementById("alert-container");
                 if (target) {
                     if (tipo == "true") {
-                        newElement.innerHTML = ('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong class="alert-heading">Erro!<br></strong>' + post + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                        newElement.innerHTML = ('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong class="alert-heading">Erro!</strong><br>' + post + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
                         $(target).append(newElement);
                     } else {
-                        newElement.innerHTML = ('<div class="alert alert-primary alert-dismissible fade show" role="alert"><strong class="alert-heading">Sucesso!<br></strong>' + post + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                        newElement.innerHTML = ('<div class="alert alert-primary alert-dismissible fade show" role="alert"><strong class="alert-heading">Sucesso!</strong><br>' + post + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
                         $(target).append(newElement);
                         $("#loader").delay(600).fadeIn(400, function () {
                             $("#corpo").delay(200).fadeOut(400);
