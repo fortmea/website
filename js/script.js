@@ -414,9 +414,9 @@ jQuery(document).ready(function () {
     loadpost();
     loadposts();
     initial();
+    confirma();
     load_projects();
     shfunc();
-    confirma();
     if ((subst == "novasenha.html") && ($_GET['pc'])) {
         $.ajax({
             type: 'POST',
@@ -631,7 +631,7 @@ function confirma() {
     let acr = $_GET['acr'];
     var newElement = document.createElement("div");
     var subst = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
-    if ((subst == "/site/website/confirmar.html") && (acr)) {
+    if ((subst == "confirmar.html") && (acr)) {
         $.ajax({
             type: 'POST',
             url: 'https://xue-hua-piao.herokuapp.com/confirmar/',
@@ -645,17 +645,19 @@ function confirma() {
                 var target = document.getElementById("alert-container");
                 if (target) {
                     if (tipo == "true") {
-                        newElement.innerHTML = ('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong class="alert-heading">Erro!</strong><br>' + post + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                        newElement.innerHTML = ('<div class="alert alert-danger fade show" role="alert"><strong class="alert-heading">Erro!</strong><br>' + post + ' </div>');
                         $(target).append(newElement);
                     } else {
-                        newElement.innerHTML = ('<div class="alert alert-primary alert-dismissible fade show" role="alert"><strong class="alert-heading">Sucesso!</strong><br>' + post + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                        newElement.innerHTML = ('<div class="alert alert-primary fade show" role="alert"><strong class="alert-heading">Sucesso!</strong><br>' + post + '</div>');
                         $(target).append(newElement);
                         $("#loader").delay(600).fadeIn(400, function () {
                             $("#corpo").delay(200).fadeOut(400);
                             $("#corpo").css("visibility", "visible");
                         });
                         setTimeout(() => {
-                            window.location.pathname = window.location.pathname.replace("confirma.html", "login.html")
+                            let url = new URL(window.location.href.replace("confirmar.html","login.html"));
+                            url.search = "";
+                            window.location.href = url;
                         }, 1000);
                     }
                 }
