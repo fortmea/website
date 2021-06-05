@@ -416,60 +416,58 @@ jQuery(document).ready(function () {
     initial();
     load_projects();
     shfunc();
-    if ($_GET['acr'] != "" && window.location.pathname == "confirmar.html"){
-        confirma();
-    }
-        if ((subst == "novasenha.html") && ($_GET['pc'])) {
-            $.ajax({
-                type: 'POST',
-                url: 'https://xue-hua-piao.herokuapp.com/pcr/',
-                dataType: 'json',
-                data: {
-                    pcr: $_GET['pc']
-                },
-                success: function (data) {
-                    var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
-                    var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
-                    var target = document.getElementById("alert-container");
-                    if (tipo == true) {
-                        let newElement = document.createElement("div");
-                        newElement.innerHTML = ('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong class="alert-heading"></strong>' + post + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
-                        $(target).append(newElement);
-                    } else {
-                        document.getElementById("loginbtn").setAttribute("onclick", "mudarsenha()");
-                        let iemail = document.getElementById("divemail");
-                        let email = document.getElementById("InputEmail");
-                        let fs = document.getElementById("form-nsenha");
-                        let isenha1 = document.createElement("input");
-                        let isenha2 = document.createElement("input");
-                        let txts = document.createElement("label");
-                        let div1 = document.createElement("div");
-                        div1.classList = "mb-3";
-                        let div2 = document.createElement("div");
-                        div2.classList = "mb-3";
-                        txts.innerHTML = "Nova Senha";
-                        let txts2 = document.createElement("label");
-                        email.value = post;
-                        email.setAttribute("readonly", true);
-                        txts2.innerHTML = "Confirme a Senha";
-                        isenha2.id = "InputSenha2";
-                        isenha1.id = "InputSenha1";
-                        isenha1.classList = "input col-12";
-                        isenha2.classList = "input col-12";
-                        isenha1.type = "password";
-                        isenha2.type = "password";
-                        fs.setAttribute("onkeyup", "nsenhaver(this);");;
-                        iemail.after(div1);
-                        div1.appendChild(isenha2);
-                        isenha2.before(txts2);
-                        iemail.after(div2);
-                        div2.appendChild(isenha1);
-                        isenha1.before(txts);
-                    }
+    confirma();
+    if ((subst == "novasenha.html") && ($_GET['pc'])) {
+        $.ajax({
+            type: 'POST',
+            url: 'https://xue-hua-piao.herokuapp.com/pcr/',
+            dataType: 'json',
+            data: {
+                pcr: $_GET['pc']
+            },
+            success: function (data) {
+                var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
+                var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
+                var target = document.getElementById("alert-container");
+                if (tipo == true) {
+                    let newElement = document.createElement("div");
+                    newElement.innerHTML = ('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong class="alert-heading"></strong>' + post + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                    $(target).append(newElement);
+                } else {
+                    document.getElementById("loginbtn").setAttribute("onclick", "mudarsenha()");
+                    let iemail = document.getElementById("divemail");
+                    let email = document.getElementById("InputEmail");
+                    let fs = document.getElementById("form-nsenha");
+                    let isenha1 = document.createElement("input");
+                    let isenha2 = document.createElement("input");
+                    let txts = document.createElement("label");
+                    let div1 = document.createElement("div");
+                    div1.classList = "mb-3";
+                    let div2 = document.createElement("div");
+                    div2.classList = "mb-3";
+                    txts.innerHTML = "Nova Senha";
+                    let txts2 = document.createElement("label");
+                    email.value = post;
+                    email.setAttribute("readonly", true);
+                    txts2.innerHTML = "Confirme a Senha";
+                    isenha2.id = "InputSenha2";
+                    isenha1.id = "InputSenha1";
+                    isenha1.classList = "input col-12";
+                    isenha2.classList = "input col-12";
+                    isenha1.type = "password";
+                    isenha2.type = "password";
+                    fs.setAttribute("onkeyup", "nsenhaver(this);");;
+                    iemail.after(div1);
+                    div1.appendChild(isenha2);
+                    isenha2.before(txts2);
+                    iemail.after(div2);
+                    div2.appendChild(isenha1);
+                    isenha1.before(txts);
                 }
-            });
+            }
+        });
 
-        }
+    }
 });
 
 function shfunc() {
@@ -632,7 +630,8 @@ function tema_escuro() {
 function confirma() {
     let acr = $_GET['acr'];
     var newElement = document.createElement("div");
-    if ((window.location.pathname == "/confirmar.html") || (window.location.pathname == "/site/website/confirmar.html")) {
+    var subst = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
+    if ((subst == "/site/website/confirmar.html") && (acr)) {
         $.ajax({
             type: 'POST',
             url: 'https://xue-hua-piao.herokuapp.com/confirmar/',
