@@ -416,7 +416,7 @@ jQuery(document).ready(function () {
     initial();
     load_projects();
     shfunc();
-    if ($_GET['acr'] != "" && window.location.pathname == "confirma.html"){
+    if ($_GET['acr'] != "" && window.location.pathname == "confirmar.html"){
         confirma();
     }
         if ((subst == "novasenha.html") && ($_GET['pc'])) {
