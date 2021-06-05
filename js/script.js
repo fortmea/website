@@ -61,23 +61,23 @@ function loadpost() {
                 if (tipo == false) {
                     if (target) {
                         var conta = 0;
-                            var newElement = document.createElement("div");
-                            newElement.style = "padding:1em;";
-                            min = Math.ceil(15000);
-                            max = Math.floor(1);
-                            var rand = Math.floor(Math.random() * (max - min + 1)) + min;
-                            var data = new Date(post.data);
-                            data.setSeconds(0, 0);
-                            var stamp = data.toISOString().replace(/T/, " ").replace(/:00.000Z/, "");
-                            stamp = stamp.replace("00:00", "");
-                            newElement.classList = "float-none";
-                            var conteudo = post.conteudo;
-                            if (temac % 2 == 1) {
-                                var bg = "bg-dark";
-                            } else {
-                                var bg = "bg-light";
-                            }
-                            newElement.innerHTML = (`
+                        var newElement = document.createElement("div");
+                        newElement.style = "padding:1em;";
+                        min = Math.ceil(15000);
+                        max = Math.floor(1);
+                        var rand = Math.floor(Math.random() * (max - min + 1)) + min;
+                        var data = new Date(post.data);
+                        data.setSeconds(0, 0);
+                        var stamp = data.toISOString().replace(/T/, " ").replace(/:00.000Z/, "");
+                        stamp = stamp.replace("00:00", "");
+                        newElement.classList = "float-none";
+                        var conteudo = post.conteudo;
+                        if (temac % 2 == 1) {
+                            var bg = "bg-dark";
+                        } else {
+                            var bg = "bg-light";
+                        }
+                        newElement.innerHTML = (`
           <div class="card ` + bg + ` font-monospace buttonOverlay mb-3" style="padding=1em" id="post_` + post.id + `">
           <h5 class="card-header ` + bg + ` bg-gradient">` + post.nome + `</h5>
           <div class="card-body ` + bg + `">
@@ -88,8 +88,8 @@ function loadpost() {
           <br>
           <cite name="autor` + post.autor + ` ` + rand + `"><i class="gg-loadbar-alt"></i></cite></div></a>Data: ` + stamp + `</p>
           </div><div class="card-footer"><span name="ebtn" id="`+ post.id + `"></span></div> </div>`);
-                            nomeautor(post.autor, rand);
-                            $(target).append(newElement);
+                        nomeautor(post.autor, rand);
+                        $(target).append(newElement);
                     }
                 } else {
                     if (target) {
@@ -416,57 +416,60 @@ jQuery(document).ready(function () {
     initial();
     load_projects();
     shfunc();
-    if ((subst == "novasenha.html") && ($_GET['pc'])) {
-        $.ajax({
-            type: 'POST',
-            url: 'https://xue-hua-piao.herokuapp.com/pcr/',
-            dataType: 'json',
-            data: {
-                pcr: $_GET['pc']
-            },
-            success: function (data) {
-                var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
-                var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
-                var target = document.getElementById("alert-container");
-                if (tipo == true) {
-                    let newElement = document.createElement("div");
-                    newElement.innerHTML = ('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong class="alert-heading"></strong>' + post + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
-                    $(target).append(newElement);
-                } else {
-                    document.getElementById("loginbtn").setAttribute("onclick", "mudarsenha()");
-                    let iemail = document.getElementById("divemail");
-                    let email = document.getElementById("InputEmail");
-                    let fs = document.getElementById("form-nsenha");
-                    let isenha1 = document.createElement("input");
-                    let isenha2 = document.createElement("input");
-                    let txts = document.createElement("label");
-                    let div1 = document.createElement("div");
-                    div1.classList = "mb-3";
-                    let div2 = document.createElement("div");
-                    div2.classList = "mb-3";
-                    txts.innerHTML = "Nova Senha";
-                    let txts2 = document.createElement("label");
-                    email.value = post;
-                    email.setAttribute("readonly", true);
-                    txts2.innerHTML = "Confirme a Senha";
-                    isenha2.id = "InputSenha2";
-                    isenha1.id = "InputSenha1";
-                    isenha1.classList = "input col-12";
-                    isenha2.classList = "input col-12";
-                    isenha1.type = "password";
-                    isenha2.type = "password";
-                    fs.setAttribute("onkeyup", "nsenhaver(this);");;
-                    iemail.after(div1);
-                    div1.appendChild(isenha2);
-                    isenha2.before(txts2);
-                    iemail.after(div2);
-                    div2.appendChild(isenha1);
-                    isenha1.before(txts);
-                }
-            }
-        });
-
+    if ($_GET['acr'] != "" && window.location.pathname == "confirma.html"){
+        confirma();
     }
+        if ((subst == "novasenha.html") && ($_GET['pc'])) {
+            $.ajax({
+                type: 'POST',
+                url: 'https://xue-hua-piao.herokuapp.com/pcr/',
+                dataType: 'json',
+                data: {
+                    pcr: $_GET['pc']
+                },
+                success: function (data) {
+                    var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
+                    var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
+                    var target = document.getElementById("alert-container");
+                    if (tipo == true) {
+                        let newElement = document.createElement("div");
+                        newElement.innerHTML = ('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong class="alert-heading"></strong>' + post + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                        $(target).append(newElement);
+                    } else {
+                        document.getElementById("loginbtn").setAttribute("onclick", "mudarsenha()");
+                        let iemail = document.getElementById("divemail");
+                        let email = document.getElementById("InputEmail");
+                        let fs = document.getElementById("form-nsenha");
+                        let isenha1 = document.createElement("input");
+                        let isenha2 = document.createElement("input");
+                        let txts = document.createElement("label");
+                        let div1 = document.createElement("div");
+                        div1.classList = "mb-3";
+                        let div2 = document.createElement("div");
+                        div2.classList = "mb-3";
+                        txts.innerHTML = "Nova Senha";
+                        let txts2 = document.createElement("label");
+                        email.value = post;
+                        email.setAttribute("readonly", true);
+                        txts2.innerHTML = "Confirme a Senha";
+                        isenha2.id = "InputSenha2";
+                        isenha1.id = "InputSenha1";
+                        isenha1.classList = "input col-12";
+                        isenha2.classList = "input col-12";
+                        isenha1.type = "password";
+                        isenha2.type = "password";
+                        fs.setAttribute("onkeyup", "nsenhaver(this);");;
+                        iemail.after(div1);
+                        div1.appendChild(isenha2);
+                        isenha2.before(txts2);
+                        iemail.after(div2);
+                        div2.appendChild(isenha1);
+                        isenha1.before(txts);
+                    }
+                }
+            });
+
+        }
 });
 
 function shfunc() {
