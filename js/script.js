@@ -86,7 +86,7 @@ function loadpost() {
           <a href="profile.html?uid=` + post.autor + `" style="text-decoration:none" class="text-info"><div class="col-md-4 d-flex justify-content-between" >
           <img src="`+post.userimage+`" class="bg-dark border-info" style="max-width:10em">
           <br>
-          <cite>` + post.username+ `<i class="gg-loadbar-alt"></i></cite></div></a>Data: ` + stamp + `</p>
+          <cite>` + post.username+ `</cite></div></a>Data: ` + stamp + `</p>
           </div><div class="card-footer"><span name="ebtn" id="`+ post.id + `"></span></div> </div>`);
                         //nomeautor(post.autor, rand);
                         $(target).append(newElement);
