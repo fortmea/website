@@ -84,11 +84,11 @@ function loadpost() {
           <h5 class="card-title">` + post.resumo + `</h5>
           <p class="card-text">` + conteudo + `</p><p>
           <a href="profile.html?uid=` + post.autor + `" style="text-decoration:none" class="text-info"><div class="col-md-4 d-flex justify-content-between" >
-          <img name="img` + post.autor + ` ` + rand + `">
+          <img src="`+post.userimage+`" class="bg-dark border-info" style="max-width:10em">
           <br>
-          <cite name="autor` + post.autor + ` ` + rand + `"><i class="gg-loadbar-alt"></i></cite></div></a>Data: ` + stamp + `</p>
+          <cite>` + post.username+ `<i class="gg-loadbar-alt"></i></cite></div></a>Data: ` + stamp + `</p>
           </div><div class="card-footer"><span name="ebtn" id="`+ post.id + `"></span></div> </div>`);
-                        nomeautor(post.autor, rand);
+                        //nomeautor(post.autor, rand);
                         $(target).append(newElement);
                     }
                 } else {
