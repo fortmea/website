@@ -116,6 +116,7 @@ function loadprofiledata() {
                 <div class="card-body">
                   <h5 class="card-title">`+ post.nome + `</h5>
                  `+email+`
+                 <p>`+post.resumo+`</p>
                   <p class="card-text"><small >Membro desde: `+ post.date + `</small></p>
                 </div>
               </div>

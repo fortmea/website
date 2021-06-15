@@ -130,9 +130,9 @@ function loadposts() {
                         stamp = stamp.replace("00:00", "");
                         newElement.classList = "float-none";
                         newElement.id = "post_" + post[x].id;
-                        var conteudo = post[x].conteudo;
+                        var conteudo = "<h3>"+post[x].conteudo;
                         if (conteudo.length >= 100) {
-                            conteudo = conteudo.substring(0, 100) + "...";
+                            conteudo = conteudo.substring(0, 100) + "...</h3>";
                         }
                         if (temac % 2 == 1) {
                             var bg = "bg-dark";
@@ -146,13 +146,13 @@ function loadposts() {
           <h5 class="card-title">` + post[x].resumo + `</h5>
           <p class="card-text">` + conteudo + `</p><p>
           <a href="profile.html?uid=` + post[x].autor + `" style="text-decoration:none" class="text-info"><div class="col-md-4 d-flex justify-content-between" >
-          <img name="img` + post[x].autor + ` ` + rand + `">
+          <img src="`+post[x].userimage+`" class="bg-dark border-info" style="max-width:10em">
           <br>
-          <cite name="autor` + post[x].autor + ` ` + rand + `"><i class="gg-loadbar-alt"></i></cite></div></a>Data: ` + stamp + `</p>
+          <cite>`+post[x].username+`</cite></div></a>Data: ` + stamp + `</p>
           </div><div class="card-footer">
           <a href="ler.html?id=`+ post[x].id + `" class="btn btn-outline-primary rounded-pill mb-3" style="margin-right:1em" name="ebtn" id=` + post[x].id + ` >Expandir</a></div> </div>`);
                         //modal.innerHTML = ('<div class="modal fade" tabindex="-1"  id="modal' + post[x].id + '" aria-labelledby="modalaria' + post[x].id + '" style="display:none"aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"><div class="modal-content bg-dark"><div class="modal-header"><h5 class="modal-title">' + post[x].resumo + '</h5><button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><p>' + post[x].conteudo + '</p><p><cite name="autor' + post[x].autor + " " + rand + '"><i class="gg-loadbar-alt"></i></cite>,<br>Data: ' + stamp + '</p></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button></div></div></div></div>');
-                        nomeautor(post[x].autor, rand);
+                        //nomeautor(post[x].autor, rand);
                         $(target).append(newElement);
                         //$(modal_target).append(modal);
                     }
@@ -161,58 +161,56 @@ function loadposts() {
         });
     }
 }
-
-function projeto() {
-    count_1++;
-    var ipaddr = document.getElementById("divaddr");
-    if (count_1 % 2 == 1) {
-        ipaddr.style.visibility = "visible";
-    } else {
-        ipaddr.style.visibility = "hidden";
-    }
-
-}
-
 function load_projects() {
     if ((window.location.pathname == "/projetos.html") || (window.location.pathname == "/site/website/projetos.html")) {
+        var addr = "https://xue-hua-piao.herokuapp.com/proj";
         $.ajax({
             type: 'POST',
-            url: 'https://xue-hua-piao.herokuapp.com/proj/',
+            url: addr,
             dataType: 'json',
             success: function (data) {
-                var proj = jQuery.parseJSON((JSON.stringify(data)))['data'];
+                var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
                 var target = document.getElementById("project-container");
                 if (target) {
-                    for (x in proj) {
+                    var conta = 0;
+                    for (x in post) {
                         var newElement = document.createElement("div");
-                        newElement.style = "padding:1em;";
+                        //var modal = document.createElement("div");
                         min = Math.ceil(15000);
                         max = Math.floor(1);
                         var rand = Math.floor(Math.random() * (max - min + 1)) + min;
-                        var data = new Date(proj[x].data);
+                        //var rand2 = Math.floor(Math.random() * (max - min + 1)) + min;
+                        var data = new Date(post[x].data);
                         data.setSeconds(0, 0);
                         var stamp = data.toISOString().replace(/T/, " ").replace(/:00.000Z/, "");
                         stamp = stamp.replace("00:00", "");
                         newElement.classList = "float-none";
-                        var conteudo = proj[x].conteudo;
+                        newElement.id = "post_" + post[x].id;
+                        var conteudo = "<h3>"+post[x].conteudo;
+                        if (conteudo.length >= 100) {
+                            conteudo = conteudo.substring(0, 100) + "...</h3>";
+                        }
                         if (temac % 2 == 1) {
                             var bg = "bg-dark";
                         } else {
                             var bg = "bg-light";
                         }
                         newElement.innerHTML = (`
-              <div class="card ` + bg + ` font-monospace buttonOverlay mb-3" style="padding=1em">
-              <h5 class="card-header ` + bg + ` bg-gradient">` + proj[x].nome + `</h5>
-              <div class="card-body ` + bg + `">
-              <h5 class="card-title">` + proj[x].resumo + `</h5>
-              <p class="card-text">` + conteudo + `</p><p>
-              <a href="profile.html?uid=` + proj[x].autor + `" style="text-decoration:none" class="text-info"><div class="col-md-4 d-flex justify-content-between" ><img name="img` + proj[x].autor + ` ` + rand + `">
-              <br>
-              <cite name="autor` + proj[x].autor + ` ` + rand + `"><i class="gg-loadbar-alt"></i></cite></div></a>Data: ` + stamp + `</p>
-              <a class="btn btn-primary rounded-pill" href="` + proj[x].addr + `">Visitar</a></div> </div>`);
-                        console.log(proj[x].addr);
-                        nomeautor(proj[x].autor, rand);
+          <div class="card ` + bg + ` font-monospace buttonOverlay mb-3" style="margin:1em">
+          <h5 class="card-header ` + bg + ` bg-gradient">` + post[x].nome + `</h5>
+          <div class="card-body ` + bg + `">
+          <h5 class="card-title">` + post[x].resumo + `</h5>
+          <p class="card-text">` + conteudo + `</p><p>
+          <a href="profile.html?uid=` + post[x].autor + `" style="text-decoration:none" class="text-info"><div class="col-md-4 d-flex justify-content-between" >
+          <img src="`+post[x].userimage+`" class="bg-dark border-info" style="max-width:10em">
+          <br>
+          <cite>`+post[x].username+`</cite></div></a>Data: ` + stamp + `</p>
+          </div><div class="card-footer">
+          <a href="ler.html?id=`+ post[x].id + `" class="btn btn-outline-primary rounded-pill mb-3" style="margin-right:1em" name="ebtn" id=` + post[x].id + ` >Expandir</a></div> </div>`);
+                        //modal.innerHTML = ('<div class="modal fade" tabindex="-1"  id="modal' + post[x].id + '" aria-labelledby="modalaria' + post[x].id + '" style="display:none"aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"><div class="modal-content bg-dark"><div class="modal-header"><h5 class="modal-title">' + post[x].resumo + '</h5><button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><p>' + post[x].conteudo + '</p><p><cite name="autor' + post[x].autor + " " + rand + '"><i class="gg-loadbar-alt"></i></cite>,<br>Data: ' + stamp + '</p></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button></div></div></div></div>');
+                        //nomeautor(post[x].autor, rand);
                         $(target).append(newElement);
+                        //$(modal_target).append(modal);
                     }
                 }
             }
@@ -225,11 +223,12 @@ function sendpost() {
     let titulo2 = document.getElementById("InputTitulo2").value;
     let content = document.getElementsByClassName("ql-editor")[0].innerHTML;
     let addr = document.getElementById("divaddr").value;
-    var apiaddr;
+    var proj;
+    var apiaddr = 'https://xue-hua-piao.herokuapp.com/addpost/'
     if (count_1 % 2 == 0) {
-        apiaddr = 'https://xue-hua-piao.herokuapp.com/addpost/'
+        proj = 0;
     } else {
-        apiaddr = 'https://xue-hua-piao.herokuapp.com/addproj/'
+       proj = 1;
     }
 
     $.ajax({
@@ -241,7 +240,8 @@ function sendpost() {
             'titulo': titulo,
             'subtitulo': titulo2,
             'conteudo': content,
-            'addr': addr
+            'addr': addr,
+            'proj' : proj
         },
         success: function (data) {
             var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
@@ -341,7 +341,7 @@ function register() {
         $(target).append(newElement);
     }
 }
-
+/*
 function nomeautor(id, rand) {
     let data2 = autor(id);
     data2.then(function (data3) {
@@ -375,7 +375,7 @@ function autor(id) {
             'id': id
         }
     }));
-}
+}*/
 jQuery(document).ready(function () {
     var subst = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
     $("#loader").delay(600).fadeOut(400, function () {
