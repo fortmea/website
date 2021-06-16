@@ -37,6 +37,7 @@ body {
     /*background: linear-gradient(135deg, #64321855 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(225deg, #643218 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(315deg, #64321855 25%, transparent 25%) 0px 0/ 80px 80px, linear-gradient(45deg, #643218 25%, #212529 25%) 0px 0/ 80px 80px;*/
     background-size: 400% 400%;
     animation: gradient 360s ease infinite;
+    background-repeat: no-repeat;
 }
 
 .bg-zigzag-light {
@@ -46,6 +47,7 @@ body {
     /*background: linear-gradient(135deg, #64321855 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(225deg, #643218 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(315deg, #64321855 25%, transparent 25%) 0px 0/ 80px 80px, linear-gradient(45deg, #643218 25%, #f8f9fa 25%) 0px 0/ 80px 80px;*/
     background-size: 400% 400%;
     animation: gradient 360s ease infinite;
+    background-repeat: no-repeat;
 }
 
 .card {
@@ -57,7 +59,7 @@ body {
     transform: translateY(-5px) scale(1.005) translateZ(0);
     box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11), 0 24px 46px var(--box-shadow-color);
     border-radius: 12px;
-    background: #212529;
+
     /*box-shadow:  19px 19px 38px #0f1112,
 				 -19px -19px 38px #333940;*/
 }

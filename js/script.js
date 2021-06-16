@@ -63,6 +63,7 @@ function loadpost() {
                         var conta = 0;
                         var newElement = document.createElement("div");
                         newElement.style = "padding:1em;";
+                        newElement.id = "post_" + post.id;
                         min = Math.ceil(15000);
                         max = Math.floor(1);
                         var rand = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -77,17 +78,16 @@ function loadpost() {
                         } else {
                             var bg = "bg-light";
                         }
-                        newElement.innerHTML = (`
-          <div class="card ` + bg + ` font-monospace buttonOverlay mb-3" style="padding=1em" id="post_` + post.id + `">
-          <h5 class="card-header ` + bg + ` bg-gradient">` + post.nome + `</h5>
-          <div class="card-body ` + bg + `">
-          <h5 class="card-title">` + post.resumo + `</h5>
-          <p class="card-text">` + conteudo + `</p><p>
-          <a href="profile.html?uid=` + post.autor + `" style="text-decoration:none" class="text-info"><div class="col-md-4 d-flex justify-content-between" >
-          <img src="`+post.userimage+`" class="bg-dark border-info" style="max-width:10em">
-          <br>
-          <cite>` + post.username+ `</cite></div></a>Data: ` + stamp + `</p>
-          </div><div class="card-footer"><span name="ebtn" id="`+ post.id + `"></span></div> </div>`);
+                        newElement.innerHTML = (`<div class="card ` + bg + `font-monospace buttonOverlay mb-3" style="margin:1em">
+                        <h5 class="card-header ` + bg + ` bg-gradient"> <img src="` + post.userimage + `" style="max-width:4em;"><cite> ` + post.username + `</cite></h5>
+                        <div class="card-body ` + bg + `">
+                        <h5 class="card-title">` + post.nome + `</h5>
+                        <p class="card-text">` + conteudo + `</p><p>
+                        <a href="profile.html?uid=` + post.autor + `" style="text-decoration:none" class="text-info"><div class="col-md-4 d-flex justify-content-between" >
+                        <br>
+              </div></a>Data: ` + stamp + `</p>
+                        </div><div class="card-footer"><i name="ebtn" id="`+post.id+`"></i>
+                        </div> </div>`);
                         //nomeautor(post.autor, rand);
                         $(target).append(newElement);
                     }
@@ -130,9 +130,9 @@ function loadposts() {
                         stamp = stamp.replace("00:00", "");
                         newElement.classList = "float-none";
                         newElement.id = "post_" + post[x].id;
-                        var conteudo = "<h3>"+post[x].conteudo;
+                        var conteudo = post[x].conteudo;
                         if (conteudo.length >= 100) {
-                            conteudo = conteudo.substring(0, 100) + "...</h3>";
+                            conteudo = "<h3>" + conteudo.substring(0, 100) + "...</h3>";
                         }
                         if (temac % 2 == 1) {
                             var bg = "bg-dark";
@@ -141,14 +141,13 @@ function loadposts() {
                         }
                         newElement.innerHTML = (`
           <div class="card ` + bg + ` font-monospace buttonOverlay mb-3" style="margin:1em">
-          <h5 class="card-header ` + bg + ` bg-gradient">` + post[x].nome + `</h5>
+          <h5 class="card-header ` + bg + ` bg-gradient"> <img src="` + post[x].userimage + `" style="max-width:4em;"><cite> ` + post[x].username + `</cite></h5>
           <div class="card-body ` + bg + `">
-          <h5 class="card-title">` + post[x].resumo + `</h5>
+          <h5 class="card-title">` + post[x].nome + `</h5>
           <p class="card-text">` + conteudo + `</p><p>
           <a href="profile.html?uid=` + post[x].autor + `" style="text-decoration:none" class="text-info"><div class="col-md-4 d-flex justify-content-between" >
-          <img src="`+post[x].userimage+`" class="bg-dark border-info" style="max-width:10em">
           <br>
-          <cite>`+post[x].username+`</cite></div></a>Data: ` + stamp + `</p>
+</div></a>Data: ` + stamp + `</p>
           </div><div class="card-footer">
           <a href="ler.html?id=`+ post[x].id + `" class="btn btn-outline-primary rounded-pill mb-3" style="margin-right:1em" name="ebtn" id=` + post[x].id + ` >Expandir</a></div> </div>`);
                         //modal.innerHTML = ('<div class="modal fade" tabindex="-1"  id="modal' + post[x].id + '" aria-labelledby="modalaria' + post[x].id + '" style="display:none"aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"><div class="modal-content bg-dark"><div class="modal-header"><h5 class="modal-title">' + post[x].resumo + '</h5><button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><p>' + post[x].conteudo + '</p><p><cite name="autor' + post[x].autor + " " + rand + '"><i class="gg-loadbar-alt"></i></cite>,<br>Data: ' + stamp + '</p></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button></div></div></div></div>');
@@ -186,7 +185,7 @@ function load_projects() {
                         stamp = stamp.replace("00:00", "");
                         newElement.classList = "float-none";
                         newElement.id = "post_" + post[x].id;
-                        var conteudo = "<h3>"+post[x].conteudo;
+                        var conteudo = "<h3>" + post[x].conteudo;
                         if (conteudo.length >= 100) {
                             conteudo = conteudo.substring(0, 100) + "...</h3>";
                         }
@@ -196,17 +195,16 @@ function load_projects() {
                             var bg = "bg-light";
                         }
                         newElement.innerHTML = (`
-          <div class="card ` + bg + ` font-monospace buttonOverlay mb-3" style="margin:1em">
-          <h5 class="card-header ` + bg + ` bg-gradient">` + post[x].nome + `</h5>
-          <div class="card-body ` + bg + `">
-          <h5 class="card-title">` + post[x].resumo + `</h5>
-          <p class="card-text">` + conteudo + `</p><p>
-          <a href="profile.html?uid=` + post[x].autor + `" style="text-decoration:none" class="text-info"><div class="col-md-4 d-flex justify-content-between" >
-          <img src="`+post[x].userimage+`" class="bg-dark border-info" style="max-width:10em">
-          <br>
-          <cite>`+post[x].username+`</cite></div></a>Data: ` + stamp + `</p>
-          </div><div class="card-footer">
-          <a href="ler.html?id=`+ post[x].id + `" class="btn btn-outline-primary rounded-pill mb-3" style="margin-right:1em" name="ebtn" id=` + post[x].id + ` >Expandir</a></div> </div>`);
+                        <div class="card ` + bg + ` font-monospace buttonOverlay mb-3" style="margin:1em">
+                        <h5 class="card-header ` + bg + ` bg-gradient"> <img src="` + post[x].userimage + `" style="max-width:4em;"><cite> ` + post[x].username + `</cite></h5>
+                        <div class="card-body ` + bg + `">
+                        <h5 class="card-title">` + post[x].nome + `</h5>
+                        <p class="card-text">` + conteudo + `</p><p>
+                        <a href="profile.html?uid=` + post[x].autor + `" style="text-decoration:none" class="text-info"><div class="col-md-4 d-flex justify-content-between" >
+                        <br>
+              </div></a>Data: ` + stamp + `</p>
+                        </div><div class="card-footer">
+                        <a href="ler.html?id=`+ post[x].id + `" class="btn btn-outline-primary rounded-pill mb-3" style="margin-right:1em" name="ebtn" id=` + post[x].id + ` >Expandir</a></div> </div>`);
                         //modal.innerHTML = ('<div class="modal fade" tabindex="-1"  id="modal' + post[x].id + '" aria-labelledby="modalaria' + post[x].id + '" style="display:none"aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"><div class="modal-content bg-dark"><div class="modal-header"><h5 class="modal-title">' + post[x].resumo + '</h5><button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><p>' + post[x].conteudo + '</p><p><cite name="autor' + post[x].autor + " " + rand + '"><i class="gg-loadbar-alt"></i></cite>,<br>Data: ' + stamp + '</p></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button></div></div></div></div>');
                         //nomeautor(post[x].autor, rand);
                         $(target).append(newElement);
@@ -228,7 +226,7 @@ function sendpost() {
     if (count_1 % 2 == 0) {
         proj = 0;
     } else {
-       proj = 1;
+        proj = 1;
     }
 
     $.ajax({
@@ -241,7 +239,7 @@ function sendpost() {
             'subtitulo': titulo2,
             'conteudo': content,
             'addr': addr,
-            'proj' : proj
+            'proj': proj
         },
         success: function (data) {
             var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
@@ -472,6 +470,7 @@ jQuery(document).ready(function () {
 
 function shfunc() {
     var subst = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
+    //console.log("eu");
     if (Cookies.get("session")) {
         $.ajax({
             type: 'POST',
@@ -488,46 +487,45 @@ function shfunc() {
                         window.location.pathname = window.location.pathname.replace(window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1), "index.html")
                     }, 1000);
                 }
-                if (subst == "index.html" || subst == "ler.html") {
-                    let id = get_id(session_info);
-                    $.ajax({
-                        type: 'POST',
-                        url: 'https://xue-hua-piao.herokuapp.com/usuario/',
-                        dataType: 'json',
-                        data: {
-                            'id': id
-                        },
-                        success: function (data) {
-                            var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
-                            var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
-                            let ebtn = document.getElementsByName("ebtn");
-                            for (x in ebtn) {
-                                let idbtn = ebtn[x].id;
-                                if (idbtn) {
-                                    var addr = "https://xue-hua-piao.herokuapp.com/uniquepost";
-                                    $.ajax({
-                                        type: 'POST',
-                                        url: addr,
-                                        data: {
-                                            'id': ebtn[x].id
-                                        },
-                                        dataType: 'json',
-                                        success: function (data2) {
-                                            var post2 = jQuery.parseJSON((JSON.stringify(data2)))['data'];
-                                            var tipo2 = jQuery.parseJSON((JSON.stringify(data2)))['error'];
-                                            if ((tipo == false) && (tipo2 == false)) {
-                                                if ((post.level == 2) || (post.id == post2.autor)) {
-                                                    $("#" + idbtn).after("<button class='btn btn-outline-danger rounded-pill mb-3' onclick='delete_prompt(" + idbtn + ")'> Deletar</button>");
-                                                }
+                let id = get_id(session_info);
+                $.ajax({
+                    type: 'POST',
+                    url: 'https://xue-hua-piao.herokuapp.com/usuario/',
+                    dataType: 'json',
+                    data: {
+                        'id': id
+                    },
+                    success: function (data) {
+                        var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
+                        var tipo = jQuery.parseJSON((JSON.stringify(data)))['error'];
+                        let ebtn = document.getElementsByName("ebtn");
+                        for (x in ebtn) {
+                            let idbtn = ebtn[x].id;
+                            if (idbtn) {
+                                var addr = "https://xue-hua-piao.herokuapp.com/uniquepost";
+                                $.ajax({
+                                    type: 'POST',
+                                    url: addr,
+                                    data: {
+                                        'id': ebtn[x].id
+                                    },
+                                    dataType: 'json',
+                                    success: function (data2) {
+                                        var post2 = jQuery.parseJSON((JSON.stringify(data2)))['data'];
+                                        var tipo2 = jQuery.parseJSON((JSON.stringify(data2)))['error'];
+                                        if ((tipo == false) && (tipo2 == false)) {
+                                            if ((post.level == 2) || (post.id == post2.autor)) {
+                                                $("#" + idbtn).after("<button class='btn btn-outline-danger rounded-pill mb-3' onclick='delete_prompt(" + idbtn + ")'> Deletar</button>");
                                             }
                                         }
-                                    });
+                                    }
+                                });
 
-                                }
                             }
                         }
-                    });
-                }
+                    }
+                });
+
             }
         });
         let btn = document.getElementById("lpbtn");
@@ -655,7 +653,7 @@ function confirma() {
                             $("#corpo").css("visibility", "visible");
                         });
                         setTimeout(() => {
-                            let url = new URL(window.location.href.replace("confirmar.html","login.html"));
+                            let url = new URL(window.location.href.replace("confirmar.html", "login.html"));
                             url.search = "";
                             window.location.href = url;
                         }, 1000);
