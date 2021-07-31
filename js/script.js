@@ -78,7 +78,7 @@ function loadpost() {
                         } else {
                             var bg = "bg-light";
                         }
-                        newElement.innerHTML = (`<div class="card ` + bg + `font-monospace buttonOverlay mb-3" style="margin:1em">
+                        newElement.innerHTML = (`<div class="card ` + bg + ` font-monospace buttonOverlay mb-3" style="margin:1em">
                         <h5 class="card-header ` + bg + ` bg-gradient"> <img src="` + post.userimage + `" style="max-width:4em;"><cite> ` + post.username + `</cite></h5>
                         <div class="card-body ` + bg + `">
                         <h5 class="card-title">` + post.nome + `</h5>
