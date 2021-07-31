@@ -218,7 +218,6 @@ function load_projects() {
 
 function sendpost() {
     let content = document.getElementsByClassName("ql-editor")[0].innerHTML;
-    let addr = document.getElementById("divaddr").value;
     var proj;
     var apiaddr = 'https://xue-hua-piao.herokuapp.com/addpost/'
     if (count_1 % 2 == 0) {
