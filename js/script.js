@@ -195,7 +195,7 @@ function load_projects() {
                             var bg = "bg-light";
                         }
                         newElement.innerHTML = (`
-                        <div class="card ` + bg + ` font-monospace buttonOverlay mb-3" style="margin:1em">
+                        <div class="card row ` + bg + ` font-monospace buttonOverlay mb-3" style="margin:1em">
                         <h5 class="card-header ` + bg + ` bg-gradient"> <img src="` + post[x].userimage + `" style="max-width:4em;"><cite> ` + post[x].username + `</cite></h5>
                         <div class="card-body ` + bg + `">
                         <h5 class="card-title">` + post[x].nome + `</h5>
