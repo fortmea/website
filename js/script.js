@@ -217,8 +217,6 @@ function load_projects() {
 }
 
 function sendpost() {
-    let titulo = document.getElementById("InputTitulo1").value;
-    let titulo2 = document.getElementById("InputTitulo2").value;
     let content = document.getElementsByClassName("ql-editor")[0].innerHTML;
     let addr = document.getElementById("divaddr").value;
     var proj;
