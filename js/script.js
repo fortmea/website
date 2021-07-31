@@ -232,10 +232,7 @@ function sendpost() {
         dataType: 'json',
         data: {
             'session': Cookies.get("session"),
-            'titulo': titulo,
-            'subtitulo': titulo2,
             'conteudo': content,
-            'addr': addr,
             'proj': proj
         },
         success: function (data) {
