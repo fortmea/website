@@ -551,6 +551,7 @@ function initial() {
     var bgc = document.getElementsByTagName("body")[0];
     bgc.classList.add("font-monospace");
     tema(true);
+    links();
 }
 
 function tema(ini) {
@@ -921,4 +922,18 @@ function nsenhaver(entry) {
     } else {
         reg.disabled = false;
     }
+}
+
+function links(){
+    const addpub_parent = document.getElementById("addpub").parentElement;
+    const list_item = document.createElement("li");
+    list_item.classList = "nav-item";
+    const github = document.createElement("a");
+    github.href = "https://github.com/fortmea/website";
+    github.innerHTML = '<i class="fa fa-github" aria-hidden="true"></i> Github';
+    github.classList = " nav-link link-primary";
+    github.target = "_blank";
+    list_item.appendChild(github)
+    addpub_parent.before(list_item);
+    return "success"
 }
