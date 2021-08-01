@@ -82,13 +82,11 @@ function loadpost() {
                             post.nome = "";
                         }
                         newElement.innerHTML = (`<div class="card ` + bg + ` font-monospace buttonOverlay mb-3" style="margin:1em">
-                        <h5 class="card-header ` + bg + ` bg-gradient"> <img src="` + post.userimage + `" style="max-width:4em;"><cite> ` + post.username + `</cite></h5>
+                        <h5 class="card-header ` + bg + ` bg-gradient"> <a href="profile.html?uid=` + post.autor + `" style="text-decoration:none"><img src="` + post.userimage + `" style="max-width:4em;"><cite> ` + post.username + `</cite></a></h5>
                         <div class="card-body ` + bg + `">
                         <h5 class="card-title">` + post.nome + `</h5>
                         <p class="card-text">` + conteudo + `</p><p>
-                        <a href="profile.html?uid=` + post.autor + `" style="text-decoration:none" class="text-info"><div class="col-md-4 d-flex justify-content-between" >
-                        <br>
-              </div></a>Data: ` + stamp + `</p>
+                        Data: ` + stamp + `</p>
                         </div><div class="card-footer"><i name="ebtn" id="`+ post.id + `"></i>
                         </div> </div>`);
                         //nomeautor(post.autor, rand);
