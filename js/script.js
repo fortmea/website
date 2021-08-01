@@ -189,6 +189,9 @@ function load_projects() {
                         stamp = stamp.replace("00:00", "");
                         newElement.classList = "float-none";
                         newElement.id = "post_" + post[x].id;
+                        if(post[x].nome == 0){
+                            post[x].nome = "";
+                        }
                         if (post[x].conteudo.length >= 120) {
                             post[x].conteudo = post[x].conteudo.substring(0, 100) + `... <a href='ler.html?id=` + post[x].id + `'> Ler mais</a></h3> `;
                         }
