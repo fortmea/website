@@ -101,6 +101,9 @@ function loadprofiledata() {
       }
       username = post.nome;
       var target = document.getElementById("profile");
+      if(post.resumo == null){
+        post.resumo = "";
+      }
       if (tipo == false) {
         $('meta[property="og:title"]').replaceWith('<meta property="og:title" content="Perfil de ' + post.nome + '">');
         var newElement = document.createElement("div");
@@ -157,6 +160,9 @@ function load_posts() {
         newElement.classList = "float-none";
         var conteudo = post2[x].conteudo;
         let adminbtn = "";
+        if(post2[x].nome==0){
+          post2[x].nome = "";
+        }
         if (ownership == true) {
           adminbtn = '<button class="btn btn-outline-danger rounded-pill" onclick="delete_prompt(' + post2[x].id + ')">Deletar</button>';
         }

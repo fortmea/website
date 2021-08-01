@@ -78,6 +78,9 @@ function loadpost() {
                         } else {
                             var bg = "bg-light";
                         }
+                        if (post.nome == 0) {
+                            post.nome = "";
+                        }
                         newElement.innerHTML = (`<div class="card ` + bg + ` font-monospace buttonOverlay mb-3" style="margin:1em">
                         <h5 class="card-header ` + bg + ` bg-gradient"> <img src="` + post.userimage + `" style="max-width:4em;"><cite> ` + post.username + `</cite></h5>
                         <div class="card-body ` + bg + `">
@@ -86,7 +89,7 @@ function loadpost() {
                         <a href="profile.html?uid=` + post.autor + `" style="text-decoration:none" class="text-info"><div class="col-md-4 d-flex justify-content-between" >
                         <br>
               </div></a>Data: ` + stamp + `</p>
-                        </div><div class="card-footer"><i name="ebtn" id="`+post.id+`"></i>
+                        </div><div class="card-footer"><i name="ebtn" id="`+ post.id + `"></i>
                         </div> </div>`);
                         //nomeautor(post.autor, rand);
                         $(target).append(newElement);
@@ -114,9 +117,7 @@ function loadposts() {
             success: function (data) {
                 var post = jQuery.parseJSON((JSON.stringify(data)))['data'];
                 var target = document.getElementById("post-container");
-                var modal_target = document.getElementById("modal-container");
                 if (target) {
-                    var conta = 0;
                     for (x in post) {
                         var newElement = document.createElement("div");
                         //var modal = document.createElement("div");
@@ -130,24 +131,27 @@ function loadposts() {
                         stamp = stamp.replace("00:00", "");
                         newElement.classList = "float-none";
                         newElement.id = "post_" + post[x].id;
-                        var conteudo = post[x].conteudo;
-                        if (conteudo.length >= 100) {
-                            conteudo = "<h3>" + conteudo.substring(0, 100) + "...</h3>";
-                        }
+                        
                         if (temac % 2 == 1) {
                             var bg = "bg-dark";
                         } else {
                             var bg = "bg-light";
+                        }
+                        if (post[x].nome == 0) {
+                            post[x].nome = "";
+                        }
+                        if (post[x].conteudo.length > 120) {
+                            post[x].conteudo = post[x].conteudo.substring(0, 100) + `... <a href='ler.html?id=` + post[x].id + `'> Ler mais</a>`;
                         }
                         newElement.innerHTML = (`
           <div class="card ` + bg + ` font-monospace buttonOverlay mb-3" style="margin:1em">
           <h5 class="card-header ` + bg + ` bg-gradient"> <img src="` + post[x].userimage + `" style="max-width:4em;"><cite> ` + post[x].username + `</cite></h5>
           <div class="card-body ` + bg + `">
           <h5 class="card-title">` + post[x].nome + `</h5>
-          <p class="card-text">` + conteudo + `</p><p>
+          <p class="card-text">` + post[x].conteudo + `</p><p>
           <a href="profile.html?uid=` + post[x].autor + `" style="text-decoration:none" class="text-info"><div class="col-md-4 d-flex justify-content-between" >
           <br>
-</div></a>Data: ` + stamp + `</p>
+          </div></a>Data: ` + stamp + `</p>
           </div><div class="card-footer">
           <a href="ler.html?id=`+ post[x].id + `" class="btn btn-outline-primary rounded-pill mb-3" style="margin-right:1em" name="ebtn" id=` + post[x].id + ` >Expandir</a></div> </div>`);
                         //modal.innerHTML = ('<div class="modal fade" tabindex="-1"  id="modal' + post[x].id + '" aria-labelledby="modalaria' + post[x].id + '" style="display:none"aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"><div class="modal-content bg-dark"><div class="modal-header"><h5 class="modal-title">' + post[x].resumo + '</h5><button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><p>' + post[x].conteudo + '</p><p><cite name="autor' + post[x].autor + " " + rand + '"><i class="gg-loadbar-alt"></i></cite>,<br>Data: ' + stamp + '</p></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button></div></div></div></div>');
@@ -185,9 +189,8 @@ function load_projects() {
                         stamp = stamp.replace("00:00", "");
                         newElement.classList = "float-none";
                         newElement.id = "post_" + post[x].id;
-                        var conteudo = "<h3>" + post[x].conteudo;
-                        if (conteudo.length >= 100) {
-                            conteudo = conteudo.substring(0, 100) + "...</h3>";
+                        if (post[x].conteudo.length >= 120) {
+                            post[x].conteudo = post[x].conteudo.substring(0, 100) + `... <a href='ler.html?id=` + post[x].id + `'> Ler mais</a></h3> `;
                         }
                         if (temac % 2 == 1) {
                             var bg = "bg-dark";
@@ -199,7 +202,7 @@ function load_projects() {
                         <h5 class="card-header ` + bg + ` bg-gradient"> <img src="` + post[x].userimage + `" style="max-width:4em;"><cite> ` + post[x].username + `</cite></h5>
                         <div class="card-body ` + bg + `">
                         <h5 class="card-title">` + post[x].nome + `</h5>
-                        <p class="card-text">` + conteudo + `</p><p>
+                        <p class="card-text">` + post[x].conteudo + `</p><p>
                         <a href="profile.html?uid=` + post[x].autor + `" style="text-decoration:none" class="text-info"><div class="col-md-4 d-flex justify-content-between" >
                         <br>
               </div></a>Data: ` + stamp + `</p>
@@ -918,7 +921,7 @@ function nsenhaver(entry) {
     }
 }
 
-function links(){
+function links() {
     const addpub_parent = document.getElementById("addpub").parentElement;
     const list_item = document.createElement("li");
     list_item.classList = "nav-item";
