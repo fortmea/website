@@ -143,7 +143,7 @@ function loadposts() {
                         }
                         newElement.innerHTML = (`
           <div class="card ` + bg + ` font-monospace buttonOverlay mb-3" style="margin:1em">
-          <h5 class="card-header ` + bg + ` bg-gradient"> <img src="` + post[x].userimage + `" style="max-width:4em;"><cite> ` + post[x].username + `</cite></h5>
+          <h5 class="card-header ` + bg + ` bg-gradient"><a href="profile.html?uid=` + post[x].autor + `" style="text-decoration:none"> <img src="` + post[x].userimage + `" style="max-width:4em;"><cite> ` + post[x].username + `</cite></a></h5>
           <div class="card-body ` + bg + `">
           <h5 class="card-title">` + post[x].nome + `</h5>
           <p class="card-text">` + post[x].conteudo + `</p><p>
@@ -200,7 +200,7 @@ function load_projects() {
                         }
                         newElement.innerHTML = (`
                         <div class="card row ` + bg + ` font-monospace buttonOverlay mb-3" style="margin:1em">
-                        <h5 class="card-header ` + bg + ` bg-gradient"> <img src="` + post[x].userimage + `" style="max-width:4em;"><cite> ` + post[x].username + `</cite></h5>
+                        <h5 class="card-header ` + bg + ` bg-gradient"> <a href="profile.html?uid=` + post[x].autor + `" style="text-decoration:none"><img src="` + post[x].userimage + `" style="max-width:4em;"><cite> ` + post[x].username + `</cite></a></h5>
                         <div class="card-body ` + bg + `">
                         <h5 class="card-title">` + post[x].nome + `</h5>
                         <p class="card-text">` + post[x].conteudo + `</p><p>
