@@ -22,7 +22,7 @@
   AddOutputFilterByType DEFLATE text/plain
   AddOutputFilterByType DEFLATE text/xml
 </IfModule>
-Header set Access-Control-Allow-Origin "https://xue-hua-piao.herokuapp.com/"
+Header set Access-Control-Allow-Origin "xue-hua-piao.herokuapp.com"
 Header set Access-Control-Allow-Methods "GET,PUT,POST,DELETE"
 Header set Access-Control-Allow-Headers "Content-Type, Authorization, XMLHttpRequest"
 ErrorDocument 404 /404.html
